@@ -1,0 +1,6 @@
+marron oscuro #322010
+marron oscuro sec ##5d4630
+marron claro #e2c38c
+marron claro sec #846449
+blanco #fcffff
+negro #fcffff
