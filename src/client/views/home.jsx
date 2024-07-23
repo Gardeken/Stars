@@ -1,7 +1,22 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Nav from "../components/nav";
 
 const Home = () => {
+  const [tiempo, setTiempo] = useState(1);
+  const tiempoId = useRef();
+  useEffect(() => {
+    tiempoId.current = setInterval(() => {
+      setTiempo((prev) => {
+        prev + 1;
+        if (prev < 5) {
+          return prev + 1;
+        } else {
+          return (prev = 1);
+        }
+      });
+    }, 2000);
+    return () => clearInterval(tiempoId.current);
+  });
   return (
     <Fragment>
       <Nav></Nav>
@@ -28,6 +43,7 @@ const Home = () => {
           className="constelaciones img2"
           src="src/client/assets/constelaciones2.webp"
         />
+        <p>{tiempo}</p>
       </main>
     </Fragment>
   );
