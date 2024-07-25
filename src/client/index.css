@@ -60,7 +60,7 @@ body {
 
 /*------------------------------------- Main ----------------------------------------------*/
 
-main {
+.container-video-text {
   display: grid;
   position: relative;
 }
@@ -177,4 +177,61 @@ main {
 .img2 {
   object-fit: cover;
   place-self: end;
+}
+
+/*------------------------------------- Galery ----------------------------------------------*/
+
+.container-galery-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 3rem;
+}
+
+.container-galery {
+  display: grid;
+  overflow: hidden;
+  gap: 1rem;
+  grid-auto-flow: column;
+}
+
+.image-galery {
+  opacity: 0;
+  transition: 0.8s;
+  transform: translateX(30rem);
+  width: 30rem;
+  height: 30rem;
+}
+
+.animation1 {
+  transform: translateX(0);
+}
+
+.animation1-5 {
+  transform: translateX(-150rem);
+}
+
+.animation2 {
+  transform: translateX(-30rem);
+}
+
+.animation3 {
+  transform: translateX(-60rem);
+}
+
+.animation4 {
+  transform: translateX(-90rem);
+}
+
+.animation5 {
+  transform: translateX(-120rem);
+}
+
+.animation0 {
+  transition: 0;
+  transform: translateX(-120rem);
+}
+
+.opacity {
+  opacity: 1 !important;
 }
