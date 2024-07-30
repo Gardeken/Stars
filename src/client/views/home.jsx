@@ -94,17 +94,11 @@ const Home = () => {
           </div>
           <div className="container-gif">
             <video autoPlay loop muted>
-              <source src="public/estrellas.mp4" type="video/mp4" />
+              <source src="/estrellas.mp4" type="video/mp4" />
             </video>
           </div>
-          <img
-            className="constelaciones img1"
-            src="public/constelaciones.webp"
-          />
-          <img
-            className="constelaciones img2"
-            src="public/constelaciones2.webp"
-          />
+          <img className="constelaciones img1" src="/constelaciones.webp" />
+          <img className="constelaciones img2" src="/constelaciones2.webp" />
         </div>
         <div className="container-galery-text">
           <div className="text-galery">
@@ -121,35 +115,35 @@ const Home = () => {
               className={`image-galery ${cambio()} ${
                 tiempo === 1 ? "opacity" : ""
               }`}
-              src="public/galery-image1.png"
+              src="/galery-image1.png"
               alt=""
             />
             <img
               className={`image-galery ${cambio()} ${
                 tiempo === 2 ? "opacity" : ""
               }`}
-              src="public/galery-image2.png"
+              src="/galery-image2.png"
               alt=""
             />
             <img
               className={`image-galery ${cambio()} ${
                 tiempo === 3 ? "opacity" : ""
               }`}
-              src="public/galery-image3.png"
+              src="/galery-image3.png"
               alt=""
             />
             <img
               className={`image-galery ${cambio()} ${
                 tiempo === 4 ? "opacity" : ""
               }`}
-              src="public/galery-image4.png"
+              src="/galery-image4.png"
               alt=""
             />
             <img
               className={`image-galery ${cambio2()} ${
                 tiempo === 5 ? "opacity" : ""
               } ${tiempo === 0 ? "animation0 opacity" : ""}`}
-              src="public/galery-image5.png"
+              src="/galery-image5.png"
               alt=""
             />
           </div>
