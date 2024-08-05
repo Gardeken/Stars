@@ -89,7 +89,7 @@ const Home = () => {
               <h3>Recuerdos</h3>
             </section>
             <div className="container-btn-crea">
-              <button>Crea tu cruadro</button>
+              <a href="/Plantillas">Crea tu cruadro</a>
             </div>
           </div>
           <div className="container-gif">
