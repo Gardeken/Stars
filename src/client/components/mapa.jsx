@@ -1,3 +1,4 @@
+import celestial from "d3-celestial";
 import { Fragment } from "react";
 import { useEffect } from "react";
 const token = import.meta.env.VITE_REACT_API_TOKEN;
