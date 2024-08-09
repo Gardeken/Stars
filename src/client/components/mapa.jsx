@@ -1,8 +1,16 @@
 import { Fragment } from "react";
 import { useEffect } from "react";
-import { useRef } from "react";
+const token = import.meta.env.VITE_REACT_API_TOKEN;
 
 const Mapa = () => {
+  /*document.addEventListener(
+    "contextmenu",
+    function (e) {
+      e.preventDefault();
+    },
+    false
+  );*/
+
   let config = {
     width: 0, // Default width, 0 = full parent element width;
     // height is determined by projection
@@ -20,18 +28,18 @@ const Mapa = () => {
     // otherwise center
     zoomlevel: null, // initial zoom level 0...zoomextend; 0|null = default, 1 = 100%, 0 < x <= zoomextend
     zoomextend: 10, // maximum zoom level
-    adaptable: true, // Sizes are increased with higher zoom-levels
+    adaptable: false, // Sizes are increased with higher zoom-levels
     interactive: false, // Enable zooming and rotation with mousewheel and dragging
-    form: true, // Display form for interactive settings. Needs a div with
+    form: false, // Display form for interactive settings. Needs a div with
     // id="celestial-form", created automatically if not present
     location: false, // Display location settings. Deprecated, use formFields below
     formFields: {
-      location: true, // Set visiblity for each group of fields with the respective id
+      location: false, // Set visiblity for each group of fields with the respective id
       general: false,
-      stars: true,
-      constellations: true,
-      lines: true,
-      other: true,
+      stars: false,
+      constellations: false,
+      lines: false,
+      other: false,
       download: false,
     },
     advanced: false, // Display fewer form fields if false
@@ -63,12 +71,12 @@ const Mapa = () => {
       // (see list below of languages codes available for stars)
       propernameStyle: {
         fill: "#ddddbb",
-        font: "13px 'Palatino Linotype', Georgia, Times, 'Times Roman', serif",
+        font: "3px 'Palatino Linotype', Georgia, Times, 'Times Roman', serif",
         align: "right",
         baseline: "bottom",
       },
       propernameLimit: 1.5, // Show proper names for stars brighter than propernameLimit
-      size: 7, // Maximum size (radius) of star circle in pixels
+      size: 4, // Maximum size (radius) of star circle in pixels
       exponent: -0.28, // Scale exponent for star size, larger = more linear
       data: "stars.6.json", // Data source for stellar data,
       // number indicates limit magnitude
@@ -192,13 +200,24 @@ const Mapa = () => {
   };
 
   useEffect(() => {
-    return Celestial.display(config);
+    Celestial.display(config);
   }, []);
+
+  async function buscarUbicación() {
+    const inputUbi = document.querySelector("#inputUbi").value;
+    const localizacion = await fetch(
+      `https://geocode.maps.co/search?q=${inputUbi}&api_key=${token}`
+    );
+    const resultado = await localizacion.json();
+    console.log(resultado);
+  }
 
   return (
     <Fragment>
       <div id="celestial-map"></div>
       <div id="celestial-form"></div>
+      <input id="inputUbi" type="text" placeholder="ej. Caracas,Venezuela" />
+      <button onClick={buscarUbicación}>Aceptar</button>
     </Fragment>
   );
 };
