@@ -93,11 +93,11 @@ body {
 }
 
 .container-icon-w {
-  top: 45%;
+  top: 45lvh;
 }
 
 .container-icon-i {
-  top: 53%;
+  top: 53lvh;
 }
 
 .container-icon-i:hover,
@@ -390,6 +390,7 @@ body {
 
   .container-galery-text {
     display: flex;
+    text-align: center;
     flex-direction: column;
   }
 
