@@ -370,7 +370,7 @@ body {
   /*------------------------------------- Nav Responsive ----------------------------------------------*/
 
   .navbar {
-    z-index: 10;
+    z-index: 20;
     position: relative;
     justify-content: space-between;
   }
@@ -413,7 +413,7 @@ body {
   }
 
   .animacion-click-nav {
-    top: 10vh;
+    top: 5rem;
     transition: 0.3s;
   }
 
