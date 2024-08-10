@@ -50,7 +50,7 @@ const Mapa = () => {
     // Default: desig or empty string for designations, other languages as used anywhere else
     culture: "", // Source of constellations and star names, default "iau", other: "cn" Traditional Chinese
     container: "celestial-map", // ID of parent element, e.g. div, null = html-body
-    datapath: "/node_modules/d3-celestial/data", // Path/URL to data files, empty = subfolder 'data'
+    datapath: "/data", // Path/URL to data files, empty = subfolder 'data'
     stars: {
       show: true, // Show stars
       limit: 5, // Show only stars brighter than limit magnitude
