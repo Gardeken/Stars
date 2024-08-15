@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { useEffect } from "react";
-const token = import.meta.env.VITE_REACT_API_TOKEN;
 
 const Mapa = () => {
   /*document.addEventListener(
@@ -53,15 +52,15 @@ const Mapa = () => {
     datapath: "/data", // Path/URL to data files, empty = subfolder 'data'
     stars: {
       show: true, // Show stars
-      limit: 5, // Show only stars brighter than limit magnitude
-      colors: true, // Show stars in spectral colors, if not use default color
+      limit: 4.2, // Show only stars brighter than limit magnitude
+      colors: false, // Show stars in spectral colors, if not use default color
       style: { fill: "#ffffff", opacity: 1 }, // Default style for stars
-      designation: true, // Show star names (Bayer, Flamsteed, Variable star, Gliese or designation,
+      designation: false, // Show star names (Bayer, Flamsteed, Variable star, Gliese or designation,
       // i.e. whichever of the previous applies first); may vary with culture setting
       designationType: "desig", // Which kind of name is displayed as designation (fieldname in starnames.json)
       designationStyle: {
-        fill: "#ddddbb",
-        font: "11px 'Palatino Linotype', Georgia, Times, 'Times Roman', serif",
+        fill: "#ffffff",
+        font: "15px 'Palatino Linotype', Georgia, Times, 'Times Roman', serif",
         align: "left",
         baseline: "top",
       },
@@ -70,14 +69,14 @@ const Mapa = () => {
       propernameType: "name", // Languge for proper name, default IAU name; may vary with culture setting
       // (see list below of languages codes available for stars)
       propernameStyle: {
-        fill: "#ddddbb",
-        font: "3px 'Palatino Linotype', Georgia, Times, 'Times Roman', serif",
+        fill: "#ffffff",
+        font: "1px 'Palatino Linotype', Georgia, Times, 'Times Roman', serif",
         align: "right",
         baseline: "bottom",
       },
       propernameLimit: 1.5, // Show proper names for stars brighter than propernameLimit
-      size: 4, // Maximum size (radius) of star circle in pixels
-      exponent: -0.28, // Scale exponent for star size, larger = more linear
+      size: 2, // Maximum size (radius) of star circle in pixels
+      exponent: -0.25, // Scale exponent for star size, larger = more linear
       data: "stars.6.json", // Data source for stellar data,
       // number indicates limit magnitude
     },
@@ -95,9 +94,14 @@ const Mapa = () => {
         ],
       }, // ranked constellations
       lines: true, // Show constellation lines, style below
-      lineStyle: { stroke: "#cccccc", width: 1, opacity: 0.6 },
+      lineStyle: { stroke: "#cccccc", width: 0.7, opacity: 0.4 },
       bounds: false, // Show constellation boundaries, style below
-      boundStyle: { stroke: "#cccc00", width: 0.5, opacity: 0.8, dash: [2, 4] },
+      boundStyle: {
+        stroke: "#cccc00",
+        width: 0,
+        opacity: 0.8,
+        dash: [2, 4],
+      },
     },
     dsos: {
       show: false, // Show Deep Space Objects
@@ -203,22 +207,27 @@ const Mapa = () => {
     Celestial.display(config);
   }, []);
 
-  async function buscarUbicación() {
-    const inputUbi = document.querySelector("#inputUbi").value;
-    const localizacion = await fetch(
-      `https://geocode.maps.co/search?q=${inputUbi}&api_key=${token}`
-    );
-    const resultado = await localizacion.json();
-    console.log(resultado);
-  }
-
   return (
-    <Fragment>
-      <div id="celestial-map"></div>
-      <div id="celestial-form"></div>
-      <input id="inputUbi" type="text" placeholder="ej. Caracas,Venezuela" />
-      <button onClick={buscarUbicación}>Aceptar</button>
-    </Fragment>
+    <div className="container-main-crear">
+      <div id="celestial-map">
+        <div className="moon"></div>
+        <h2 id="Name" className="name">
+          Pedro Centeno
+        </h2>
+        <div className="borderWhite"></div>
+      </div>
+      <div className="bg-black"></div>
+      <span id="dateShow" className="date-show">
+        Agosto 14, 2024
+      </span>
+      <span id="locatioShow" className="location-show">
+        Caracas, Venezuela
+      </span>
+      <span className="message-show" id="messageShow">
+        Daniuska Te amo mucho, eres lo mejor que me ha pasado hasta ahora y
+        quiero que sigamos por muchos años mas
+      </span>
+    </div>
   );
 };
 

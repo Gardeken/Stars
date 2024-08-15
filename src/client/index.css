@@ -284,6 +284,196 @@ body {
   height: 100lvh;
 }
 
+.container-main-crear {
+  display: grid;
+  height: 80lvh;
+  width: 40vw;
+  place-items: center;
+}
+
+#celestial-map {
+  width: 33vw;
+  border: solid 4px var(--blanco);
+  z-index: 0;
+  height: 68lvh !important;
+  display: grid;
+  place-items: start center;
+  min-width: 100px;
+  background-color: var(--negro);
+}
+
+#celestial-map canvas {
+  width: 20vw;
+  height: 20vw;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.container-marco {
+  z-index: -5;
+  width: 50vw;
+  margin-top: 1rem;
+  height: 90vh;
+  display: grid;
+  place-items: center;
+}
+
+.marco {
+  width: 90%;
+}
+
+.bg-black {
+  z-index: -5;
+  width: 40vw;
+  height: 80lvh;
+  position: absolute;
+  background-color: var(--negro);
+}
+
+.container-crear-form {
+  display: grid;
+  height: 100lvh;
+  place-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+
+.formulario {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
+  height: 70%;
+  overflow-y: scroll;
+}
+
+.container-input-form {
+  display: flex;
+  margin: 1rem;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.container-search {
+  gap: 1rem;
+  display: flex;
+}
+
+.container-search button {
+  color: var(--blanco);
+  border: none;
+  width: 5rem;
+  border-radius: 0.5rem;
+  background-color: var(--marron-claro-sec);
+}
+
+.inputCreate {
+  cursor: pointer;
+  outline: none;
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+  transition: 0.3s;
+  border: 2px solid var(--marron-claro-sec);
+}
+
+.labelCreate {
+  cursor: pointer;
+}
+
+.inputCreate:hover,
+.inputCreate:hover::placeholder {
+  transition: 0.3s;
+  color: var(--blanco);
+  background-color: var(--marron-claro-sec);
+}
+
+.message {
+  padding-bottom: 5rem;
+}
+
+.search {
+  width: 30vw;
+}
+
+.container-map {
+  display: grid;
+  position: relative;
+}
+
+.moon {
+  background-image: url(../../public/luna.webp);
+  background-size: 72%;
+  opacity: 0.8;
+  background-position: top 0.3rem left 135%;
+  background-repeat: no-repeat;
+  width: 20vw;
+  height: 22vw;
+  z-index: 15;
+  position: absolute;
+  margin-top: 3rem;
+  place-self: start center;
+}
+
+.name {
+  place-self: end center;
+  bottom: -2rem;
+  color: var(--blanco);
+  z-index: 15;
+  padding: 0 1rem;
+  background-color: var(--negro);
+  position: absolute;
+}
+
+.borderWhite {
+  width: 20vw;
+  height: 20vw;
+  margin-top: 3rem;
+  place-self: start center;
+  z-index: 20;
+  border-radius: 50%;
+  position: absolute;
+  border: solid 4px var(--blanco);
+}
+
+.spotify-code {
+  z-index: 5;
+  width: 9vw;
+  top: 70%;
+  place-self: center;
+  position: absolute;
+}
+
+.message-show,
+.date-show,
+.location-show {
+  font-weight: 300;
+  z-index: 5;
+  place-self: center;
+  color: var(--blanco);
+  position: absolute;
+}
+
+.message-show {
+  top: 57%;
+  text-align: center;
+  max-width: 50%;
+}
+
+.date-show,
+.location-show {
+  font-size: 0.8rem;
+}
+
+.date-show {
+  top: 80%;
+}
+
+.location-show {
+  top: 83%;
+}
+
 /*------------------------------------- Galery ----------------------------------------------*/
 
 .text-galery {
@@ -456,6 +646,53 @@ body {
   .plantilla {
     width: 70vw;
     height: 40vh;
+  }
+
+  .container-crear-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .formulario {
+    height: auto;
+    margin: 1rem;
+    overflow-y: visible;
+  }
+
+  .search {
+    width: 50vw;
+  }
+
+  .container-main-crear {
+    width: 90vw;
+    height: 70vh;
+    margin: 1rem;
+  }
+
+  #celestial-map {
+    width: 90%;
+    height: 62lvh !important;
+  }
+
+  #celestial-map canvas,
+  .moon,
+  .borderWhite {
+    margin-top: 1.5rem;
+    width: 50vw;
+    height: 50vw;
+  }
+
+  .message-show {
+    font-size: 0.8rem;
+  }
+
+  .spotify-code {
+    width: 30vw;
+  }
+
+  .bg-black {
+    height: 70lvh;
+    width: 95vw;
   }
 
   /*------------------------------------- Galery Responsive ----------------------------------------------*/
