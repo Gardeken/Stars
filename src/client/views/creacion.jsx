@@ -6,6 +6,24 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 const token = import.meta.env.VITE_REACT_API_TOKEN;
 
 const Creacion = () => {
+  function changeName() {
+    const inputName = document.getElementById("inputName");
+    const showName = document.getElementById("Name");
+    if (inputName.value.length > 20) {
+      inputName.value = inputName.value.slice(0, 20);
+    }
+    showName.innerText = inputName.value;
+  }
+
+  function changeMessage() {
+    const inputMsg = document.getElementById("inputMsg");
+    const showMsg = document.getElementById("messageShow");
+    if (inputMsg.value.length > 130) {
+      inputMsg.value = inputMsg.value.slice(0, 130);
+    }
+    showMsg.innerText = inputMsg.value;
+  }
+
   function filtrarFecha(e) {
     const inputDate = document.querySelector("#inputDate");
     setTimeout(() => {
@@ -71,13 +89,22 @@ const Creacion = () => {
           <label className="labelCreate" htmlFor="inputName">
             Nombres
           </label>
-          <input className="inputCreate" type="text" id="inputName" />
+          <input
+            className="inputCreate"
+            onInput={changeName}
+            type="text"
+            id="inputName"
+          />
         </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputMsg">
             Mensaje
           </label>
-          <input className="inputCreate message" type="text" id="inputMsg" />
+          <textarea
+            className="inputCreate message"
+            onInput={changeMessage}
+            id="inputMsg"
+          ></textarea>
         </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputUbi">

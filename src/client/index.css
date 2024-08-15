@@ -403,7 +403,7 @@ body {
 }
 
 .moon {
-  background-image: url(../../public/luna.webp);
+  background-image: url(/luna.webp);
   background-size: 72%;
   opacity: 0.8;
   background-position: top 0.3rem left 135%;
