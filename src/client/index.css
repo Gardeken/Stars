@@ -303,8 +303,8 @@ body {
 }
 
 #celestial-map canvas {
-  width: 20vw;
-  height: 20vw;
+  width: 20vw !important;
+  height: 20vw !important;
   margin-top: 3rem;
   position: relative;
   z-index: 10;
@@ -678,8 +678,8 @@ body {
   .moon,
   .borderWhite {
     margin-top: 1.5rem;
-    width: 50vw;
-    height: 50vw;
+    width: 50vw !important;
+    height: 50vw !important;
   }
 
   .message-show {
