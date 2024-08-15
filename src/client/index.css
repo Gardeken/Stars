@@ -474,6 +474,23 @@ body {
   top: 83%;
 }
 
+.container-location {
+  display: flex;
+  gap: 1rem;
+}
+
+.container-coor {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.borderSelected {
+  border: 2px solid var(--marron-claro-sec);
+  padding: 5px;
+  border-radius: 0.5rem;
+}
+
 /*------------------------------------- Galery ----------------------------------------------*/
 
 .text-galery {
@@ -675,11 +692,16 @@ body {
   }
 
   #celestial-map canvas,
-  .moon,
   .borderWhite {
     margin-top: 1.5rem;
     width: 50vw !important;
     height: 50vw !important;
+  }
+
+  .moon {
+    margin-top: 1.5rem;
+    width: 50vw;
+    height: 55vw;
   }
 
   .message-show {

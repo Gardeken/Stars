@@ -107,12 +107,27 @@ const Creacion = () => {
           ></textarea>
         </div>
         <div className="container-input-form">
-          <label className="labelCreate" htmlFor="inputUbi">
-            Ubicación
-          </label>
+          <div className="container-location">
+            <label className="labelCreate borderSelected" htmlFor="inputUbi">
+              Ubicación
+            </label>
+            <label className="labelCreate" htmlFor="">
+              Avanzado
+            </label>
+          </div>
           <div className="container-search">
             <input className="inputCreate search" type="text" id="inputUbi" />
             <button>Buscar</button>
+          </div>
+          <div className="container-search">
+            <div className="container-coor">
+              <label htmlFor="inputLat">Latitud</label>
+              <input className="inputCreate" type="text" id="inputLat" />
+            </div>
+            <div className="container-coor">
+              <label htmlFor="inputLong">Longitud</label>
+              <input className="inputCreate" type="text" id="inputLong" />
+            </div>
           </div>
         </div>
         <div className="container-input-form">
