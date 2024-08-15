@@ -480,15 +480,12 @@ body {
 }
 
 .container-coor {
-  display: flex;
+  display: none;
   gap: 1rem;
   flex-direction: column;
 }
 
 .borderSelected {
-  border: 2px solid var(--marron-claro-sec);
-  padding: 5px;
-  border-radius: 0.5rem;
 }
 
 /*------------------------------------- Galery ----------------------------------------------*/
