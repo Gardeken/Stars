@@ -224,8 +224,8 @@ const Mapa = () => {
         Caracas, Venezuela
       </span>
       <span className="message-show" id="messageShow">
-        Daniuska Te amo mucho, eres lo mejor que me ha pasado hasta ahora y
-        quiero que sigamos por muchos años mas
+        Te amo mucho, eres lo mejor que me ha pasado hasta ahora y quiero que
+        sigamos por muchos años mas
       </span>
     </div>
   );

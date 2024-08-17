@@ -361,7 +361,8 @@ body {
   display: flex;
 }
 
-.container-search button {
+.container-search button,
+.btn-search {
   color: var(--blanco);
   border: none;
   width: 5rem;
@@ -405,7 +406,7 @@ body {
 .moon {
   background-image: url(/luna.webp);
   background-size: 72%;
-  opacity: 0.8;
+  opacity: 0.9;
   background-position: top 0.3rem left 135%;
   background-repeat: no-repeat;
   width: 20vw;
@@ -480,12 +481,74 @@ body {
 }
 
 .container-coor {
-  display: none;
+  display: flex;
   gap: 1rem;
   flex-direction: column;
 }
 
+.labelCoor {
+  padding: 5px;
+}
+
 .borderSelected {
+  border: 2px solid var(--marron-claro-sec);
+  border-radius: 0.5rem;
+}
+
+.searchForm {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.container-btn-search {
+  place-self: center;
+  height: 100%;
+  display: grid;
+  place-items: end center;
+}
+
+.btn-search {
+  padding: 0.8rem;
+}
+
+.location-input {
+  position: relative;
+}
+
+.result {
+  overflow-y: scroll;
+  font-size: 0.8rem;
+  color: var(--blanco);
+  background-color: var(--marron-claro-sec);
+  position: absolute;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  border-radius: 0.5rem;
+  max-height: 15rem;
+  padding: 0.8rem;
+}
+
+.location-result {
+  cursor: pointer;
+  margin: 1rem 0;
+  transition: 0.3s;
+  border-radius: 0.8rem;
+  padding: 0.8rem;
+}
+
+.location-result:hover {
+  transition: 0.3s;
+  background-color: var(--marron-oscuro-sec);
+}
+
+.location-result h4 {
+  margin: 0;
+}
+
+.hidden {
+  display: none;
 }
 
 /*------------------------------------- Galery ----------------------------------------------*/

@@ -1,11 +1,14 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Mapa from "../components/mapa";
 import { imageDb } from "./config";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, list, ref, uploadBytes } from "firebase/storage";
+import LocationR from "../components/locationR";
 
 const token = import.meta.env.VITE_REACT_API_TOKEN;
 
 const Creacion = () => {
+  const [active, setActive] = useState(0);
+  const [lista, setLista] = useState([]);
   function changeName() {
     const inputName = document.getElementById("inputName");
     const showName = document.getElementById("Name");
@@ -24,27 +27,62 @@ const Creacion = () => {
     showMsg.innerText = inputMsg.value;
   }
 
-  function filtrarFecha(e) {
+  function changeDate(e) {
+    const inputDate = e.target;
+    const inputTime = document.querySelector("#inputTime");
+    const date = new Date(`${inputDate.value} ${inputTime.value}`);
+    Celestial.date(date);
+  }
+
+  function changeTime() {
     const inputDate = document.querySelector("#inputDate");
-    setTimeout(() => {
-      inputDate.value = inputDate.value.replace("-", "/");
-    }, 100);
+    const inputTime = document.querySelector("#inputTime");
+    if (!inputDate.value) {
+      return alert("Debe ingresar una fecha primero");
+    }
+    const date = new Date(`${inputDate.value} ${inputTime.value}`);
+    Celestial.date(date);
   }
 
-  function cambiarLat() {
-    const inputUbi = document.querySelector("#inputUbi");
-    const inputLat = document.querySelector("#lat");
-    inputLat.value = inputUbi.value;
+  function changeCoor(e) {
+    e.preventDefault();
+    const inputLat = document.getElementById("inputLat");
+    const inputLong = document.getElementById("inputLong");
+    if (!inputLat.value || !inputLong.value) {
+      return alert("No puede dejar los dos campos vacíos");
+    }
+    if (isNaN(inputLat.value) || isNaN(inputLong.value)) {
+      return alert("Los datos que ha ingresado no son válidos");
+    }
+    Celestial.location([
+      inputLat.value === "" ? 0 : inputLat.value,
+      inputLong.value === "" ? 0 : inputLong.value,
+    ]);
   }
 
-  function cambiarLon() {
-    const inputUbi2 = document.querySelector("#inputName");
-    const inputUbi = document.querySelector("#inputUbi");
-    const inputLon = document.querySelector("#lon");
+  function toggleCoor(e) {
+    const containerCoor = document.getElementById("container-coor");
+    const containerLocation = document.getElementById("container-location");
+    const btnLoc = document.getElementById("btnLoc");
+    const btnCoor = document.getElementById("btnSearchC");
+    btnCoor.classList.remove("hidden");
+    containerCoor.classList.remove("hidden");
+    containerLocation.classList.add("hidden");
+    e.target.classList.add("borderSelected");
+    btnLoc.classList.remove("borderSelected");
+  }
 
-    inputLon.value = inputUbi2.value;
-    let event = new Event("change");
-    inputLon.dispatchEvent(event);
+  function toggleLoc(e) {
+    const containerCoor = document.getElementById("container-coor");
+    const containerLocation = document.getElementById("container-location");
+    const btnCoor = document.getElementById("btnCoor");
+    const btnSearchC = document.getElementById("btnSearchC");
+    btnSearchC.classList.add("hidden");
+    containerCoor.classList.add("hidden");
+    btnCoor.classList.remove("hidden");
+    containerLocation.classList.remove("hidden");
+    e.target.classList.add("borderSelected");
+    btnCoor.classList.remove("borderSelected");
   }
 
   function imprimir() {
@@ -69,13 +107,17 @@ const Creacion = () => {
       });
   }
 
+  useEffect(() => {
+    buscarUbicación();
+  }, [active]);
+
   async function buscarUbicación() {
     const inputUbi = document.querySelector("#inputUbi").value;
     const localizacion = await fetch(
       `https://geocode.maps.co/search?q=${inputUbi}&api_key=${token}`
     );
     const resultado = await localizacion.json();
-    console.log(resultado);
+    setLista(resultado);
   }
 
   return (
@@ -108,25 +150,77 @@ const Creacion = () => {
         </div>
         <div className="container-input-form">
           <div className="container-location">
-            <label className="labelCreate borderSelected" htmlFor="inputUbi">
+            <label
+              id="btnLoc"
+              onClick={toggleLoc}
+              className="labelCreate labelCoor borderSelected"
+            >
               Ubicación
             </label>
-            <label className="labelCreate" htmlFor="">
+            <label
+              id="btnCoor"
+              onClick={toggleCoor}
+              className="labelCreate labelCoor"
+              htmlFor=""
+            >
               Avanzado
             </label>
           </div>
-          <div className="container-search">
-            <input className="inputCreate search" type="text" id="inputUbi" />
-            <button>Buscar</button>
-          </div>
-          <div className="container-search">
-            <div className="container-coor">
-              <label htmlFor="inputLat">Latitud</label>
-              <input className="inputCreate" type="text" id="inputLat" />
+          <div id="container-location" className="container-search">
+            <div className="location-input">
+              <input
+                placeholder="ej.. Caracas,Venezuela"
+                className="inputCreate search"
+                type="text"
+                id="inputUbi"
+              />
+              <div id="result" className="result hidden">
+                {lista.map((i) => {
+                  const { display_name, lat, lon } = i;
+                  return (
+                    <LocationR
+                      name={display_name}
+                      latitude={lat}
+                      longitude={lon}
+                    ></LocationR>
+                  );
+                })}
+              </div>
             </div>
-            <div className="container-coor">
-              <label htmlFor="inputLong">Longitud</label>
-              <input className="inputCreate" type="text" id="inputLong" />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                const result = document.querySelector("#result");
+                result.classList.remove("hidden");
+                setActive(active + 1);
+              }}
+            >
+              Buscar
+            </button>
+          </div>
+          <div className="searchForm">
+            <div id="container-coor" className="container-search hidden">
+              <div className="container-coor">
+                <label className="labelCreate" htmlFor="inputLat">
+                  Latitud
+                </label>
+                <input className="inputCreate" type="text" id="inputLat" />
+              </div>
+              <div className="container-coor">
+                <label className="labelCreate" htmlFor="inputLong">
+                  Longitud
+                </label>
+                <input className="inputCreate" type="text" id="inputLong" />
+              </div>
+            </div>
+            <div className="container-btn-search">
+              <button
+                onClick={changeCoor}
+                className="btn-search hidden"
+                id="btnSearchC"
+              >
+                Buscar
+              </button>
             </div>
           </div>
         </div>
@@ -134,13 +228,23 @@ const Creacion = () => {
           <label className="labelCreate" htmlFor="inputDate">
             Fecha
           </label>
-          <input className="inputCreate" type="date" id="inputDate" />
+          <input
+            onChange={changeDate}
+            className="inputCreate"
+            type="date"
+            id="inputDate"
+          />
         </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputTime">
             Hora
           </label>
-          <input className="inputCreate" type="time" id="inputTime" />
+          <input
+            onChange={changeTime}
+            className="inputCreate"
+            type="time"
+            id="inputTime"
+          />
         </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputMarco">
