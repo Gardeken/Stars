@@ -54,10 +54,19 @@ const Creacion = () => {
     if (isNaN(inputLat.value) || isNaN(inputLong.value)) {
       return alert("Los datos que ha ingresado no son válidos");
     }
-    Celestial.location([
-      inputLat.value === "" ? 0 : inputLat.value,
-      inputLong.value === "" ? 0 : inputLong.value,
-    ]);
+    Celestial.location([inputLat.value, inputLong.value]);
+  }
+
+  function changeLocation(e) {
+    if (e.target.getAttribute("latitude")) {
+      const result = document.querySelector("#result");
+      result.classList.add("hidden");
+      const inputUbi = document.querySelector("#inputUbi");
+      inputUbi.value = e.target.textContent;
+      const lat = e.target.getAttribute("latitude");
+      const long = e.target.getAttribute("longitude");
+      Celestial.location([lat, long]);
+    }
   }
 
   function toggleCoor(e) {
@@ -119,7 +128,7 @@ const Creacion = () => {
     const resultado = await localizacion.json();
     setLista(resultado);
   }
-
+  let count = 0;
   return (
     <div className="container-crear-form">
       <div className="container-map">
@@ -174,11 +183,17 @@ const Creacion = () => {
                 type="text"
                 id="inputUbi"
               />
-              <div id="result" className="result hidden">
+              <div
+                onClick={changeLocation}
+                id="result"
+                className="result hidden"
+              >
                 {lista.map((i) => {
                   const { display_name, lat, lon } = i;
+                  count++;
                   return (
                     <LocationR
+                      key={count}
                       name={display_name}
                       latitude={lat}
                       longitude={lon}
@@ -194,6 +209,7 @@ const Creacion = () => {
                 result.classList.remove("hidden");
                 setActive(active + 1);
               }}
+              className="btnLocation"
             >
               Buscar
             </button>
