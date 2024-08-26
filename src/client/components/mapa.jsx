@@ -1,7 +1,15 @@
 import { Fragment } from "react";
 import { useEffect } from "react";
+import QRCode from "react-qr-code";
 
-const Mapa = () => {
+const Mapa = ({
+  qr,
+  isChecked,
+  isCheckedSP,
+  isCheckedM,
+  color,
+  isCheckedN,
+}) => {
   /*document.addEventListener(
     "contextmenu",
     function (e) {
@@ -209,24 +217,64 @@ const Mapa = () => {
 
   return (
     <div className="container-main-crear">
-      <div id="celestial-map">
-        <div className="moon"></div>
-        <h2 id="Name" className="name">
-          Pedro Centeno
-        </h2>
+      <div className={!color ? null : "borderBlack"} id="celestial-map">
+        <div className={isCheckedM ? "moon" : "moon hidden"}></div>
+        {isCheckedN ? (
+          <h2 id="Name" className={!color ? "name" : "name colorBlack"}>
+            Pedro Centeno
+          </h2>
+        ) : (
+          <h2
+            id="Name"
+            className={
+              !color ? "name nameBottom" : "name nameBottom bg-white colorBlack"
+            }
+          >
+            Pedro Centeno
+          </h2>
+        )}
         <div className="borderWhite"></div>
       </div>
-      <div className="bg-black"></div>
-      <span id="dateShow" className="date-show">
+      <div className={!color ? "bg-black" : "bg-black bg-white"}></div>
+      <span
+        id="dateShow"
+        className={!color ? "date-show" : "date-show colorBlack"}
+      >
         Agosto 14, 2024
       </span>
-      <span id="locatioShow" className="location-show">
+      <span
+        id="locatioShow"
+        className={!color ? "location-show" : "location-show colorBlack"}
+      >
         Caracas, Venezuela
       </span>
-      <span className="message-show" id="messageShow">
-        Te amo mucho, eres lo mejor que me ha pasado hasta ahora y quiero que
-        sigamos por muchos años mas
-      </span>
+      {isChecked || isCheckedSP ? (
+        <span
+          className={!color ? "message-show" : "message-show  colorBlack"}
+          id="messageShow"
+        >
+          Te amo mucho, eres lo mejor que me ha pasado hasta ahora y quiero que
+          sigamos por muchos años mas
+        </span>
+      ) : (
+        <span
+          className={
+            !color
+              ? "message-show message-prev"
+              : "message-show message-prev colorBlack"
+          }
+          id="messageShow"
+        >
+          Te amo mucho, eres lo mejor que me ha pasado hasta ahora y quiero que
+          sigamos por muchos años mas
+        </span>
+      )}
+
+      {isChecked ? (
+        <QRCode className="QRCode" value={qr} size={60}></QRCode>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

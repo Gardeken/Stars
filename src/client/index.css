@@ -302,6 +302,11 @@ body {
   background-color: var(--negro);
 }
 
+.borderBlack {
+  background-color: var(--blanco) !important;
+  border: solid 4px var(--negro) !important;
+}
+
 #celestial-map canvas {
   width: 20vw !important;
   height: 20vw !important;
@@ -407,10 +412,12 @@ body {
   background-image: url(/luna.webp);
   background-size: 72%;
   opacity: 0.9;
-  background-position: top 0.3rem left 135%;
+  border-radius: 49%;
+  transform: rotate(-18deg);
+  background-position: top 0 left 140%;
   background-repeat: no-repeat;
   width: 20vw;
-  height: 22vw;
+  height: 28.1vh;
   z-index: 15;
   position: absolute;
   margin-top: 3rem;
@@ -418,8 +425,8 @@ body {
 }
 
 .name {
-  place-self: end center;
-  bottom: -2rem;
+  place-self: center;
+  margin-top: 5.5rem;
   color: var(--blanco);
   z-index: 15;
   padding: 0 1rem;
@@ -427,21 +434,25 @@ body {
   position: absolute;
 }
 
+.nameBottom {
+  bottom: -2rem;
+}
+
 .borderWhite {
   width: 20vw;
   height: 20vw;
-  margin-top: 3rem;
+  margin-top: 2.8rem;
   place-self: start center;
   z-index: 20;
   border-radius: 50%;
   position: absolute;
-  border: solid 4px var(--blanco);
+  border: solid 2px var(--blanco);
 }
 
 .spotify-code {
   z-index: 5;
   width: 9vw;
-  top: 70%;
+  top: 71%;
   place-self: center;
   position: absolute;
 }
@@ -457,9 +468,15 @@ body {
 }
 
 .message-show {
-  top: 57%;
+  top: 59%;
+  font-size: 0.9rem;
   text-align: center;
   max-width: 50%;
+}
+
+.message-prev {
+  top: 63%;
+  font-size: 1rem;
 }
 
 .date-show,
@@ -545,6 +562,72 @@ body {
 
 .location-result h4 {
   margin: 0;
+}
+
+.QRCode {
+  top: 69%;
+  place-self: center;
+  position: absolute;
+}
+
+.container-yn {
+  display: flex;
+  position: relative;
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  align-items: center;
+  justify-content: space-around;
+  border: solid 1px var(--marron-claro-sec);
+}
+
+.separador {
+  width: 1px;
+  height: 100%;
+  background-color: var(--marron-claro-sec);
+}
+
+.blockBrown {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 47%;
+  right: 0;
+  transition: 0.3s;
+  z-index: -1;
+  border-radius: 0 0.3rem 0.3rem 0;
+  background-color: var(--marron-claro-sec);
+}
+
+.left {
+  transition: 0.3s;
+  left: 0;
+  right: 48%;
+  border-radius: 0.3rem 0 0 0.3rem;
+}
+
+.inputQR {
+  width: 40vw;
+}
+
+.colorWhite {
+  color: var(--blanco);
+}
+
+.black {
+  background-color: var(--negro) !important;
+}
+
+.colorBlack {
+  background-color: transparent;
+  color: var(--negro);
+}
+
+.bg-white {
+  box-shadow: 10px 17px 59px -12px rgba(0, 0, 0, 0.5);
+  background-color: var(--blanco) !important;
 }
 
 .hidden {
@@ -684,6 +767,10 @@ body {
     transition: 0.3s;
   }
 
+  .bg-white {
+    background-color: var(--blanco) !important;
+  }
+
   /*------------------------------------- Main Responsive ----------------------------------------------*/
 
   .eslogan {
@@ -758,14 +845,23 @@ body {
     height: 50vw !important;
   }
 
+  .borderWhite {
+    margin-top: 1.4rem;
+  }
+
   .moon {
     margin-top: 1.5rem;
-    width: 50vw;
-    height: 55vw;
+    width: 50.8vw;
+    height: 50vw;
   }
 
   .message-show {
-    font-size: 0.8rem;
+    top: 55%;
+    font-size: 0.9rem;
+  }
+
+  .message-prev {
+    top: 60%;
   }
 
   .spotify-code {
@@ -775,6 +871,43 @@ body {
   .bg-black {
     height: 70lvh;
     width: 95vw;
+  }
+
+  .searchForm {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+  }
+
+  .search {
+    width: 80vw;
+  }
+
+  .btnLocation {
+    display: grid;
+    place-items: center;
+  }
+
+  .btnLocation button {
+    padding: 0.5rem;
+  }
+
+  .container-search {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name {
+    margin-top: 1rem;
+  }
+
+  .nameBottom {
+    bottom: -2rem;
+  }
+
+  .hidden {
+    display: none;
   }
 
   /*------------------------------------- Galery Responsive ----------------------------------------------*/

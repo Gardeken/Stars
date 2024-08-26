@@ -3,12 +3,36 @@ import Mapa from "../components/mapa";
 import { imageDb } from "./config";
 import { getDownloadURL, list, ref, uploadBytes } from "firebase/storage";
 import LocationR from "../components/locationR";
-
+import YesorNo from "../components/yesorno";
 const token = import.meta.env.VITE_REACT_API_TOKEN;
+
+let meses = {
+  "01": "Enero",
+  "02": "Febrero",
+  "03": "Marzo",
+  "04": "Abril",
+  "05": "Mayo",
+  "06": "Junio",
+  "07": "Julio",
+  "08": "Agosto",
+  "09": "Septiembre",
+  10: "Octubre",
+  11: "Noviembre",
+  12: "Diciembre",
+};
 
 const Creacion = () => {
   const [active, setActive] = useState(0);
   const [lista, setLista] = useState([]);
+  const [qr, setQR] = useState(
+    "https://open.spotify.com/intl-es/track/4a9tbd947vo9K8Vti9JwcI?si=b6b12cb70cb84015"
+  );
+  let [checked, setIsChecked] = useState(false);
+  let [checkedSP, setIsCheckedSP] = useState(false);
+  let [checkedM, setIsCheckedM] = useState(false);
+  let [checkedC, setIsCheckedC] = useState(false);
+  let [checkedN, setIsCheckedN] = useState(false);
+
   function changeName() {
     const inputName = document.getElementById("inputName");
     const showName = document.getElementById("Name");
@@ -31,6 +55,9 @@ const Creacion = () => {
     const inputDate = e.target;
     const inputTime = document.querySelector("#inputTime");
     const date = new Date(`${inputDate.value} ${inputTime.value}`);
+    const dateShow = document.querySelector("#dateShow");
+    const listD = inputDate.value.split("-");
+    dateShow.innerText = `${meses[listD[1]]} ${listD[2]}, ${listD[0]}`;
     Celestial.date(date);
   }
 
@@ -54,6 +81,10 @@ const Creacion = () => {
     if (isNaN(inputLat.value) || isNaN(inputLong.value)) {
       return alert("Los datos que ha ingresado no son válidos");
     }
+    const locatioShow = document.querySelector("#locatioShow");
+    locatioShow.innerText = `${Number(inputLat.value).toFixed(4)}°N, ${Number(
+      inputLong.value
+    ).toFixed(4)}°E`;
     Celestial.location([inputLat.value, inputLong.value]);
   }
 
@@ -61,10 +92,14 @@ const Creacion = () => {
     if (e.target.getAttribute("latitude")) {
       const result = document.querySelector("#result");
       result.classList.add("hidden");
+      const locatioShow = document.querySelector("#locatioShow");
+      const name = e.target.textContent;
       const inputUbi = document.querySelector("#inputUbi");
-      inputUbi.value = e.target.textContent;
+      inputUbi.value = name;
       const lat = e.target.getAttribute("latitude");
       const long = e.target.getAttribute("longitude");
+      const lista = name.split(",");
+      locatioShow.innerText = `${lista[0]}, Venezuela`;
       Celestial.location([lat, long]);
     }
   }
@@ -94,6 +129,40 @@ const Creacion = () => {
     btnCoor.classList.remove("borderSelected");
   }
 
+  function changeColor() {
+    setIsCheckedC(!checkedC);
+  }
+
+  function moveName() {
+    setIsCheckedN(!checkedN);
+  }
+
+  function displayMoon() {
+    setIsCheckedM(!checkedM);
+  }
+
+  function displayInputSP() {
+    if (checked) {
+      setIsCheckedSP(false);
+      alert("Solo puede seleccionar uno a la vez");
+    } else {
+      setIsCheckedSP(!checkedSP);
+    }
+  }
+
+  function displayInput() {
+    if (checkedSP) {
+      setIsChecked(false);
+      alert("Solo puede seleccionar uno a la vez");
+    } else {
+      setIsChecked(!checked);
+    }
+  }
+
+  function changeQR(e) {
+    setQR(e.target.value);
+  }
+
   function imprimir() {
     const inputUbi2 = document.querySelector("#inputName");
     const inputUbi = document.querySelector("#inputUbi");
@@ -107,9 +176,7 @@ const Creacion = () => {
       .then((dataUrl) => {
         const id = Date.now();
         const imageRef = ref(imageDb, `stars/mapas/${id}.png`);
-        uploadBytes(imageRef, dataUrl).then((snapshot) => {
-          getDownloadURL(snapshot.ref);
-        });
+        uploadBytes(imageRef, dataUrl);
       })
       .catch(function (error) {
         console.error("oops, something went wrong!", error);
@@ -132,8 +199,19 @@ const Creacion = () => {
   return (
     <div className="container-crear-form">
       <div className="container-map">
-        <Mapa></Mapa>
-        <img src="/spotify-code.webp" className="spotify-code" alt="" />
+        <Mapa
+          color={checkedC}
+          qr={qr}
+          isChecked={checked}
+          isCheckedSP={checkedSP}
+          isCheckedM={checkedM}
+          isCheckedN={checkedN}
+        ></Mapa>
+        <img
+          src={!checkedC ? "/spcode-b.jpeg" : "/spcode-w.jpeg"}
+          className={checkedSP ? "spotify-code" : "spotify-code hidden"}
+          alt=""
+        />
       </div>
       <form id="formulario" className="formulario">
         <div className="container-input-form">
@@ -141,10 +219,28 @@ const Creacion = () => {
             Nombres
           </label>
           <input
+            placeholder="Coloque el nombre o las iniciales"
             className="inputCreate"
             onInput={changeName}
             type="text"
             id="inputName"
+          />
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate">
+            Ubicación del nombre o iniciales
+          </label>
+          <YesorNo
+            text1={"Arriba"}
+            text2={"Abajo"}
+            checked={checkedN}
+            input={"inputN"}
+          ></YesorNo>
+          <input
+            className="hidden"
+            onChange={moveName}
+            type="checkbox"
+            id="inputN"
           />
         </div>
         <div className="container-input-form">
@@ -156,6 +252,23 @@ const Creacion = () => {
             onInput={changeMessage}
             id="inputMsg"
           ></textarea>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputM">
+            Activar Luna
+          </label>
+          <YesorNo
+            text1={"Si"}
+            text2={"No"}
+            checked={checkedM}
+            input={"inputM"}
+          ></YesorNo>
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={displayMoon}
+            id="inputM"
+          />
         </div>
         <div className="container-input-form">
           <div className="container-location">
@@ -202,17 +315,19 @@ const Creacion = () => {
                 })}
               </div>
             </div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                const result = document.querySelector("#result");
-                result.classList.remove("hidden");
-                setActive(active + 1);
-              }}
-              className="btnLocation"
-            >
-              Buscar
-            </button>
+            <div className="btnLocation">
+              <button
+                className="btn-search"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const result = document.querySelector("#result");
+                  result.classList.remove("hidden");
+                  setActive(active + 1);
+                }}
+              >
+                Buscar
+              </button>
+            </div>
           </div>
           <div className="searchForm">
             <div id="container-coor" className="container-search hidden">
@@ -264,7 +379,7 @@ const Creacion = () => {
         </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputMarco">
-            Marco
+            Medidas
           </label>
           <select className="inputCreate" id="inputMarco">
             <option selected disabled>
@@ -273,21 +388,73 @@ const Creacion = () => {
           </select>
         </div>
         <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputM">
+            Color
+          </label>
+          <YesorNo
+            text1={"Blanco"}
+            text2={"Negro"}
+            checked={checkedC}
+            input={"inputColor"}
+          ></YesorNo>
+          <input
+            type="checkbox"
+            className="hidden"
+            onChange={changeColor}
+            id="inputColor"
+          />
+        </div>
+        <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputQR">
             Código QR
           </label>
-          <input className="checkCreate" type="checkbox" id="inputQR" />
+          <div>
+            <YesorNo
+              text1={"Si"}
+              text2={"No"}
+              checked={checked}
+              input={"inputQR"}
+            ></YesorNo>
+            <input
+              className="hidden"
+              onChange={displayInput}
+              type="checkbox"
+              id="inputQR"
+            />
+            {checked ? (
+              <input
+                className="inputCreate inputQR"
+                type="text"
+                onChange={changeQR}
+                placeholder="Introduzca el link aquí"
+              />
+            ) : null}
+          </div>
         </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputSpotify">
             Spotify Code
           </label>
+          <YesorNo
+            text1={"Si"}
+            text2={"No"}
+            checked={checkedSP}
+            input={"inputSP"}
+          ></YesorNo>
           <input
-            className="inputCreate"
-            type="text"
-            id="inputSpotify"
-            placeholder="Introduzca el código aquí"
+            className="hidden"
+            onChange={displayInputSP}
+            type="checkbox"
+            id="inputSP"
           />
+          {checkedSP ? (
+            <input
+              className="inputCreate"
+              type="text"
+              id="inputSpotify"
+              placeholder="Introduzca el código aquí"
+            />
+          ) : null}
         </div>
       </form>
     </div>
