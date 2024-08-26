@@ -9,6 +9,7 @@ const Mapa = ({
   isCheckedM,
   color,
   isCheckedN,
+  isCheckedConst,
 }) => {
   /*document.addEventListener(
     "contextmenu",
@@ -101,7 +102,7 @@ const Mapa = ({
           "11px Helvetica, Arial, sans-serif",
         ],
       }, // ranked constellations
-      lines: true, // Show constellation lines, style below
+      lines: isCheckedConst, // Show constellation lines, style below
       lineStyle: { stroke: "#cccccc", width: 0.7, opacity: 0.4 },
       bounds: false, // Show constellation boundaries, style below
       boundStyle: {
@@ -213,7 +214,7 @@ const Mapa = ({
 
   useEffect(() => {
     Celestial.display(config);
-  }, []);
+  }, [isCheckedConst]);
 
   return (
     <div className="container-main-crear">

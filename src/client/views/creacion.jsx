@@ -32,6 +32,7 @@ const Creacion = () => {
   let [checkedM, setIsCheckedM] = useState(false);
   let [checkedC, setIsCheckedC] = useState(false);
   let [checkedN, setIsCheckedN] = useState(false);
+  let [checkedConst, setIsCheckedConst] = useState(false);
 
   function changeName() {
     const inputName = document.getElementById("inputName");
@@ -141,6 +142,10 @@ const Creacion = () => {
     setIsCheckedM(!checkedM);
   }
 
+  function displayConst() {
+    setIsCheckedConst(!checkedConst);
+  }
+
   function displayInputSP() {
     if (checked) {
       setIsCheckedSP(false);
@@ -200,6 +205,7 @@ const Creacion = () => {
     <div className="container-crear-form">
       <div className="container-map">
         <Mapa
+          isCheckedConst={checkedConst}
           color={checkedC}
           qr={qr}
           isChecked={checked}
@@ -227,7 +233,7 @@ const Creacion = () => {
           />
         </div>
         <div className="container-input-form">
-          <label className="labelCreate">
+          <label htmlFor="inputN" className="labelCreate">
             Ubicación del nombre o iniciales
           </label>
           <YesorNo
@@ -354,6 +360,23 @@ const Creacion = () => {
               </button>
             </div>
           </div>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputConst">
+            Activar constelaciones
+          </label>
+          <YesorNo
+            checked={checkedConst}
+            text1={"Si"}
+            text2={"No"}
+            input={"inputConst"}
+          ></YesorNo>
+          <input
+            onChange={displayConst}
+            className="hidden"
+            type="checkbox"
+            id="inputConst"
+          />
         </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputDate">
