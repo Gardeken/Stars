@@ -630,6 +630,13 @@ body {
   background-color: var(--blanco) !important;
 }
 
+.total {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1rem;
+}
+
 .hidden {
   display: none;
 }

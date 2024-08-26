@@ -33,6 +33,7 @@ const Creacion = () => {
   let [checkedC, setIsCheckedC] = useState(false);
   let [checkedN, setIsCheckedN] = useState(false);
   let [checkedConst, setIsCheckedConst] = useState(false);
+  let [total, setTotal] = useState(0);
 
   function changeName() {
     const inputName = document.getElementById("inputName");
@@ -168,6 +169,17 @@ const Creacion = () => {
     setQR(e.target.value);
   }
 
+  function Totalizar(e) {
+    const value = e.target.value;
+    if (value === "13x18cm") {
+      setTotal(15);
+    } else if (value === "15x20cm") {
+      setTotal(20);
+    } else if (value === "20x25cm") {
+      setTotal(25);
+    }
+  }
+
   function imprimir() {
     const inputUbi2 = document.querySelector("#inputName");
     const inputUbi = document.querySelector("#inputUbi");
@@ -232,7 +244,7 @@ const Creacion = () => {
             id="inputName"
           />
         </div>
-        <div className="container-input-form">
+        <div className="container-input-form formyn">
           <label htmlFor="inputN" className="labelCreate">
             Ubicación del nombre o iniciales
           </label>
@@ -259,7 +271,7 @@ const Creacion = () => {
             id="inputMsg"
           ></textarea>
         </div>
-        <div className="container-input-form">
+        <div className="container-input-form formyn">
           <label className="labelCreate" htmlFor="inputM">
             Activar Luna
           </label>
@@ -361,7 +373,7 @@ const Creacion = () => {
             </div>
           </div>
         </div>
-        <div className="container-input-form">
+        <div className="container-input-form formyn">
           <label className="labelCreate" htmlFor="inputConst">
             Activar constelaciones
           </label>
@@ -404,13 +416,22 @@ const Creacion = () => {
           <label className="labelCreate" htmlFor="inputMarco">
             Medidas
           </label>
-          <select className="inputCreate" id="inputMarco">
+          <select onChange={Totalizar} className="inputCreate" id="inputMarco">
             <option selected disabled>
               ...
             </option>
+            <option price="15" value="13x18cm">
+              13x18cm
+            </option>
+            <option price="20" value="15x20cm">
+              15x20cm
+            </option>
+            <option price="25" value="20x25cm">
+              20x25cm
+            </option>
           </select>
         </div>
-        <div className="container-input-form">
+        <div className="container-input-form formyn">
           <label className="labelCreate" htmlFor="inputM">
             Color
           </label>
@@ -427,7 +448,7 @@ const Creacion = () => {
             id="inputColor"
           />
         </div>
-        <div className="container-input-form">
+        <div className="container-input-form formyn">
           <label className="labelCreate" htmlFor="inputQR">
             Código QR
           </label>
@@ -454,7 +475,7 @@ const Creacion = () => {
             ) : null}
           </div>
         </div>
-        <div className="container-input-form">
+        <div className="container-input-form formyn">
           <label className="labelCreate" htmlFor="inputSpotify">
             Spotify Code
           </label>
@@ -479,6 +500,7 @@ const Creacion = () => {
             />
           ) : null}
         </div>
+        <div className="total">Total: ${total}</div>
       </form>
     </div>
   );
