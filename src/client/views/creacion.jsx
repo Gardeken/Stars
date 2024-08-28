@@ -34,6 +34,9 @@ const Creacion = () => {
   let [checkedN, setIsCheckedN] = useState(false);
   let [checkedConst, setIsCheckedConst] = useState(false);
   let [total, setTotal] = useState(0);
+  let ancho = 491;
+  let alto = 680;
+  let images = [];
 
   function changeName() {
     const inputName = document.getElementById("inputName");
@@ -180,20 +183,86 @@ const Creacion = () => {
     }
   }
 
-  function imprimir() {
-    const inputUbi2 = document.querySelector("#inputName");
-    const inputUbi = document.querySelector("#inputUbi");
-    const mapa = document.querySelector(".container-main-crear");
+  function cambiarEstilos(medida) {
+    const containerMain = document.querySelector(".container-main-crear");
+    const Celestialmap = document.querySelector("#celestial-map");
+    const bgBlack = document.querySelector(".bg-black");
+    const locatioShow = document.querySelector("#locatioShow");
+    const messageShow = document.querySelector("#messageShow");
+    const dateShow = document.querySelector("#dateShow");
+    const nameShow = document.querySelector("#Name");
+    const moon = document.querySelector(".moon");
+    const borderWhite = document.querySelector(".borderWhite");
+    console.log(medida);
+    if (medida === "13x18cm") {
+      bgBlack.classList.add("bg13x18");
+      containerMain.classList.add("container13x18");
+      Celestialmap.classList.add("map13x18");
+    } else if (medida === "15x20cm") {
+      bgBlack.classList.add("bg15x20");
+      containerMain.classList.add("container15x20");
+      Celestialmap.classList.add("map15x20");
+      borderWhite.classList.add("borderWhite15x20");
+      moon.classList.add("moon15x20");
+    }
+  }
 
+  function retirarEstilos(medida) {
+    const containerMain = document.querySelector(".container-main-crear");
+    const Celestialmap = document.querySelector("#celestial-map");
+    const bgBlack = document.querySelector(".bg-black");
+    const locatioShow = document.querySelector("#locatioShow");
+    const messageShow = document.querySelector("#messageShow");
+    const dateShow = document.querySelector("#dateShow");
+    const nameShow = document.querySelector("#Name");
+    const moon = document.querySelector(".moon");
+    const borderWhite = document.querySelector(".borderWhite");
+    if (medida === "13x18cm") {
+      bgBlack.classList.remove("bg13x18");
+      containerMain.classList.remove("container13x18");
+      Celestialmap.classList.remove("map13x18");
+    } else if (medida === "15x20cm") {
+      bgBlack.classList.remove("bg15x20");
+      containerMain.classList.remove("container15x20");
+      Celestialmap.classList.remove("map15x20");
+      borderWhite.classList.remove("borderWhite15x20");
+      moon.classList.remove("moon15x20");
+    }
+  }
+
+  function crearMapa(e) {
+    e.preventDefault();
+    const containerMain = document.querySelector(".container-main-crear");
+    const inputMedida = document.querySelector("#inputMedida");
+    if (!inputMedida.value) {
+      return alert("Por favor ingrese la medida del mapa");
+    }
+    if (inputMedida.value === "13x18cm") {
+      ancho = 491;
+      alto = 680;
+      cambiarEstilos(inputMedida.value);
+    } else if (inputMedida.value === "15x20cm") {
+      ancho = 566;
+      alto = 755;
+      cambiarEstilos(inputMedida.value);
+    } else if (inputMedida.value === "20x25cm") {
+      ancho = 755;
+      alto = 944;
+    }
     domtoimage
-      .toBlob(mapa, {
-        width: 491.33864458,
-        height: 680.31504634,
+      .toBlob(containerMain, {
+        width: ancho,
+        height: alto,
       })
       .then((dataUrl) => {
         const id = Date.now();
         const imageRef = ref(imageDb, `stars/mapas/${id}.png`);
-        uploadBytes(imageRef, dataUrl);
+        images.push({ imageRef, dataUrl });
+        images.forEach((i) => {
+          uploadBytes(i.imageRef, i.dataUrl);
+        });
+        //retirarEstilos(inputMedida.value);
+        alert("Mapa creado con éxito");
       })
       .catch(function (error) {
         console.error("oops, something went wrong!", error);
@@ -413,22 +482,16 @@ const Creacion = () => {
           />
         </div>
         <div className="container-input-form">
-          <label className="labelCreate" htmlFor="inputMarco">
+          <label className="labelCreate" htmlFor="inputMedida">
             Medidas
           </label>
-          <select onChange={Totalizar} className="inputCreate" id="inputMarco">
-            <option selected disabled>
+          <select onChange={Totalizar} className="inputCreate" id="inputMedida">
+            <option value={""} selected disabled>
               ...
             </option>
-            <option price="15" value="13x18cm">
-              13x18cm
-            </option>
-            <option price="20" value="15x20cm">
-              15x20cm
-            </option>
-            <option price="25" value="20x25cm">
-              20x25cm
-            </option>
+            <option value="13x18cm">13x18cm</option>
+            <option value="15x20cm">15x20cm</option>
+            <option value="20x25cm">20x25cm</option>
           </select>
         </div>
         <div className="container-input-form formyn">
@@ -501,6 +564,11 @@ const Creacion = () => {
           ) : null}
         </div>
         <div className="total">Total: ${total}</div>
+        <div className="btnCreateM">
+          <button className="btn-search" onClick={crearMapa}>
+            Crear
+          </button>
+        </div>
       </form>
     </div>
   );

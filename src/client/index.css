@@ -291,14 +291,14 @@ body {
   place-items: center;
 }
 
-#celestial-map {
-  width: 33vw;
+.map {
+  width: 33vw !important;
+  min-width: 100px !important;
   border: solid 4px var(--blanco);
   z-index: 0;
   height: 68lvh !important;
-  display: grid;
+  display: grid !important;
   place-items: start center;
-  min-width: 100px;
   background-color: var(--negro);
 }
 
@@ -307,7 +307,7 @@ body {
   border: solid 4px var(--negro) !important;
 }
 
-#celestial-map canvas {
+.map canvas {
   width: 20vw !important;
   height: 20vw !important;
   margin-top: 3rem;
@@ -481,6 +481,8 @@ body {
 
 .date-show,
 .location-show {
+  text-align: center;
+  width: 10rem;
   font-size: 0.8rem;
 }
 
@@ -627,8 +629,11 @@ body {
 }
 
 .bg-white {
-  box-shadow: 10px 17px 59px -12px rgba(0, 0, 0, 0.5);
   background-color: var(--blanco) !important;
+}
+
+.shadow {
+  box-shadow: 10px 17px 59px -12px rgba(0, 0, 0, 0.5);
 }
 
 .total {
@@ -636,6 +641,139 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 1rem;
+}
+
+.btnCreateM {
+  display: grid;
+  place-items: center;
+}
+
+/*------------------------------------- 13x18 styles ----------------------------------------------*/
+
+.bg13x18,
+.container13x18 {
+  width: 13cm;
+  height: 18cm;
+}
+
+.map13x18 {
+  width: 11cm !important;
+  height: 16cm !important;
+}
+
+.date-show13x18 {
+  width: 6rem;
+}
+
+.location-show13x18 {
+  width: 7rem;
+}
+
+/*------------------------------------- 15x20 styles ----------------------------------------------*/
+
+.bg15x20,
+.container15x20 {
+  width: 15cm;
+  height: 20cm;
+}
+
+.map15x20 {
+  width: 13cm !important;
+  height: 18cm !important;
+}
+
+.map15x20 canvas,
+.borderWhite15x20,
+.moon15x20 {
+  width: 7.5cm !important;
+  height: 7.5cm !important;
+}
+
+.location-show15x20 {
+  top: 86%;
+}
+
+.location-show15x20,
+.date-show15x20 {
+  font-size: 0.9rem;
+  left: 35.8%;
+}
+
+.name15x20 {
+  font-size: 1.9rem;
+}
+
+.nameBottom15x20 {
+  bottom: -2.5rem;
+}
+
+.message-show15x20 {
+  top: 60%;
+  font-size: 1rem;
+}
+
+.QRCode15x20 {
+  top: 71%;
+  width: 2cm;
+  height: 2cm;
+}
+
+/*------------------------------------- 20x25 styles ----------------------------------------------*/
+
+.bg20x25,
+.container20x25 {
+  width: 20cm;
+  height: 25cm;
+}
+
+.map20x25 {
+  width: 18cm !important;
+  height: 22.5cm !important;
+}
+
+.map20x25 canvas,
+.borderWhite20x25,
+.moon20x25 {
+  width: 10cm !important;
+  height: 10cm !important;
+}
+
+.QRCode20x25 {
+  top: 72%;
+  width: 2.4cm;
+  height: 2.4cm;
+}
+
+.date-show20x25 {
+  top: 85%;
+}
+
+.location-show20x25 {
+  top: 89%;
+}
+
+.location-show20x25,
+.date-show20x25 {
+  font-size: 1.2rem;
+}
+
+.message-show20x25 {
+  top: 60%;
+  font-size: 1.2rem;
+}
+
+.message-prev20x25 {
+  top: 65%;
+  font-size: 1.3rem;
+}
+
+.name20x25 {
+  margin-top: 7rem;
+  font-size: 1.8rem;
+}
+
+.nameBottom20x25 {
+  bottom: -2.5rem;
 }
 
 .hidden {
@@ -841,12 +979,12 @@ body {
     margin: 1rem;
   }
 
-  #celestial-map {
-    width: 90%;
+  .map {
+    width: 90% !important;
     height: 62lvh !important;
   }
 
-  #celestial-map canvas,
+  .map canvas,
   .borderWhite {
     margin-top: 1.5rem;
     width: 50vw !important;
@@ -915,7 +1053,120 @@ body {
   }
 
   .result {
+    max-height: 25rem;
     width: 80vw;
+  }
+
+  /*------------------------------------- 13x18 styles ----------------------------------------------*/
+
+  .bg13x18,
+  .container13x18 {
+    width: 13cm;
+    height: 18cm;
+  }
+
+  .map13x18 {
+    width: 11cm !important;
+    height: 16cm !important;
+  }
+
+  /*------------------------------------- 15x20 styles ----------------------------------------------*/
+
+  .bg15x20,
+  .container15x20 {
+    width: 15cm;
+    height: 20cm;
+  }
+
+  .map15x20 {
+    width: 13cm !important;
+    height: 18cm !important;
+  }
+
+  .map15x20 canvas,
+  .borderWhite15x20,
+  .moon15x20 {
+    width: 7.5cm !important;
+    height: 7.5cm !important;
+  }
+
+  .date-show15x20 {
+    top: 83%;
+  }
+
+  .location-show15x20 {
+    top: 86%;
+  }
+
+  .location-show15x20,
+  .date-show15x20 {
+    font-size: 0.9rem;
+    left: 35.8%;
+  }
+
+  .name15x20 {
+    font-size: 1.9rem;
+  }
+  .nameBottom15x20 {
+    bottom: -2.5rem;
+  }
+
+  /*------------------------------------- 20x25 styles ----------------------------------------------*/
+
+  .bg20x25,
+  .container20x25 {
+    width: 20cm;
+    height: 25cm;
+  }
+
+  .map20x25 {
+    width: 18cm !important;
+    height: 22.5cm !important;
+  }
+
+  .map20x25 canvas,
+  .borderWhite20x25,
+  .moon20x25 {
+    width: 10cm !important;
+    height: 10cm !important;
+  }
+
+  .QRCode20x25 {
+    top: 72%;
+    width: 2.4cm;
+    height: 2.4cm;
+  }
+
+  .date-show20x25 {
+    top: 85%;
+  }
+
+  .location-show20x25 {
+    top: 89%;
+  }
+
+  .location-show20x25,
+  .date-show20x25 {
+    font-size: 1.2rem;
+  }
+
+  .message-show20x25 {
+    top: 60%;
+    font-size: 1.2rem;
+  }
+
+  .message-prev20x25 {
+    top: 65%;
+    font-size: 1.3rem;
+  }
+
+  .name20x25 {
+    margin-top: 7rem;
+    font-size: 1.8rem;
+  }
+
+  .nameBottom20x25 {
+    bottom: -2.5rem;
   }
 
   .hidden {
