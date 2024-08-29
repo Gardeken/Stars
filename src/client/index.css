@@ -291,14 +291,14 @@ body {
   place-items: center;
 }
 
-#celestial-map {
-  width: 33vw;
+.map {
+  width: 33vw !important;
+  min-width: 100px !important;
   border: solid 4px var(--blanco);
   z-index: 0;
   height: 68lvh !important;
-  display: grid;
+  display: grid !important;
   place-items: start center;
-  min-width: 100px;
   background-color: var(--negro);
 }
 
@@ -307,10 +307,10 @@ body {
   border: solid 4px var(--negro) !important;
 }
 
-#celestial-map canvas {
-  width: 20vw !important;
-  height: 20vw !important;
-  margin-top: 3rem;
+.map canvas {
+  width: 25vw !important;
+  height: 25vw !important;
+  margin-top: 1rem;
   position: relative;
   z-index: 10;
   border-radius: 50%;
@@ -339,6 +339,7 @@ body {
 
 .container-crear-form {
   display: grid;
+  position: relative;
   height: 100lvh;
   place-items: center;
   grid-template-columns: 1fr 1fr;
@@ -370,7 +371,7 @@ body {
 .btn-search {
   color: var(--blanco);
   border: none;
-  width: 5rem;
+  width: 6rem;
   border-radius: 0.5rem;
   background-color: var(--marron-claro-sec);
 }
@@ -414,19 +415,19 @@ body {
   opacity: 0.9;
   border-radius: 49%;
   transform: rotate(-18deg);
-  background-position: top 0 left 140%;
+  background-position: top 0.5rem left 140%;
   background-repeat: no-repeat;
-  width: 20vw;
-  height: 28.1vh;
+  width: 25vw;
+  height: 25vw;
   z-index: 15;
   position: absolute;
-  margin-top: 3rem;
+  margin-top: 1.2rem;
   place-self: start center;
 }
 
 .name {
   place-self: center;
-  margin-top: 5.5rem;
+  margin-top: 8.5rem;
   color: var(--blanco);
   z-index: 15;
   padding: 0 1rem;
@@ -439,9 +440,9 @@ body {
 }
 
 .borderWhite {
-  width: 20vw;
-  height: 20vw;
-  margin-top: 2.8rem;
+  width: 25vw;
+  height: 25vw;
+  margin-top: 1rem;
   place-self: start center;
   z-index: 20;
   border-radius: 50%;
@@ -451,8 +452,8 @@ body {
 
 .spotify-code {
   z-index: 5;
-  width: 9vw;
-  top: 71%;
+  width: 12vw;
+  top: 73%;
   place-self: center;
   position: absolute;
 }
@@ -468,9 +469,10 @@ body {
 }
 
 .message-show {
-  top: 59%;
+  top: 62%;
   font-size: 0.9rem;
   text-align: center;
+  width: 50%;
   max-width: 50%;
 }
 
@@ -481,15 +483,17 @@ body {
 
 .date-show,
 .location-show {
+  text-align: center;
+  width: 10rem;
   font-size: 0.8rem;
 }
 
 .date-show {
-  top: 80%;
+  top: 83%;
 }
 
 .location-show {
-  top: 83%;
+  top: 86%;
 }
 
 .container-location {
@@ -525,6 +529,7 @@ body {
 }
 
 .btn-search {
+  margin: 1rem;
   padding: 0.8rem;
 }
 
@@ -566,7 +571,7 @@ body {
 }
 
 .QRCode {
-  top: 69%;
+  top: 72%;
   place-self: center;
   position: absolute;
 }
@@ -627,8 +632,11 @@ body {
 }
 
 .bg-white {
-  box-shadow: 10px 17px 59px -12px rgba(0, 0, 0, 0.5);
   background-color: var(--blanco) !important;
+}
+
+.shadow {
+  box-shadow: 10px 17px 59px -12px rgba(0, 0, 0, 0.5);
 }
 
 .total {
@@ -636,6 +644,237 @@ body {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 1rem;
+}
+
+.btnCreateM {
+  display: grid;
+  place-items: center;
+}
+
+.bg-create {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  font-size: 1.8rem;
+  font-weight: 700;
+  place-items: center;
+  z-index: 100;
+  background-color: var(--blanco);
+  position: fixed;
+}
+
+/*------------------------------------- 13x18 styles ----------------------------------------------*/
+
+.bg13x18,
+.container13x18 {
+  width: 13cm;
+  height: 18cm;
+}
+
+.map13x18 {
+  width: 11cm !important;
+  height: 16cm !important;
+}
+
+.date-show13x18 {
+  width: 6rem;
+}
+
+.location-show13x18 {
+  width: 7rem;
+}
+
+/*------------------------------------- 15x20 styles ----------------------------------------------*/
+
+.bg15x20,
+.container15x20 {
+  width: 15cm;
+  height: 20cm;
+}
+
+.map15x20 {
+  width: 13cm !important;
+  height: 18cm !important;
+}
+
+.map15x20 canvas,
+.borderWhite15x20,
+.moon15x20 {
+  width: 9.5cm !important;
+  height: 9.5cm !important;
+}
+
+.date-show15x20 {
+  top: 86%;
+}
+
+.location-show15x20 {
+  top: 89%;
+}
+
+.location-show15x20,
+.date-show15x20 {
+  font-size: 0.9rem;
+  left: 35.8%;
+}
+
+.name15x20 {
+  margin-top: 10rem;
+  font-size: 1.9rem;
+}
+
+.nameBottom15x20 {
+  bottom: -2.5rem;
+}
+
+.message-show15x20 {
+  top: 63%;
+  font-size: 1rem;
+}
+
+.message-prev15x20 {
+  top: 65%;
+  font-size: 1.1rem;
+}
+
+.spotify-code15x20 {
+  width: 5cm;
+  top: 73%;
+}
+
+.QRCode15x20 {
+  top: 73%;
+  width: 2cm;
+  height: 2cm;
+}
+
+/*------------------------------------- 20x25 styles ----------------------------------------------*/
+
+.bg20x25,
+.container20x25 {
+  width: 20cm;
+  height: 25cm;
+}
+
+.map20x25 {
+  width: 18cm !important;
+  height: 22.5cm !important;
+}
+
+.map20x25 canvas,
+.borderWhite20x25 {
+  margin-top: 0.5rem;
+  width: 12cm !important;
+  height: 12cm !important;
+}
+
+.moon20x25 {
+  margin-top: 0.6rem;
+  width: 12cm;
+  height: 12cm;
+}
+
+.QRCode20x25 {
+  top: 72%;
+  width: 2.8cm;
+  height: 2.8cm;
+}
+
+.date-show20x25 {
+  top: 85%;
+}
+
+.location-show20x25 {
+  top: 89%;
+  width: 20rem;
+}
+
+.location-show20x25,
+.date-show20x25 {
+  font-size: 1.2rem;
+}
+
+.message-show20x25 {
+  top: 62%;
+  font-size: 1.4rem;
+}
+
+.message-prev20x25 {
+  top: 65%;
+  font-size: 1.3rem;
+}
+
+.name20x25 {
+  margin-top: 12rem;
+  font-size: 2.3rem;
+}
+
+.nameBottom20x25 {
+  bottom: -3.2rem;
+}
+
+.spotify-code20x25 {
+  width: 6cm;
+  top: 75%;
+}
+
+/*------------------------------------- Container Contactar ----------------------------------------------*/
+
+.container-contactar {
+  background-color: rgba(0, 0, 0, 0.37);
+  position: fixed;
+  place-self: center;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.contactar-inputs {
+  width: 60vw;
+  padding: 1rem;
+  display: grid;
+  border-radius: 1rem;
+  background-color: var(--blanco);
+}
+
+.contactar-inputs h3 {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.contactar-inputs div {
+  display: grid;
+  margin: 1rem;
+  grid-template-columns: 0.5fr 1fr;
+}
+
+.contactar-inputs div label {
+  place-self: center start;
+}
+
+.container-close {
+  place-self: end;
+  display: flex !important;
+  margin: 0 !important;
+}
+
+.close-contact {
+  width: 2.5rem;
+  cursor: pointer;
+}
+
+.btn-create {
+  border: none;
+  padding: 0.8rem;
+  margin: 1rem;
+  color: white;
+  border-radius: 0.5rem;
+  background-color: var(--marron-claro-sec);
+  place-self: center;
 }
 
 .hidden {
@@ -781,6 +1020,11 @@ body {
 
   /*------------------------------------- Main Responsive ----------------------------------------------*/
 
+  .bg-create {
+    width: 100vw;
+    height: 100vh;
+  }
+
   .eslogan {
     width: 0;
   }
@@ -841,39 +1085,37 @@ body {
     margin: 1rem;
   }
 
-  #celestial-map {
-    width: 90%;
+  .map {
+    width: 90% !important;
     height: 62lvh !important;
   }
 
-  #celestial-map canvas,
+  .map canvas,
   .borderWhite {
-    margin-top: 1.5rem;
-    width: 50vw !important;
-    height: 50vw !important;
-  }
-
-  .borderWhite {
-    margin-top: 1.4rem;
+    margin-top: 0.5rem;
+    width: 62vw !important;
+    height: 62vw !important;
   }
 
   .moon {
-    margin-top: 1.5rem;
-    width: 50.8vw;
-    height: 50vw;
+    margin-top: 0.6rem;
+    width: 62.8vw;
+    height: 62vw;
   }
 
   .message-show {
-    top: 55%;
+    top: 57%;
     font-size: 0.9rem;
   }
 
   .message-prev {
-    top: 60%;
+    width: 20rem;
+    font-size: 1rem;
+    top: 62%;
   }
 
   .spotify-code {
-    width: 30vw;
+    width: 35vw;
   }
 
   .bg-black {
@@ -907,15 +1149,224 @@ body {
   }
 
   .name {
-    margin-top: 1rem;
+    margin-top: 3.8rem;
   }
 
   .nameBottom {
     bottom: -2rem;
   }
 
+  .QRCode {
+    height: 4rem;
+    width: 4rem;
+    top: 71%;
+  }
+
   .result {
+    max-height: 25rem;
     width: 80vw;
+  }
+
+  /*------------------------------------- Container Contactar Responsive ----------------------------------------------*/
+
+  .contactar-inputs {
+    width: 85vw;
+    height: 90vh;
+    overflow: scroll;
+  }
+
+  .contactar-inputs h3 {
+    margin: 1rem;
+  }
+
+  .contactar-inputs div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /*------------------------------------- 13x18 styles ----------------------------------------------*/
+
+  .bg13x18,
+  .container13x18 {
+    width: 13cm;
+    height: 18cm;
+    margin: 0;
+  }
+
+  .map13x18 {
+    width: 11cm !important;
+    height: 16cm !important;
+  }
+
+  .map13x18 canvas,
+  .borderWhite13x18 {
+    width: 7.5cm !important;
+    height: 7.5cm !important;
+  }
+
+  .moon13x18 {
+    width: 7.52cm;
+    height: 7.5cm;
+  }
+
+  .date-show13x18 {
+    width: 6rem;
+  }
+
+  .message-show13x18 {
+    top: 60%;
+  }
+
+  .QRCode13x18 {
+    height: 2cm;
+    width: 2cm;
+    top: 70%;
+  }
+
+  .name13x18 {
+    margin-top: 6rem;
+    font-size: 1.8rem;
+  }
+
+  .location-show13x18 {
+    width: 7rem;
+  }
+
+  /*------------------------------------- 15x20 styles ----------------------------------------------*/
+
+  .bg15x20,
+  .container15x20 {
+    width: 15cm;
+    margin: 0;
+    height: 20cm;
+  }
+
+  .map15x20 {
+    width: 13cm !important;
+    height: 18cm !important;
+  }
+
+  .map15x20 canvas,
+  .borderWhite15x20,
+  .moon15x20 {
+    width: 9.5cm !important;
+    height: 9.5cm !important;
+  }
+
+  .date-show15x20 {
+    top: 86%;
+  }
+
+  .location-show15x20 {
+    top: 89%;
+  }
+
+  .location-show15x20,
+  .date-show15x20 {
+    font-size: 0.9rem;
+    left: 35.8%;
+  }
+
+  .name15x20 {
+    margin-top: 10rem;
+    font-size: 1.9rem;
+  }
+
+  .nameBottom15x20 {
+    bottom: -2.5rem;
+  }
+
+  .message-show15x20 {
+    top: 63%;
+    font-size: 1rem;
+  }
+
+  .message-prev15x20 {
+    top: 65%;
+    font-size: 1.1rem;
+  }
+
+  .spotify-code15x20 {
+    width: 5cm;
+    top: 73%;
+  }
+
+  .QRCode15x20 {
+    top: 73%;
+    width: 2cm;
+    height: 2cm;
+  }
+
+  /*------------------------------------- 20x25 styles ----------------------------------------------*/
+
+  .bg20x25,
+  .container20x25 {
+    width: 20cm;
+    margin: 0;
+    height: 25cm;
+  }
+
+  .map20x25 {
+    width: 18cm !important;
+    height: 22.5cm !important;
+  }
+
+  .map20x25 canvas,
+  .borderWhite20x25 {
+    margin-top: 0.5rem;
+    width: 12cm !important;
+    height: 12cm !important;
+  }
+
+  .moon20x25 {
+    margin-top: 0.6rem;
+    width: 12cm;
+    height: 12cm;
+  }
+
+  .QRCode20x25 {
+    top: 72%;
+    width: 2.8cm;
+    height: 2.8cm;
+  }
+
+  .date-show20x25 {
+    top: 85%;
+  }
+
+  .location-show20x25 {
+    top: 89%;
+    width: 20rem;
+  }
+
+  .location-show20x25,
+  .date-show20x25 {
+    font-size: 1.2rem;
+  }
+
+  .message-show20x25 {
+    top: 62%;
+    font-size: 1.4rem;
+  }
+
+  .message-prev20x25 {
+    top: 65%;
+    font-size: 1.3rem;
+  }
+
+  .name20x25 {
+    margin-top: 12rem;
+    font-size: 2.3rem;
+  }
+
+  .nameBottom20x25 {
+    bottom: -3.2rem;
+  }
+
+  .spotify-code20x25 {
+    width: 6cm;
+    top: 75%;
   }
 
   .hidden {

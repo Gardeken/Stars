@@ -218,7 +218,7 @@ const Mapa = ({
 
   return (
     <div className="container-main-crear">
-      <div className={!color ? null : "borderBlack"} id="celestial-map">
+      <div className={!color ? "map" : "map borderBlack"} id="celestial-map">
         <div className={isCheckedM ? "moon" : "moon hidden"}></div>
         {isCheckedN ? (
           <h2 id="Name" className={!color ? "name" : "name colorBlack"}>
@@ -236,7 +236,7 @@ const Mapa = ({
         )}
         <div className="borderWhite"></div>
       </div>
-      <div className={!color ? "bg-black" : "bg-black bg-white"}></div>
+      <div className={!color ? "bg-black" : "bg-black shadow bg-white"}></div>
       <span
         id="dateShow"
         className={!color ? "date-show" : "date-show colorBlack"}
@@ -272,7 +272,7 @@ const Mapa = ({
       )}
 
       {isChecked ? (
-        <QRCode className="QRCode" value={qr} size={60}></QRCode>
+        <QRCode className="QRCode" id="QRCode" value={qr} size={60}></QRCode>
       ) : (
         ""
       )}

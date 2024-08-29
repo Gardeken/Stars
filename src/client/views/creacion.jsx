@@ -33,7 +33,12 @@ const Creacion = () => {
   let [checkedC, setIsCheckedC] = useState(false);
   let [checkedN, setIsCheckedN] = useState(false);
   let [checkedConst, setIsCheckedConst] = useState(false);
+  let [checkedBG, setIsCheckedBG] = useState(false);
+  let [checkedContact, setIsCheckedContact] = useState(false);
   let [total, setTotal] = useState(0);
+  let ancho = 491;
+  let alto = 680;
+  let images = [];
 
   function changeName() {
     const inputName = document.getElementById("inputName");
@@ -101,7 +106,7 @@ const Creacion = () => {
       const lat = e.target.getAttribute("latitude");
       const long = e.target.getAttribute("longitude");
       const lista = name.split(",");
-      locatioShow.innerText = `${lista[0]}, Venezuela`;
+      locatioShow.innerText = `${lista[0]}, ${lista[lista.length - 1]}`;
       Celestial.location([lat, long]);
     }
   }
@@ -165,6 +170,11 @@ const Creacion = () => {
     }
   }
 
+  function displayContact(e) {
+    e.preventDefault();
+    setIsCheckedContact(!checkedContact);
+  }
+
   function changeQR(e) {
     setQR(e.target.value);
   }
@@ -180,23 +190,150 @@ const Creacion = () => {
     }
   }
 
-  function imprimir() {
-    const inputUbi2 = document.querySelector("#inputName");
-    const inputUbi = document.querySelector("#inputUbi");
-    const mapa = document.querySelector(".container-main-crear");
+  function cambiarEstilos(medida) {
+    const containerMain = document.querySelector(".container-main-crear");
+    const Celestialmap = document.querySelector("#celestial-map");
+    const bgBlack = document.querySelector(".bg-black");
+    const locatioShow = document.querySelector("#locatioShow");
+    const messageShow = document.querySelector("#messageShow");
+    const dateShow = document.querySelector("#dateShow");
+    const nameShow = document.querySelector("#Name");
+    const moon = document.querySelector(".moon");
+    const qr = document.querySelector("#QRCode");
+    const spotify = document.querySelector("#spotify");
+    const borderWhite = document.querySelector(".borderWhite");
+    const quitarCM = medida.split("cm");
+    const medidaCM = quitarCM[0];
+    bgBlack.classList.add(`bg${medidaCM}`);
+    containerMain.classList.add(`container${medidaCM}`);
+    Celestialmap.classList.add(`map${medidaCM}`);
+    borderWhite.classList.add(`borderWhite${medidaCM}`);
+    moon.classList.add(`moon${medidaCM}`);
+    locatioShow.classList.add(`location-show${medidaCM}`);
+    dateShow.classList.add(`date-show${medidaCM}`);
+    spotify.classList.add(`spotify-code${medidaCM}`);
+    if (messageShow.classList.contains("message-prev")) {
+      messageShow.classList.add(`message-show${medidaCM}`);
+      messageShow.classList.add(`message-prev${medidaCM}`);
+    } else {
+      messageShow.classList.add(`message-show${medidaCM}`);
+    }
+    qr ? qr.classList.add(`QRCode${medidaCM}`) : null;
+    if (nameShow.classList.contains("nameBottom")) {
+      nameShow.classList.add(`name${medidaCM}`);
+      nameShow.classList.add(`nameBottom${medidaCM}`);
+    } else {
+      nameShow.classList.add(`name${medidaCM}`);
+    }
+  }
 
+  function retirarEstilos(medida) {
+    const containerMain = document.querySelector(".container-main-crear");
+    const Celestialmap = document.querySelector("#celestial-map");
+    const bgBlack = document.querySelector(".bg-black");
+    const locatioShow = document.querySelector("#locatioShow");
+    const messageShow = document.querySelector("#messageShow");
+    const dateShow = document.querySelector("#dateShow");
+    const nameShow = document.querySelector("#Name");
+    const moon = document.querySelector(".moon");
+    const qr = document.querySelector("#QRCode");
+    const borderWhite = document.querySelector(".borderWhite");
+    const quitarCM = medida.split("cm");
+    const medidaCM = quitarCM[0];
+    bgBlack.classList.remove(`bg${medidaCM}`);
+    containerMain.classList.remove(`container${medidaCM}`);
+    Celestialmap.classList.remove(`map${medidaCM}`);
+    borderWhite.classList.remove(`borderWhite${medidaCM}`);
+    moon.classList.remove(`moon${medidaCM}`);
+    locatioShow.classList.remove(`location-show${medidaCM}`);
+    dateShow.classList.remove(`date-show${medidaCM}`);
+    messageShow.classList.remove(`message-show${medidaCM}`);
+    messageShow.classList.remove(`message-prev${medidaCM}`);
+    spotify.classList.remove(`spotify-code${medidaCM}`);
+    nameShow.classList.remove(`name${medidaCM}`);
+    nameShow.classList.remove(`nameBottom${medidaCM}`);
+    qr ? qr.classList.remove(`QRCode${medidaCM}`) : null;
+  }
+
+  async function enviarEmail(obj) {
+    try {
+      const response = await axios.post("/api/email/sendEmail", obj);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function crearMapa(e) {
+    e.preventDefault();
+    let infoObj = {};
+    const containerMain = document.querySelector(".container-main-crear");
+    const inputMedida = document.querySelector("#inputMedida");
+    const inputName = document.querySelector("#inputNombre");
+    const inputEmail = document.querySelector("#inputEmail");
+    const inputTelf = document.querySelector("#inputTelf");
+    const inputMetodo = document.querySelector("#inputMetodo");
+    const inputSpotify = document.querySelector("#inputSpotify");
+    if (!inputMedida.value) {
+      return alert("Por favor ingrese la medida del mapa");
+    }
+    if (
+      !inputEmail.value ||
+      !inputName.value ||
+      !inputMetodo.value ||
+      !inputTelf.value
+    ) {
+      return alert("No puede dejar los campos vacíos");
+    }
+    setIsCheckedBG(true);
+    infoObj.name = inputName.value;
+    infoObj.email = inputEmail.value;
+    infoObj.telf = inputTelf.value;
+    infoObj.medida = inputMedida.value;
+    infoObj.metodo = inputMetodo.value;
+    inputSpotify ? (infoObj.spotify = inputSpotify.value) : null;
+    inputEmail.value = "";
+    inputName.value = "";
+    inputTelf.value = "";
+    inputMetodo.value = "";
+    if (inputMedida.value === "13x18cm") {
+      ancho = 491;
+      alto = 680;
+      cambiarEstilos(inputMedida.value);
+    } else if (inputMedida.value === "15x20cm") {
+      ancho = 566;
+      alto = 755;
+      cambiarEstilos(inputMedida.value);
+    } else if (inputMedida.value === "20x25cm") {
+      ancho = 755;
+      alto = 944;
+      cambiarEstilos(inputMedida.value);
+    }
     domtoimage
-      .toBlob(mapa, {
-        width: 491.33864458,
-        height: 680.31504634,
+      .toBlob(containerMain, {
+        width: ancho,
+        height: alto,
       })
       .then((dataUrl) => {
         const id = Date.now();
         const imageRef = ref(imageDb, `stars/mapas/${id}.png`);
-        uploadBytes(imageRef, dataUrl);
+        images.push({ imageRef, dataUrl });
+        images.forEach((i) => {
+          uploadBytes(i.imageRef, i.dataUrl).then((snapshot) =>
+            getDownloadURL(snapshot.ref).then((url) => {
+              infoObj.id = id;
+              infoObj.link = url;
+              enviarEmail(infoObj);
+            })
+          );
+        });
+        retirarEstilos(inputMedida.value);
+        setIsCheckedContact(false);
+        setIsCheckedBG(false);
+        alert("Mapa creado con éxito");
       })
       .catch(function (error) {
-        console.error("oops, something went wrong!", error);
+        setIsCheckedBG(false);
+        alert("Hubo un error al crear la imagen");
       });
   }
 
@@ -215,6 +352,68 @@ const Creacion = () => {
   let count = 0;
   return (
     <div className="container-crear-form">
+      <div
+        className={
+          checkedContact ? "container-contactar" : "container-contactar hidden"
+        }
+      >
+        <div className="contactar-inputs">
+          <div className="container-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="close-contact"
+              onClick={displayContact}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+
+          <h3>Información de contacto</h3>
+          <div>
+            <label className="labelCreate" htmlFor="inputNombre">
+              Nombre de contacto
+            </label>
+            <input className="inputCreate" type="text" id="inputNombre" />
+          </div>
+          <div>
+            <label className="labelCreate" htmlFor="inputEmail">
+              Correo
+            </label>
+            <input className="inputCreate" type="email" id="inputEmail" />
+          </div>
+          <div>
+            <label className="labelCreate" htmlFor="inputTelf">
+              Teléfono
+            </label>
+            <input className="inputCreate" type="number" id="inputTelf" />
+          </div>
+          <h3>Método de pago</h3>
+          <div>
+            <label className="labelCreate" htmlFor="inputMetodo">
+              Escoger método de pago
+            </label>
+            <select className="inputCreate" id="inputMetodo">
+              <option selected disabled value="">
+                ...
+              </option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Pago móvil">Pago móvil</option>
+            </select>
+          </div>
+          <button onClick={crearMapa} className="btn-create">
+            Crear Mapa
+          </button>
+        </div>
+      </div>
+      <div className={checkedBG ? "bg-create" : "hidden"}>Cargando...</div>
       <div className="container-map">
         <Mapa
           isCheckedConst={checkedConst}
@@ -227,6 +426,7 @@ const Creacion = () => {
         ></Mapa>
         <img
           src={!checkedC ? "/spcode-b.jpeg" : "/spcode-w.jpeg"}
+          id="spotify"
           className={checkedSP ? "spotify-code" : "spotify-code hidden"}
           alt=""
         />
@@ -413,22 +613,16 @@ const Creacion = () => {
           />
         </div>
         <div className="container-input-form">
-          <label className="labelCreate" htmlFor="inputMarco">
+          <label className="labelCreate" htmlFor="inputMedida">
             Medidas
           </label>
-          <select onChange={Totalizar} className="inputCreate" id="inputMarco">
-            <option selected disabled>
+          <select onChange={Totalizar} className="inputCreate" id="inputMedida">
+            <option value={""} selected disabled>
               ...
             </option>
-            <option price="15" value="13x18cm">
-              13x18cm
-            </option>
-            <option price="20" value="15x20cm">
-              15x20cm
-            </option>
-            <option price="25" value="20x25cm">
-              20x25cm
-            </option>
+            <option value="13x18cm">13x18cm</option>
+            <option value="15x20cm">15x20cm</option>
+            <option value="20x25cm">20x25cm</option>
           </select>
         </div>
         <div className="container-input-form formyn">
@@ -501,6 +695,11 @@ const Creacion = () => {
           ) : null}
         </div>
         <div className="total">Total: ${total}</div>
+        <div className="btnCreateM">
+          <button className="btn-search" onClick={displayContact}>
+            Continuar
+          </button>
+        </div>
       </form>
     </div>
   );
