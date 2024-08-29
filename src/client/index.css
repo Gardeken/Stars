@@ -662,7 +662,7 @@ body {
   place-items: center;
   z-index: 100;
   background-color: var(--blanco);
-  position: absolute;
+  position: fixed;
 }
 
 /*------------------------------------- 13x18 styles ----------------------------------------------*/
@@ -824,7 +824,7 @@ body {
 
 .container-contactar {
   background-color: rgba(0, 0, 0, 0.37);
-  position: absolute;
+  position: fixed;
   place-self: center;
   display: grid;
   place-items: center;
@@ -856,10 +856,15 @@ body {
   place-self: center start;
 }
 
+.container-close {
+  place-self: end;
+  display: flex !important;
+  margin: 0 !important;
+}
+
 .close-contact {
   width: 2.5rem;
   cursor: pointer;
-  place-self: end;
 }
 
 .btn-create {
@@ -1015,6 +1020,11 @@ body {
 
   /*------------------------------------- Main Responsive ----------------------------------------------*/
 
+  .bg-create {
+    width: 100vw;
+    height: 100vh;
+  }
+
   .eslogan {
     width: 0;
   }
@@ -1082,32 +1092,30 @@ body {
 
   .map canvas,
   .borderWhite {
-    margin-top: 1.5rem;
-    width: 50vw !important;
-    height: 50vw !important;
-  }
-
-  .borderWhite {
-    margin-top: 1.4rem;
+    margin-top: 0.5rem;
+    width: 62vw !important;
+    height: 62vw !important;
   }
 
   .moon {
-    margin-top: 1.5rem;
-    width: 50.8vw;
-    height: 50vw;
+    margin-top: 0.6rem;
+    width: 62.8vw;
+    height: 62vw;
   }
 
   .message-show {
-    top: 55%;
+    top: 57%;
     font-size: 0.9rem;
   }
 
   .message-prev {
-    top: 60%;
+    width: 20rem;
+    font-size: 1rem;
+    top: 62%;
   }
 
   .spotify-code {
-    width: 30vw;
+    width: 35vw;
   }
 
   .bg-black {
@@ -1141,23 +1149,49 @@ body {
   }
 
   .name {
-    margin-top: 1rem;
+    margin-top: 3.8rem;
   }
 
   .nameBottom {
     bottom: -2rem;
   }
 
+  .QRCode {
+    height: 4rem;
+    width: 4rem;
+    top: 71%;
+  }
+
   .result {
     max-height: 25rem;
     width: 80vw;
   }
+
+  /*------------------------------------- Container Contactar Responsive ----------------------------------------------*/
+
+  .contactar-inputs {
+    width: 85vw;
+    height: 90vh;
+    overflow: scroll;
+  }
+
+  .contactar-inputs h3 {
+    margin: 1rem;
+  }
+
+  .contactar-inputs div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   /*------------------------------------- 13x18 styles ----------------------------------------------*/
 
   .bg13x18,
   .container13x18 {
     width: 13cm;
     height: 18cm;
+    margin: 0;
   }
 
   .map13x18 {
@@ -1165,8 +1199,34 @@ body {
     height: 16cm !important;
   }
 
+  .map13x18 canvas,
+  .borderWhite13x18 {
+    width: 7.5cm !important;
+    height: 7.5cm !important;
+  }
+
+  .moon13x18 {
+    width: 7.52cm;
+    height: 7.5cm;
+  }
+
   .date-show13x18 {
     width: 6rem;
+  }
+
+  .message-show13x18 {
+    top: 60%;
+  }
+
+  .QRCode13x18 {
+    height: 2cm;
+    width: 2cm;
+    top: 70%;
+  }
+
+  .name13x18 {
+    margin-top: 6rem;
+    font-size: 1.8rem;
   }
 
   .location-show13x18 {
@@ -1178,6 +1238,7 @@ body {
   .bg15x20,
   .container15x20 {
     width: 15cm;
+    margin: 0;
     height: 20cm;
   }
 
@@ -1242,6 +1303,7 @@ body {
   .bg20x25,
   .container20x25 {
     width: 20cm;
+    margin: 0;
     height: 25cm;
   }
 
@@ -1306,6 +1368,7 @@ body {
     width: 6cm;
     top: 75%;
   }
+
   .hidden {
     display: none;
   }

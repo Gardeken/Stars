@@ -248,6 +248,7 @@ const Creacion = () => {
     locatioShow.classList.remove(`location-show${medidaCM}`);
     dateShow.classList.remove(`date-show${medidaCM}`);
     messageShow.classList.remove(`message-show${medidaCM}`);
+    messageShow.classList.remove(`message-prev${medidaCM}`);
     spotify.classList.remove(`spotify-code${medidaCM}`);
     nameShow.classList.remove(`name${medidaCM}`);
     nameShow.classList.remove(`nameBottom${medidaCM}`);
@@ -267,15 +268,28 @@ const Creacion = () => {
     let infoObj = {};
     const containerMain = document.querySelector(".container-main-crear");
     const inputMedida = document.querySelector("#inputMedida");
+    const inputName = document.querySelector("#inputNombre");
+    const inputEmail = document.querySelector("#inputEmail");
+    const inputTelf = document.querySelector("#inputTelf");
+    const inputMetodo = document.querySelector("#inputMetodo");
+    const inputSpotify = document.querySelector("#inputSpotify");
     if (!inputMedida.value) {
       return alert("Por favor ingrese la medida del mapa");
     }
+    if (!inputEmail || !inputName || !inputMetodo || !inputTelf) {
+      return alert("No puede dejar los campos vacíos");
+    }
     setIsCheckedBG(true);
-    infoObj.name = document.querySelector("#inputNombre").value;
-    infoObj.email = document.querySelector("#inputEmail").value;
-    infoObj.telf = document.querySelector("#inputTelf").value;
+    infoObj.name = inputName.value;
+    infoObj.email = inputEmail.value;
+    infoObj.telf = inputTelf.value;
     infoObj.medida = inputMedida.value;
-    infoObj.metodo = document.querySelector("#inputMetodo").value;
+    infoObj.metodo = inputMetodo.value;
+    inputSpotify ? (infoObj.spotify = inputSpotify.value) : null;
+    inputEmail.value = "";
+    inputName.value = "";
+    inputTelf.value = "";
+    inputMetodo.value = "";
     if (inputMedida.value === "13x18cm") {
       ancho = 491;
       alto = 680;
@@ -303,7 +317,7 @@ const Creacion = () => {
             getDownloadURL(snapshot.ref).then((url) => {
               infoObj.id = id;
               infoObj.link = url;
-              enviarEmail(infoObj);
+              //enviarEmail(infoObj);
             })
           );
         });
@@ -339,21 +353,23 @@ const Creacion = () => {
         }
       >
         <div className="contactar-inputs">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="close-contact"
-            onClick={displayContact}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18 18 6M6 6l12 12"
-            />
-          </svg>
+          <div className="container-close">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="close-contact"
+              onClick={displayContact}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
 
           <h3>Información de contacto</h3>
           <div>

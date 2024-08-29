@@ -14,25 +14,34 @@ const transporter = nodemailer.createTransport({
 
 emailRouter.post("/sendEmail", async (req, res) => {
   try {
-    const { name, email, telf, medida, metodo, id, link } = req.body;
+    const { name, email, telf, medida, metodo, id, link, spotify } = req.body;
+    console.log(spotify);
+    const without = `<div style="text-align: center;">
+      <p>Nombre: ${name}</p>
+      <p style="text-decoration: none;">Correo: ${email}</p>
+      <p>Telf: ${telf}</p>
+      <p>Metodo: ${metodo}</p>
+      <p>Medida: ${medida}</p>
+      <p>ID del mapa: ${id}</p>
+      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link}">Descargar mapa</a>
+      </div>`;
+    const withSP = `
+      <div style="text-align: center;">
+      <p>Nombre: ${name}</p>
+      <p style="text-decoration: none;">Correo: ${email}</p>
+      <p>Telf: ${telf}</p>
+      <p>Metodo: ${metodo}</p>
+      <p>Medida: ${medida}</p>
+      <p>ID del mapa: ${id}</p>
+      <p>Link Spotify: ${spotify}</p>
+      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link}">Descargar mapa</a>
+      </div>`;
     transporter.sendMail({
       from: '"Stars" <dominicode.xyz@gmail.com>',
       to: `${email}`,
       subject: "Pedido",
       text: `Pedido de ${name}`,
-      html: `
-      <div style="text-align: center;">
-      <p>Nombre: ${name}</p>
-      <p style="text-decoration: none;">Correo: ${email}</p>
-      <p>Telf: ${telf}</p>
-      <p>Medida: ${medida}</p>
-      <p>Medida: ${medida}</p>
-      <p>Medida: ${medida}</p>
-      <p>Metodo: ${metodo}</p>
-      <p>ID del mapa: ${id}</p>
-      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link}">Descargar mapa</a>
-      </div>
-    `,
+      html: spotify ? withSP : without,
     });
 
     transporter.sendMail({
