@@ -1,6 +1,10 @@
 import { Fragment } from "react";
 import Nav from "../components/nav";
 
+function redirigir() {
+  window.location.href = "/crear";
+}
+
 const Plantillas = () => {
   return (
     <Fragment>
@@ -8,7 +12,7 @@ const Plantillas = () => {
       <main className="container-main-plantillas">
         <h1 className="titulo-plantillas">Plantillas</h1>
         <div className="container-plantillas">
-          <div className="plantilla">
+          <div onClick={redirigir} className="plantilla">
             <img
               className="img-plantilla img-plantilla-1"
               src="/plantilla-1.webp"
