@@ -34,6 +34,7 @@ const Creacion = () => {
   let [checkedN, setIsCheckedN] = useState(false);
   let [checkedConst, setIsCheckedConst] = useState(false);
   let [checkedBG, setIsCheckedBG] = useState(false);
+  let [checkedContact, setIsCheckedContact] = useState(false);
   let [total, setTotal] = useState(0);
   let ancho = 491;
   let alto = 680;
@@ -169,6 +170,11 @@ const Creacion = () => {
     }
   }
 
+  function displayContact(e) {
+    e.preventDefault();
+    setIsCheckedContact(!checkedContact);
+  }
+
   function changeQR(e) {
     setQR(e.target.value);
   }
@@ -194,27 +200,30 @@ const Creacion = () => {
     const nameShow = document.querySelector("#Name");
     const moon = document.querySelector(".moon");
     const qr = document.querySelector("#QRCode");
+    const spotify = document.querySelector("#spotify");
     const borderWhite = document.querySelector(".borderWhite");
-    if (medida === "13x18cm") {
-      bgBlack.classList.add("bg13x18");
-      containerMain.classList.add("container13x18");
-      Celestialmap.classList.add("map13x18");
-    } else if (medida === "15x20cm") {
-      bgBlack.classList.add("bg15x20");
-      containerMain.classList.add("container15x20");
-      Celestialmap.classList.add("map15x20");
-      borderWhite.classList.add("borderWhite15x20");
-      moon.classList.add("moon15x20");
-      locatioShow.classList.add("location-show15x20");
-      dateShow.classList.add("date-show15x20");
-      messageShow.classList.add("message-show15x20");
-      qr ? qr.classList.add("QRCode15x20") : null;
-      if (nameShow.classList.contains("nameBottom")) {
-        nameShow.classList.add("name15x20");
-        nameShow.classList.add("nameBottom15x20");
-      } else {
-        nameShow.classList.add("name15x20");
-      }
+    const quitarCM = medida.split("cm");
+    const medidaCM = quitarCM[0];
+    bgBlack.classList.add(`bg${medidaCM}`);
+    containerMain.classList.add(`container${medidaCM}`);
+    Celestialmap.classList.add(`map${medidaCM}`);
+    borderWhite.classList.add(`borderWhite${medidaCM}`);
+    moon.classList.add(`moon${medidaCM}`);
+    locatioShow.classList.add(`location-show${medidaCM}`);
+    dateShow.classList.add(`date-show${medidaCM}`);
+    spotify.classList.add(`spotify-code${medidaCM}`);
+    if (messageShow.classList.contains("message-prev")) {
+      messageShow.classList.add(`message-show${medidaCM}`);
+      messageShow.classList.add(`message-prev${medidaCM}`);
+    } else {
+      messageShow.classList.add(`message-show${medidaCM}`);
+    }
+    qr ? qr.classList.add(`QRCode${medidaCM}`) : null;
+    if (nameShow.classList.contains("nameBottom")) {
+      nameShow.classList.add(`name${medidaCM}`);
+      nameShow.classList.add(`nameBottom${medidaCM}`);
+    } else {
+      nameShow.classList.add(`name${medidaCM}`);
     }
   }
 
@@ -229,33 +238,44 @@ const Creacion = () => {
     const moon = document.querySelector(".moon");
     const qr = document.querySelector("#QRCode");
     const borderWhite = document.querySelector(".borderWhite");
-    if (medida === "13x18cm") {
-      bgBlack.classList.remove("bg13x18");
-      containerMain.classList.remove("container13x18");
-      Celestialmap.classList.remove("map13x18");
-    } else if (medida === "15x20cm") {
-      bgBlack.classList.remove("bg15x20");
-      containerMain.classList.remove("container15x20");
-      Celestialmap.classList.remove("map15x20");
-      borderWhite.classList.remove("borderWhite15x20");
-      moon.classList.remove("moon15x20");
-      locatioShow.classList.remove("location-show15x20");
-      dateShow.classList.remove("date-show15x20");
-      messageShow.classList.remove("message-show15x20");
-      nameShow.classList.remove("name15x20");
-      nameShow.classList.remove("nameBottom15x20");
-      qr ? qr.classList.remove("QRCode15x20") : null;
+    const quitarCM = medida.split("cm");
+    const medidaCM = quitarCM[0];
+    bgBlack.classList.remove(`bg${medidaCM}`);
+    containerMain.classList.remove(`container${medidaCM}`);
+    Celestialmap.classList.remove(`map${medidaCM}`);
+    borderWhite.classList.remove(`borderWhite${medidaCM}`);
+    moon.classList.remove(`moon${medidaCM}`);
+    locatioShow.classList.remove(`location-show${medidaCM}`);
+    dateShow.classList.remove(`date-show${medidaCM}`);
+    messageShow.classList.remove(`message-show${medidaCM}`);
+    spotify.classList.remove(`spotify-code${medidaCM}`);
+    nameShow.classList.remove(`name${medidaCM}`);
+    nameShow.classList.remove(`nameBottom${medidaCM}`);
+    qr ? qr.classList.remove(`QRCode${medidaCM}`) : null;
+  }
+
+  async function enviarEmail(obj) {
+    try {
+      const response = await axios.post("/api/email/sendEmail", obj);
+    } catch (error) {
+      console.log(error);
     }
   }
 
-  function crearMapa(e) {
+  async function crearMapa(e) {
     e.preventDefault();
-    setIsCheckedBG(true);
+    let infoObj = {};
     const containerMain = document.querySelector(".container-main-crear");
     const inputMedida = document.querySelector("#inputMedida");
     if (!inputMedida.value) {
       return alert("Por favor ingrese la medida del mapa");
     }
+    setIsCheckedBG(true);
+    infoObj.name = document.querySelector("#inputNombre").value;
+    infoObj.email = document.querySelector("#inputEmail").value;
+    infoObj.telf = document.querySelector("#inputTelf").value;
+    infoObj.medida = inputMedida.value;
+    infoObj.metodo = document.querySelector("#inputMetodo").value;
     if (inputMedida.value === "13x18cm") {
       ancho = 491;
       alto = 680;
@@ -267,8 +287,8 @@ const Creacion = () => {
     } else if (inputMedida.value === "20x25cm") {
       ancho = 755;
       alto = 944;
+      cambiarEstilos(inputMedida.value);
     }
-    /*
     domtoimage
       .toBlob(containerMain, {
         width: ancho,
@@ -279,17 +299,23 @@ const Creacion = () => {
         const imageRef = ref(imageDb, `stars/mapas/${id}.png`);
         images.push({ imageRef, dataUrl });
         images.forEach((i) => {
-          uploadBytes(i.imageRef, i.dataUrl);
+          uploadBytes(i.imageRef, i.dataUrl).then((snapshot) =>
+            getDownloadURL(snapshot.ref).then((url) => {
+              infoObj.id = id;
+              infoObj.link = url;
+              enviarEmail(infoObj);
+            })
+          );
         });
         retirarEstilos(inputMedida.value);
+        setIsCheckedContact(false);
         setIsCheckedBG(false);
         alert("Mapa creado con éxito");
       })
       .catch(function (error) {
         setIsCheckedBG(false);
         alert("Hubo un error al crear la imagen");
-        console.log(error);
-      });*/
+      });
   }
 
   useEffect(() => {
@@ -307,6 +333,65 @@ const Creacion = () => {
   let count = 0;
   return (
     <div className="container-crear-form">
+      <div
+        className={
+          checkedContact ? "container-contactar" : "container-contactar hidden"
+        }
+      >
+        <div className="contactar-inputs">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="close-contact"
+            onClick={displayContact}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+
+          <h3>Información de contacto</h3>
+          <div>
+            <label className="labelCreate" htmlFor="inputNombre">
+              Nombre de contacto
+            </label>
+            <input className="inputCreate" type="text" id="inputNombre" />
+          </div>
+          <div>
+            <label className="labelCreate" htmlFor="inputEmail">
+              Correo
+            </label>
+            <input className="inputCreate" type="email" id="inputEmail" />
+          </div>
+          <div>
+            <label className="labelCreate" htmlFor="inputTelf">
+              Teléfono
+            </label>
+            <input className="inputCreate" type="number" id="inputTelf" />
+          </div>
+          <h3>Método de pago</h3>
+          <div>
+            <label className="labelCreate" htmlFor="inputMetodo">
+              Escoger método de pago
+            </label>
+            <select className="inputCreate" id="inputMetodo">
+              <option selected disabled value="">
+                ...
+              </option>
+              <option value="Efectivo">Efectivo</option>
+              <option value="Pago móvil">Pago móvil</option>
+            </select>
+          </div>
+          <button onClick={crearMapa} className="btn-create">
+            Crear Mapa
+          </button>
+        </div>
+      </div>
       <div className={checkedBG ? "bg-create" : "hidden"}>Cargando...</div>
       <div className="container-map">
         <Mapa
@@ -320,6 +405,7 @@ const Creacion = () => {
         ></Mapa>
         <img
           src={!checkedC ? "/spcode-b.jpeg" : "/spcode-w.jpeg"}
+          id="spotify"
           className={checkedSP ? "spotify-code" : "spotify-code hidden"}
           alt=""
         />
@@ -589,8 +675,8 @@ const Creacion = () => {
         </div>
         <div className="total">Total: ${total}</div>
         <div className="btnCreateM">
-          <button className="btn-search" onClick={crearMapa}>
-            Crear
+          <button className="btn-search" onClick={displayContact}>
+            Continuar
           </button>
         </div>
       </form>
