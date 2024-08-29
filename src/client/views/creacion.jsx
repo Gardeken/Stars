@@ -315,7 +315,10 @@ const Creacion = () => {
       })
       .then((dataUrl) => {
         const id = Date.now();
-        const imageRef = ref(imageDb, `stars/mapas/${id}.png`);
+        const imageRef = ref(
+          imageDb,
+          `stars/mapas/${infoObj.name} - ${id}.png`
+        );
         images.push({ imageRef, dataUrl });
         images.forEach((i) => {
           uploadBytes(i.imageRef, i.dataUrl).then((snapshot) =>
