@@ -276,7 +276,12 @@ const Creacion = () => {
     if (!inputMedida.value) {
       return alert("Por favor ingrese la medida del mapa");
     }
-    if (!inputEmail || !inputName || !inputMetodo || !inputTelf) {
+    if (
+      !inputEmail.value ||
+      !inputName.value ||
+      !inputMetodo.value ||
+      !inputTelf.value
+    ) {
       return alert("No puede dejar los campos vacíos");
     }
     setIsCheckedBG(true);
@@ -317,7 +322,7 @@ const Creacion = () => {
             getDownloadURL(snapshot.ref).then((url) => {
               infoObj.id = id;
               infoObj.link = url;
-              //enviarEmail(infoObj);
+              enviarEmail(infoObj);
             })
           );
         });

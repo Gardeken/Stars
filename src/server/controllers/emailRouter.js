@@ -15,7 +15,6 @@ const transporter = nodemailer.createTransport({
 emailRouter.post("/sendEmail", async (req, res) => {
   try {
     const { name, email, telf, medida, metodo, id, link, spotify } = req.body;
-    console.log(spotify);
     const without = `<div style="text-align: center;">
       <p>Nombre: ${name}</p>
       <p style="text-decoration: none;">Correo: ${email}</p>
