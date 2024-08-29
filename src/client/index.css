@@ -308,9 +308,9 @@ body {
 }
 
 .map canvas {
-  width: 20vw !important;
-  height: 20vw !important;
-  margin-top: 3rem;
+  width: 25vw !important;
+  height: 25vw !important;
+  margin-top: 1rem;
   position: relative;
   z-index: 10;
   border-radius: 50%;
@@ -339,6 +339,7 @@ body {
 
 .container-crear-form {
   display: grid;
+  position: relative;
   height: 100lvh;
   place-items: center;
   grid-template-columns: 1fr 1fr;
@@ -414,19 +415,19 @@ body {
   opacity: 0.9;
   border-radius: 49%;
   transform: rotate(-18deg);
-  background-position: top 0 left 140%;
+  background-position: top 0.5rem left 140%;
   background-repeat: no-repeat;
-  width: 20vw;
-  height: 28.1vh;
+  width: 25vw;
+  height: 25vw;
   z-index: 15;
   position: absolute;
-  margin-top: 3rem;
+  margin-top: 1.2rem;
   place-self: start center;
 }
 
 .name {
   place-self: center;
-  margin-top: 5.5rem;
+  margin-top: 8.5rem;
   color: var(--blanco);
   z-index: 15;
   padding: 0 1rem;
@@ -439,9 +440,9 @@ body {
 }
 
 .borderWhite {
-  width: 20vw;
-  height: 20vw;
-  margin-top: 2.8rem;
+  width: 25vw;
+  height: 25vw;
+  margin-top: 1rem;
   place-self: start center;
   z-index: 20;
   border-radius: 50%;
@@ -468,9 +469,10 @@ body {
 }
 
 .message-show {
-  top: 59%;
+  top: 62%;
   font-size: 0.9rem;
   text-align: center;
+  width: 50%;
   max-width: 50%;
 }
 
@@ -487,11 +489,11 @@ body {
 }
 
 .date-show {
-  top: 80%;
+  top: 83%;
 }
 
 .location-show {
-  top: 83%;
+  top: 86%;
 }
 
 .container-location {
@@ -568,7 +570,7 @@ body {
 }
 
 .QRCode {
-  top: 69%;
+  top: 72%;
   place-self: center;
   position: absolute;
 }
@@ -648,6 +650,20 @@ body {
   place-items: center;
 }
 
+.bg-create {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  font-size: 1.8rem;
+  font-weight: 700;
+  place-items: center;
+  z-index: 100;
+  background-color: var(--blanco);
+  position: absolute;
+}
+
 /*------------------------------------- 13x18 styles ----------------------------------------------*/
 
 .bg13x18,
@@ -687,6 +703,10 @@ body {
 .moon15x20 {
   width: 7.5cm !important;
   height: 7.5cm !important;
+}
+
+.date-show15x20 {
+  top: 83%;
 }
 
 .location-show15x20 {

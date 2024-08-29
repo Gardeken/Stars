@@ -272,7 +272,7 @@ const Mapa = ({
       )}
 
       {isChecked ? (
-        <QRCode className="QRCode" value={qr} size={60}></QRCode>
+        <QRCode className="QRCode" id="QRCode" value={qr} size={60}></QRCode>
       ) : (
         ""
       )}

@@ -33,6 +33,7 @@ const Creacion = () => {
   let [checkedC, setIsCheckedC] = useState(false);
   let [checkedN, setIsCheckedN] = useState(false);
   let [checkedConst, setIsCheckedConst] = useState(false);
+  let [checkedBG, setIsCheckedBG] = useState(false);
   let [total, setTotal] = useState(0);
   let ancho = 491;
   let alto = 680;
@@ -104,7 +105,7 @@ const Creacion = () => {
       const lat = e.target.getAttribute("latitude");
       const long = e.target.getAttribute("longitude");
       const lista = name.split(",");
-      locatioShow.innerText = `${lista[0]}, Venezuela`;
+      locatioShow.innerText = `${lista[0]}, ${lista[lista.length - 1]}`;
       Celestial.location([lat, long]);
     }
   }
@@ -192,8 +193,8 @@ const Creacion = () => {
     const dateShow = document.querySelector("#dateShow");
     const nameShow = document.querySelector("#Name");
     const moon = document.querySelector(".moon");
+    const qr = document.querySelector("#QRCode");
     const borderWhite = document.querySelector(".borderWhite");
-    console.log(medida);
     if (medida === "13x18cm") {
       bgBlack.classList.add("bg13x18");
       containerMain.classList.add("container13x18");
@@ -204,6 +205,16 @@ const Creacion = () => {
       Celestialmap.classList.add("map15x20");
       borderWhite.classList.add("borderWhite15x20");
       moon.classList.add("moon15x20");
+      locatioShow.classList.add("location-show15x20");
+      dateShow.classList.add("date-show15x20");
+      messageShow.classList.add("message-show15x20");
+      qr ? qr.classList.add("QRCode15x20") : null;
+      if (nameShow.classList.contains("nameBottom")) {
+        nameShow.classList.add("name15x20");
+        nameShow.classList.add("nameBottom15x20");
+      } else {
+        nameShow.classList.add("name15x20");
+      }
     }
   }
 
@@ -216,6 +227,7 @@ const Creacion = () => {
     const dateShow = document.querySelector("#dateShow");
     const nameShow = document.querySelector("#Name");
     const moon = document.querySelector(".moon");
+    const qr = document.querySelector("#QRCode");
     const borderWhite = document.querySelector(".borderWhite");
     if (medida === "13x18cm") {
       bgBlack.classList.remove("bg13x18");
@@ -227,11 +239,18 @@ const Creacion = () => {
       Celestialmap.classList.remove("map15x20");
       borderWhite.classList.remove("borderWhite15x20");
       moon.classList.remove("moon15x20");
+      locatioShow.classList.remove("location-show15x20");
+      dateShow.classList.remove("date-show15x20");
+      messageShow.classList.remove("message-show15x20");
+      nameShow.classList.remove("name15x20");
+      nameShow.classList.remove("nameBottom15x20");
+      qr ? qr.classList.remove("QRCode15x20") : null;
     }
   }
 
   function crearMapa(e) {
     e.preventDefault();
+    setIsCheckedBG(true);
     const containerMain = document.querySelector(".container-main-crear");
     const inputMedida = document.querySelector("#inputMedida");
     if (!inputMedida.value) {
@@ -249,6 +268,7 @@ const Creacion = () => {
       ancho = 755;
       alto = 944;
     }
+    /*
     domtoimage
       .toBlob(containerMain, {
         width: ancho,
@@ -261,12 +281,15 @@ const Creacion = () => {
         images.forEach((i) => {
           uploadBytes(i.imageRef, i.dataUrl);
         });
-        //retirarEstilos(inputMedida.value);
+        retirarEstilos(inputMedida.value);
+        setIsCheckedBG(false);
         alert("Mapa creado con éxito");
       })
       .catch(function (error) {
-        console.error("oops, something went wrong!", error);
-      });
+        setIsCheckedBG(false);
+        alert("Hubo un error al crear la imagen");
+        console.log(error);
+      });*/
   }
 
   useEffect(() => {
@@ -284,6 +307,7 @@ const Creacion = () => {
   let count = 0;
   return (
     <div className="container-crear-form">
+      <div className={checkedBG ? "bg-create" : "hidden"}>Cargando...</div>
       <div className="container-map">
         <Mapa
           isCheckedConst={checkedConst}
