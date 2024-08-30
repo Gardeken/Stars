@@ -1091,15 +1091,15 @@ body {
 
   .map canvas,
   .borderWhite {
-    margin-top: 0.5rem;
-    width: 62vw !important;
-    height: 62vw !important;
+    margin-top: 0.2rem;
+    width: 60vw !important;
+    height: 60vw !important;
   }
 
   .moon {
-    margin-top: 0.6rem;
-    width: 62.8vw;
-    height: 62vw;
+    margin-top: 0.3rem;
+    width: 60vw;
+    height: 60.1vw;
   }
 
   .message-show {
