@@ -1104,7 +1104,7 @@ body {
 
   .message-show {
     top: 57%;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
 
   .message-prev {
@@ -1148,7 +1148,8 @@ body {
   }
 
   .name {
-    margin-top: 3.8rem;
+    font-size: 1.3rem;
+    margin-top: 4rem;
   }
 
   .nameBottom {
@@ -1158,7 +1159,7 @@ body {
   .QRCode {
     height: 4rem;
     width: 4rem;
-    top: 71%;
+    top: 70%;
   }
 
   .result {
