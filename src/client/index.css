@@ -368,12 +368,17 @@ body {
 }
 
 .container-search button,
-.btn-search {
+.btn-search,
+.btnSearch {
   color: var(--blanco);
   border: none;
   width: 6rem;
   border-radius: 0.5rem;
   background-color: var(--marron-claro-sec);
+}
+
+.btnSearch {
+  padding: 0.8rem;
 }
 
 .inputCreate {
@@ -673,17 +678,31 @@ body {
   height: 18cm;
 }
 
+.map13x18 canvas,
+.borderWhite13x18 {
+  width: 7.5cm !important;
+  height: 7.5cm !important;
+}
+
+.moon13x18 {
+  width: 7.52cm;
+  height: 7.5cm;
+}
+
 .map13x18 {
   width: 11cm !important;
   height: 16cm !important;
 }
 
-.date-show13x18 {
-  width: 6rem;
+.date-show13x18,
+.location-show13x18 {
+  width: 10rem;
 }
 
-.location-show13x18 {
-  width: 7rem;
+.name13x18 {
+  left: 6rem;
+  text-align: center;
+  width: 12rem;
 }
 
 /*------------------------------------- 15x20 styles ----------------------------------------------*/
@@ -721,6 +740,9 @@ body {
 }
 
 .name15x20 {
+  left: 6.8rem;
+  text-align: center;
+  width: 15rem;
   margin-top: 10rem;
   font-size: 1.9rem;
 }
@@ -807,6 +829,9 @@ body {
 }
 
 .name20x25 {
+  left: 9.5rem;
+  text-align: center;
+  width: 20rem;
   margin-top: 12rem;
   font-size: 2.3rem;
 }
@@ -875,6 +900,40 @@ body {
   border-radius: 0.5rem;
   background-color: var(--marron-claro-sec);
   place-self: center;
+}
+
+/*------------------------------------- Tipografías ----------------------------------------------*/
+
+.tituloT {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.Alice {
+  font-family: "Alice", serif;
+  font-style: normal;
+}
+
+.Lustria {
+  font-family: "Lustria", serif;
+  font-style: normal;
+}
+
+.Inter {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.Tinos {
+  font-family: "Tinos", serif;
+  font-style: normal;
+}
+
+.Arimo {
+  font-family: "Arimo", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .hidden {
@@ -1210,8 +1269,9 @@ body {
     height: 7.5cm;
   }
 
-  .date-show13x18 {
-    width: 6rem;
+  .date-show13x18,
+  .location-show13x18 {
+    width: 10rem;
   }
 
   .message-show13x18 {
@@ -1227,10 +1287,6 @@ body {
   .name13x18 {
     margin-top: 6rem;
     font-size: 1.8rem;
-  }
-
-  .location-show13x18 {
-    width: 7rem;
   }
 
   /*------------------------------------- 15x20 styles ----------------------------------------------*/
@@ -1269,6 +1325,9 @@ body {
   }
 
   .name15x20 {
+    left: 6.8rem;
+    text-align: center;
+    width: 15rem;
     margin-top: 10rem;
     font-size: 1.9rem;
   }
@@ -1356,6 +1415,9 @@ body {
   }
 
   .name20x25 {
+    left: 10.3rem;
+    text-align: center;
+    width: 20rem;
     margin-top: 12rem;
     font-size: 2.3rem;
   }

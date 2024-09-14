@@ -221,14 +221,19 @@ const Mapa = ({
       <div className={!color ? "map" : "map borderBlack"} id="celestial-map">
         <div className={isCheckedM ? "moon" : "moon hidden"}></div>
         {isCheckedN ? (
-          <h2 id="Name" className={!color ? "name" : "name colorBlack"}>
+          <h2
+            id="Name"
+            className={!color ? "name Lustria" : "name colorBlack Lustria"}
+          >
             Pedro Centeno
           </h2>
         ) : (
           <h2
             id="Name"
             className={
-              !color ? "name nameBottom" : "name nameBottom bg-white colorBlack"
+              !color
+                ? "name nameBottom Lustria"
+                : "name nameBottom bg-white colorBlack Lustria"
             }
           >
             Pedro Centeno
@@ -239,19 +244,23 @@ const Mapa = ({
       <div className={!color ? "bg-black" : "bg-black shadow bg-white"}></div>
       <span
         id="dateShow"
-        className={!color ? "date-show" : "date-show colorBlack"}
+        className={!color ? "date-show Inter" : "date-show colorBlack Inter"}
       >
         Agosto 14, 2024
       </span>
       <span
         id="locatioShow"
-        className={!color ? "location-show" : "location-show colorBlack"}
+        className={
+          !color ? "location-show Inter" : "location-show colorBlack Inter"
+        }
       >
         Caracas, Venezuela
       </span>
       {isChecked || isCheckedSP ? (
         <span
-          className={!color ? "message-show" : "message-show  colorBlack"}
+          className={
+            !color ? "message-show Alice" : "message-show  colorBlack Alice"
+          }
           id="messageShow"
         >
           Te amo mucho, eres lo mejor que me ha pasado hasta ahora y quiero que
@@ -261,8 +270,8 @@ const Mapa = ({
         <span
           className={
             !color
-              ? "message-show message-prev"
-              : "message-show message-prev colorBlack"
+              ? "message-show message-prev Alice"
+              : "message-show message-prev colorBlack Alice"
           }
           id="messageShow"
         >

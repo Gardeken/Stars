@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import Nav from "../components/nav";
 
 function redirigir() {
-  window.location.href = "/crear";
+  window.location.href = "/crear?cantidad=2";
 }
 
 const Plantillas = () => {

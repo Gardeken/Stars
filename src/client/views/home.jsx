@@ -104,11 +104,15 @@ const Home = () => {
           <div className="text-galery">
             <h3 id="aboutus">Sobre nosotros</h3>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius
-              minima ipsum reiciendis, est obcaecati sit at itaque ducimus.
-              Debitis optio sint quibusdam reprehenderit aliquam perspiciatis
-              voluptatum quisquam accusantium repudiandae voluptates?
+              Creemos que los seres humanos, aunque por distintas razones puedan
+              estar separados por la distncia, siempre podrán mirar al cielo y
+              observar las mismas estrallas.
             </p>
+            <p>
+              Creemos que las estrellas siempre estarán presentes en las
+              ocasiones más especiales.
+            </p>
+            <p>Creemos que es posible regalar un pedacito del cielo</p>
           </div>
           <div className="container-galery">
             <img

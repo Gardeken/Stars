@@ -22,7 +22,7 @@ let meses = {
 };
 
 const Creacion = () => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(false);
   const [lista, setLista] = useState([]);
   const [qr, setQR] = useState(
     "https://open.spotify.com/intl-es/track/4a9tbd947vo9K8Vti9JwcI?si=b6b12cb70cb84015"
@@ -140,6 +140,17 @@ const Creacion = () => {
     setIsCheckedC(!checkedC);
   }
 
+  function changeTypography(e, id) {
+    const block = document.querySelector(`#${id}`);
+    block.classList.remove("Alice");
+    block.classList.remove("Lustria");
+    block.classList.remove("Inter");
+    block.classList.remove("Tinos");
+    block.classList.remove("Arimo");
+
+    block.classList.add(e.target.value);
+  }
+
   function moveName() {
     setIsCheckedN(!checkedN);
   }
@@ -172,6 +183,10 @@ const Creacion = () => {
 
   function displayContact(e) {
     e.preventDefault();
+    const medida = document.querySelector("#inputMedida");
+    if (!medida.value) {
+      return alert("Debe seleccionar una medida previamente");
+    }
     setIsCheckedContact(!checkedContact);
   }
 
@@ -538,12 +553,12 @@ const Creacion = () => {
             </div>
             <div className="btnLocation">
               <button
-                className="btn-search"
+                className="btnSearch"
                 onClick={(e) => {
                   e.preventDefault();
                   const result = document.querySelector("#result");
                   result.classList.remove("hidden");
-                  setActive(active + 1);
+                  setActive(!active);
                 }}
               >
                 Buscar
@@ -696,6 +711,87 @@ const Creacion = () => {
               placeholder="Introduzca el código aquí"
             />
           ) : null}
+        </div>
+        <h3 className="tituloT">Tipografías</h3>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Nombre o iniciales
+          </label>
+          <select
+            onChange={(e) => {
+              changeTypography(e, "Name");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Alice">Alice</option>
+            <option value="Lustria">Lustria</option>
+            <option value="Inter">Inter</option>
+            <option value="Tinos">Tinos</option>
+          </select>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Mensaje
+          </label>
+          <select
+            onChange={(e) => {
+              changeTypography(e, "messageShow");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Alice">Alice</option>
+            <option value="Lustria">Lustria</option>
+            <option value="Inter">Inter</option>
+            <option value="Tinos">Tinos</option>
+          </select>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Fecha
+          </label>
+          <select
+            onChange={(e) => {
+              changeTypography(e, "dateShow");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Alice">Alice</option>
+            <option value="Lustria">Lustria</option>
+            <option value="Inter">Inter</option>
+            <option value="Tinos">Tinos</option>
+          </select>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Ubicación
+          </label>
+          <select
+            onChange={(e) => {
+              changeTypography(e, "locatioShow");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Alice">Alice</option>
+            <option value="Lustria">Lustria</option>
+            <option value="Inter">Inter</option>
+            <option value="Tinos">Tinos</option>
+          </select>
         </div>
         <div className="total">Total: ${total}</div>
         <div className="btnCreateM">
