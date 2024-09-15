@@ -902,6 +902,29 @@ body {
   place-self: center;
 }
 
+.container-message-cant {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  background-color: #04040494;
+  z-index: 20;
+}
+
+.message-cant {
+  background-color: var(--blanco);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  width: 15rem;
+  padding: 2rem 0;
+  border-radius: 24px;
+}
+
 /*------------------------------------- Tipografías ----------------------------------------------*/
 
 .tituloT {
@@ -934,6 +957,18 @@ body {
   font-family: "Arimo", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+.Light {
+  font-weight: lighter;
+}
+
+.Regular {
+  font-weight: normal;
+}
+
+.Bold {
+  font-weight: bold;
 }
 
 .hidden {

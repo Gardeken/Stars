@@ -5,6 +5,7 @@ import { getDownloadURL, list, ref, uploadBytes } from "firebase/storage";
 import LocationR from "../components/locationR";
 import YesorNo from "../components/yesorno";
 const token = import.meta.env.VITE_REACT_API_TOKEN;
+const url = new URLSearchParams(window.location.search);
 
 let meses = {
   "01": "Enero",
@@ -22,6 +23,7 @@ let meses = {
 };
 
 const Creacion = () => {
+  let contador = 0;
   const [active, setActive] = useState(false);
   const [lista, setLista] = useState([]);
   const [qr, setQR] = useState(
@@ -35,10 +37,21 @@ const Creacion = () => {
   let [checkedConst, setIsCheckedConst] = useState(false);
   let [checkedBG, setIsCheckedBG] = useState(false);
   let [checkedContact, setIsCheckedContact] = useState(false);
+  let [checkedCant, setIsCheckedCant] = useState(false);
   let [total, setTotal] = useState(0);
   let ancho = 491;
   let alto = 680;
   let images = [];
+
+  function mensajeCantidad() {
+    if (url.get("cantidad") > 1) {
+      setIsCheckedCant(true);
+    }
+  }
+
+  function quitarMsg() {
+    setIsCheckedCant(!checkedCant);
+  }
 
   function changeName() {
     const inputName = document.getElementById("inputName");
@@ -147,6 +160,15 @@ const Creacion = () => {
     block.classList.remove("Inter");
     block.classList.remove("Tinos");
     block.classList.remove("Arimo");
+
+    block.classList.add(e.target.value);
+  }
+
+  function changeWeight(e, id) {
+    const block = document.querySelector(`#${id}`);
+    block.classList.remove("Light");
+    block.classList.remove("Regular");
+    block.classList.remove("Bold");
 
     block.classList.add(e.target.value);
   }
@@ -369,7 +391,15 @@ const Creacion = () => {
   }
   let count = 0;
   return (
-    <div className="container-crear-form">
+    <div onLoad={mensajeCantidad} className="container-crear-form">
+      <div className={checkedCant ? "container-message-cant" : "hidden"}>
+        <div className="message-cant">
+          <p>Los mapas serán creados por separado</p>
+          <button onClick={quitarMsg} className="btnSearch">
+            Aceptar
+          </button>
+        </div>
+      </div>
       <div
         className={
           checkedContact ? "container-contactar" : "container-contactar hidden"
@@ -791,6 +821,83 @@ const Creacion = () => {
             <option value="Lustria">Lustria</option>
             <option value="Inter">Inter</option>
             <option value="Tinos">Tinos</option>
+          </select>
+        </div>
+        <h3 className="tituloT">Grosor de las Tipografías</h3>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Nombre o iniciales
+          </label>
+          <select
+            onChange={(e) => {
+              changeWeight(e, "Name");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Light">Light</option>
+            <option value="Regular">Regular</option>
+            <option value="Bold">Bold</option>
+          </select>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Mensaje
+          </label>
+          <select
+            onChange={(e) => {
+              changeWeight(e, "messageShow");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Light">Light</option>
+            <option value="Regular">Regular</option>
+            <option value="Bold">Bold</option>
+          </select>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Fecha
+          </label>
+          <select
+            onChange={(e) => {
+              changeWeight(e, "dateShow");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Light">Light</option>
+            <option value="Regular">Regular</option>
+            <option value="Bold">Bold</option>
+          </select>
+        </div>
+        <div className="container-input-form">
+          <label className="labelCreate" htmlFor="inputMedida">
+            Ubicación
+          </label>
+          <select
+            onChange={(e) => {
+              changeWeight(e, "locatioShow");
+            }}
+            className="inputCreate"
+            id="inputMedida"
+          >
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="Light">Light</option>
+            <option value="Regular">Regular</option>
+            <option value="Bold">Bold</option>
           </select>
         </div>
         <div className="total">Total: ${total}</div>
