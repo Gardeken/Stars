@@ -50,6 +50,7 @@ const Creacion = () => {
 
   function mensajeCantidad() {
     if (urlCant > 1) {
+      setIsCheckedN(true);
       setIsCheckedCant(true);
     }
   }
@@ -549,7 +550,13 @@ const Creacion = () => {
             id="inputName"
           />
         </div>
-        <div className="container-input-form formyn">
+        <div
+          className={
+            urlCant > 1
+              ? "container-input-form formyn hidden"
+              : "container-input-form formyn"
+          }
+        >
           <label htmlFor="inputN" className="labelCreate">
             Ubicación del nombre o iniciales
           </label>
@@ -717,7 +724,13 @@ const Creacion = () => {
             id="inputTime"
           />
         </div>
-        <div className="container-input-form">
+        <div
+          className={
+            contador > 1
+              ? "container-input-form hidden"
+              : "container-input-form"
+          }
+        >
           <label className="labelCreate" htmlFor="inputMedida">
             Medidas
           </label>
