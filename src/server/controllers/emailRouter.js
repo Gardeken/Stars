@@ -15,14 +15,41 @@ const transporter = nodemailer.createTransport({
 emailRouter.post("/sendEmail", async (req, res) => {
   try {
     const { name, email, telf, medida, metodo, id, link, spotify } = req.body;
+    let containerID = `<p>ID del mapa: ${id[0]}</p>`;
+    if (id[2]) {
+      containerID = `
+      <p>ID del mapa 1: ${id[0]}</p>
+      <p>ID del mapa 2: ${id[1]}</p> 
+      <p>ID del mapa 3: ${id[2]}</p> 
+      `;
+    } else if (id[1]) {
+      containerID = `
+      <p>ID del mapa 1: ${id[0]}</p>
+      <p>ID del mapa 2: ${id[1]}</p> 
+      `;
+    }
+    let containerLink = `<a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link[0]}">Descargar mapa</a>`;
+    if (link[2]) {
+      containerLink = `
+      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link[0]}">Descargar mapa 1</a>
+      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link[1]}">Descargar mapa 2</a>
+      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link[2]}">Descargar mapa 3</a>
+      `;
+    } else if (link[1]) {
+      containerLink = `
+      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link[0]}">Descargar mapa 1</a>
+      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link[1]}">Descargar mapa 2</a>
+      `;
+    }
+
     const without = `<div style="text-align: center;">
       <p>Nombre: ${name}</p>
       <p style="text-decoration: none;">Correo: ${email}</p>
       <p>Telf: ${telf}</p>
       <p>Metodo: ${metodo}</p>
       <p>Medida: ${medida}</p>
-      <p>ID del mapa: ${id}</p>
-      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link}">Descargar mapa</a>
+      ${containerID}
+      ${containerLink}
       </div>`;
     const withSP = `
       <div style="text-align: center;">
@@ -31,15 +58,14 @@ emailRouter.post("/sendEmail", async (req, res) => {
       <p>Telf: ${telf}</p>
       <p>Metodo: ${metodo}</p>
       <p>Medida: ${medida}</p>
-      <p>ID del mapa: ${id}</p>
+      ${containerID}
       <p>Link Spotify: ${spotify}</p>
-      <a style="color: white; margin: 1rem; text-decoration: none; border-radius: .5rem; padding: .8rem; background-color: #846449;" download href="${link}">Descargar mapa</a>
+      ${containerLink}
       </div>`;
     transporter.sendMail({
       from: '"Stars" <dominicode.xyz@gmail.com>',
       to: `${email}`,
       subject: "Pedido",
-      text: `Pedido de ${name}`,
       html: spotify ? withSP : without,
     });
 
@@ -47,7 +73,6 @@ emailRouter.post("/sendEmail", async (req, res) => {
       from: '"Stars" <dominicode.xyz@gmail.com>',
       to: `${email}`,
       subject: "Pedido",
-      text: `Pedido de ${name}`,
       html: `<p style="text-align: center;">Gracias por realizar su pedido, le estaremos contactando dentro de poco.</p>`,
     });
     res.status(200).json({

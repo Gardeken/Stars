@@ -23,7 +23,12 @@ let meses = {
 };
 
 const Creacion = () => {
-  let contador = 0;
+  let [infoObj, setInfoObj] = useState({
+    id: [],
+    link: [],
+  });
+  let [contador, setContador] = useState(1);
+  const urlCant = url.get("cantidad");
   const [active, setActive] = useState(false);
   const [lista, setLista] = useState([]);
   const [qr, setQR] = useState(
@@ -41,10 +46,10 @@ const Creacion = () => {
   let [total, setTotal] = useState(0);
   let ancho = 491;
   let alto = 680;
-  let images = [];
+  let [images, setImages] = useState([]);
 
   function mensajeCantidad() {
-    if (url.get("cantidad") > 1) {
+    if (urlCant > 1) {
       setIsCheckedCant(true);
     }
   }
@@ -300,9 +305,52 @@ const Creacion = () => {
     }
   }
 
+  function saveImage(e) {
+    e.preventDefault();
+    const containerMain = document.querySelector(".container-main-crear");
+    const inputMedida = document.querySelector("#inputMedida");
+    if (!inputMedida.value) {
+      return alert("Por favor ingrese la medida del mapa");
+    }
+    setIsCheckedBG(true);
+    if (inputMedida.value === "13x18cm") {
+      ancho = 491;
+      alto = 680;
+      cambiarEstilos(inputMedida.value);
+    } else if (inputMedida.value === "15x20cm") {
+      ancho = 566;
+      alto = 755;
+      cambiarEstilos(inputMedida.value);
+    } else if (inputMedida.value === "20x25cm") {
+      ancho = 755;
+      alto = 944;
+      cambiarEstilos(inputMedida.value);
+    }
+    domtoimage
+      .toBlob(containerMain, {
+        width: ancho,
+        height: alto,
+      })
+      .then((dataUrl) => {
+        const id = Date.now();
+        const imageRef = ref(imageDb, `stars/mapas/${id}.png`);
+        images.push({ imageRef, dataUrl });
+        retirarEstilos(inputMedida.value);
+        setIsCheckedBG(false);
+        setContador(contador + 1);
+        let listID = infoObj.id;
+        listID.push(id);
+        alert("Mapa creado con éxito");
+      })
+      .catch(function (error) {
+        setIsCheckedBG(false);
+        console.log(error);
+        alert("Hubo un error al crear el mapa");
+      });
+  }
+
   async function crearMapa(e) {
     e.preventDefault();
-    let infoObj = {};
     const containerMain = document.querySelector(".container-main-crear");
     const inputMedida = document.querySelector("#inputMedida");
     const inputName = document.querySelector("#inputNombre");
@@ -322,6 +370,8 @@ const Creacion = () => {
       return alert("No puede dejar los campos vacíos");
     }
     setIsCheckedBG(true);
+    let listID = infoObj.id;
+    let listLink = infoObj.link;
     infoObj.name = inputName.value;
     infoObj.email = inputEmail.value;
     infoObj.telf = inputTelf.value;
@@ -352,17 +402,21 @@ const Creacion = () => {
       })
       .then((dataUrl) => {
         const id = Date.now();
+        listID.push(id);
         const imageRef = ref(
           imageDb,
           `stars/mapas/${infoObj.name} - ${id}.png`
         );
         images.push({ imageRef, dataUrl });
+        let contador = 1;
         images.forEach((i) => {
           uploadBytes(i.imageRef, i.dataUrl).then((snapshot) =>
             getDownloadURL(snapshot.ref).then((url) => {
-              infoObj.id = id;
-              infoObj.link = url;
-              enviarEmail(infoObj);
+              listLink.push(url);
+              if (contador == urlCant) {
+                enviarEmail(infoObj);
+              }
+              contador++;
             })
           );
         });
@@ -392,7 +446,10 @@ const Creacion = () => {
   let count = 0;
   return (
     <div onLoad={mensajeCantidad} className="container-crear-form">
-      <div className={checkedCant ? "container-message-cant" : "hidden"}>
+      <div
+        onLoad={mensajeCantidad}
+        className={checkedCant ? "container-message-cant" : "hidden"}
+      >
         <div className="message-cant">
           <p>Los mapas serán creados por separado</p>
           <button onClick={quitarMsg} className="btnSearch">
@@ -902,7 +959,10 @@ const Creacion = () => {
         </div>
         <div className="total">Total: ${total}</div>
         <div className="btnCreateM">
-          <button className="btn-search" onClick={displayContact}>
+          <button
+            className="btn-search"
+            onClick={contador == urlCant ? displayContact : saveImage}
+          >
             Continuar
           </button>
         </div>
