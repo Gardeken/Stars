@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true, // Use `true` for port 465, `false` for all other ports
   auth: {
-    user: "gardeken1205@gmail.com",
-    pass: "wlfd rhfz tffz nobz",
+    user: "stars.ve.25@gmail.com",
+    pass: "aalk gzlw pilc emjc",
   },
 });
 
@@ -64,7 +64,7 @@ emailRouter.post("/sendEmail", async (req, res) => {
       </div>`;
     transporter.sendMail({
       from: '"Stars" <dominicode.xyz@gmail.com>',
-      to: `${email}`,
+      to: "stars.ve.25@gmail.com",
       subject: "Pedido",
       html: spotify ? withSP : without,
     });
