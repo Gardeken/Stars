@@ -671,14 +671,15 @@ body {
 }
 
 .WM {
+  cursor: default;
   position: absolute;
   color: var(--blanco);
-  place-self: center;
+  place-self: start center;
   font-weight: bold;
-  font-size: 20rem;
-  opacity: 15%;
+  margin-top: 13vw;
+  font-size: 8vw;
+  opacity: 20%;
   letter-spacing: 5px;
-  transform: rotate(-50deg);
 }
 
 /*------------------------------------- 13x18 styles ----------------------------------------------*/
@@ -1270,6 +1271,11 @@ body {
   .result {
     max-height: 25rem;
     width: 80vw;
+  }
+
+  .WM {
+    margin-top: 28vw;
+    font-size: 20vw;
   }
 
   /*------------------------------------- Container Contactar Responsive ----------------------------------------------*/

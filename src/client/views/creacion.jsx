@@ -23,13 +23,13 @@ let meses = {
 };
 
 const Creacion = () => {
-  document.addEventListener(
+  /*document.addEventListener(
     "contextmenu",
     function (e) {
       e.preventDefault();
     },
     false
-  );
+  );*/
   let [img, setImg] = useState();
   let [infoObj, setInfoObj] = useState({
     id: [],
@@ -514,8 +514,11 @@ const Creacion = () => {
               <option selected disabled value="">
                 ...
               </option>
-              <option value="Efectivo">Efectivo</option>
+              <option value="Divisas en Efectivo">Divisas en Efectivo</option>
               <option value="Pago móvil">Pago móvil</option>
+              <option value="Paypal">Paypal</option>
+              <option value="Binance">Binance</option>
+              <option value="Zinli">Zinli</option>
             </select>
           </div>
           <button onClick={crearMapa} className="btn-create">
