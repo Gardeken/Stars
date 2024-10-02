@@ -11,14 +11,6 @@ const Mapa = ({
   isCheckedN,
   isCheckedConst,
 }) => {
-  /*document.addEventListener(
-    "contextmenu",
-    function (e) {
-      e.preventDefault();
-    },
-    false
-  );*/
-
   let config = {
     width: 0, // Default width, 0 = full parent element width;
     // height is determined by projection
@@ -63,7 +55,7 @@ const Mapa = ({
       show: true, // Show stars
       limit: 4.2, // Show only stars brighter than limit magnitude
       colors: false, // Show stars in spectral colors, if not use default color
-      style: { fill: "#ffffff", opacity: 1 }, // Default style for stars
+      style: { fill: "#fcffff", opacity: 1 }, // Default style for stars
       designation: false, // Show star names (Bayer, Flamsteed, Variable star, Gliese or designation,
       // i.e. whichever of the previous applies first); may vary with culture setting
       designationType: "desig", // Which kind of name is displayed as designation (fieldname in starnames.json)

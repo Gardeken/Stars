@@ -670,12 +670,23 @@ body {
   position: fixed;
 }
 
+.WM {
+  position: absolute;
+  color: var(--blanco);
+  place-self: center;
+  font-weight: bold;
+  font-size: 20rem;
+  opacity: 15%;
+  letter-spacing: 5px;
+  transform: rotate(-50deg);
+}
+
 /*------------------------------------- 13x18 styles ----------------------------------------------*/
 
 .bg13x18,
 .container13x18 {
-  width: 13cm;
-  height: 18cm;
+  width: 12.8cm;
+  height: 17.8cm;
 }
 
 .map13x18 canvas,
@@ -1283,8 +1294,8 @@ body {
 
   .bg13x18,
   .container13x18 {
-    width: 13cm;
-    height: 18cm;
+    width: 12.8cm;
+    height: 17.8cm;
     margin: 0;
   }
 

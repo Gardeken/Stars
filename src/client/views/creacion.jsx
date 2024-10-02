@@ -23,6 +23,14 @@ let meses = {
 };
 
 const Creacion = () => {
+  document.addEventListener(
+    "contextmenu",
+    function (e) {
+      e.preventDefault();
+    },
+    false
+  );
+  let [img, setImg] = useState();
   let [infoObj, setInfoObj] = useState({
     id: [],
     link: [],
@@ -44,8 +52,6 @@ const Creacion = () => {
   let [checkedContact, setIsCheckedContact] = useState(false);
   let [checkedCant, setIsCheckedCant] = useState(false);
   let [total, setTotal] = useState(0);
-  let ancho = 491;
-  let alto = 680;
   let [images, setImages] = useState([]);
 
   function mensajeCantidad() {
@@ -327,27 +333,27 @@ const Creacion = () => {
       alto = 944;
       cambiarEstilos(inputMedida.value);
     }
-    domtoimage
-      .toBlob(containerMain, {
-        width: ancho,
-        height: alto,
-      })
-      .then((dataUrl) => {
+    try {
+      html2canvas(containerMain, { scale: 3 }).then((canvas) => {
         const id = Date.now();
-        const imageRef = ref(imageDb, `stars/mapas/${id}.png`);
-        images.push({ imageRef, dataUrl });
-        retirarEstilos(inputMedida.value);
-        setIsCheckedBG(false);
-        setContador(contador + 1);
-        let listID = infoObj.id;
-        listID.push(id);
-        alert("Mapa creado con éxito");
-      })
-      .catch(function (error) {
-        setIsCheckedBG(false);
-        console.log(error);
-        alert("Hubo un error al crear el mapa");
+        canvas.toBlob((result) => {
+          const imageRef = ref(
+            imageDb,
+            `stars/mapas/${infoObj.name} - ${id}.png`
+          );
+          images.push({ imageRef, result });
+          retirarEstilos(inputMedida.value);
+          setIsCheckedBG(false);
+          setContador(contador + 1);
+          let listID = infoObj.id;
+          listID.push(id);
+          alert("Mapa creado con éxito");
+        });
       });
+    } catch (error) {
+      setIsCheckedBG(false);
+      alert("Hubo un error al crear la imagen");
+    }
   }
 
   async function crearMapa(e) {
@@ -396,41 +402,42 @@ const Creacion = () => {
       alto = 944;
       cambiarEstilos(inputMedida.value);
     }
-    domtoimage
-      .toBlob(containerMain, {
-        width: ancho,
-        height: alto,
-      })
-      .then((dataUrl) => {
+    try {
+      html2canvas(containerMain, { scale: 3 }).then((canvas) => {
         const id = Date.now();
         listID.push(id);
-        const imageRef = ref(
-          imageDb,
-          `stars/mapas/${infoObj.name} - ${id}.png`
-        );
-        images.push({ imageRef, dataUrl });
-        let contador = 1;
-        images.forEach((i) => {
-          uploadBytes(i.imageRef, i.dataUrl).then((snapshot) =>
-            getDownloadURL(snapshot.ref).then((url) => {
-              listLink.push(url);
-              if (contador == urlCant) {
-                enviarEmail(infoObj);
-              }
-              contador++;
-            })
+        canvas.toBlob((result) => {
+          const imageRef = ref(
+            imageDb,
+            `stars/mapas/${infoObj.name} - ${id}.png`
           );
+          images.push({ imageRef, result });
+          images.forEach((i) => {
+            uploadBytes(i.imageRef, i.result).then((snapshot) =>
+              getDownloadURL(snapshot.ref).then((url) => {
+                listLink.push(url);
+                if (contador == urlCant) {
+                  enviarEmail(infoObj);
+                }
+                contador++;
+              })
+            );
+          });
+          retirarEstilos(inputMedida.value);
+          setIsCheckedContact(false);
+          setIsCheckedBG(false);
+          alert("Mapa creado con éxito");
         });
-        retirarEstilos(inputMedida.value);
-        setIsCheckedContact(false);
-        setIsCheckedBG(false);
-        alert("Mapa creado con éxito");
-      })
-      .catch(function (error) {
-        setIsCheckedBG(false);
-        alert("Hubo un error al crear la imagen");
       });
+    } catch (error) {
+      setIsCheckedBG(false);
+      alert("Hubo un error al crear la imagen");
+    }
   }
+
+  useEffect(() => {
+    mensajeCantidad();
+  }, []);
 
   useEffect(() => {
     buscarUbicación();
@@ -446,11 +453,8 @@ const Creacion = () => {
   }
   let count = 0;
   return (
-    <div onLoad={mensajeCantidad} className="container-crear-form">
-      <div
-        onLoad={mensajeCantidad}
-        className={checkedCant ? "container-message-cant" : "hidden"}
-      >
+    <div className="container-crear-form">
+      <div className={checkedCant ? "container-message-cant" : "hidden"}>
         <div className="message-cant">
           <p>Los mapas serán creados por separado</p>
           <button onClick={quitarMsg} className="btnSearch">
@@ -530,6 +534,7 @@ const Creacion = () => {
           isCheckedM={checkedM}
           isCheckedN={checkedN}
         ></Mapa>
+        <p className="WM">stars</p>
         <img
           src={!checkedC ? "/spcode-b.jpeg" : "/spcode-w.jpeg"}
           id="spotify"
