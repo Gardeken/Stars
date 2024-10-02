@@ -23,13 +23,13 @@ let meses = {
 };
 
 const Creacion = () => {
-  /*document.addEventListener(
+  document.addEventListener(
     "contextmenu",
     function (e) {
       e.preventDefault();
     },
     false
-  );*/
+  );
   let [img, setImg] = useState();
   let [infoObj, setInfoObj] = useState({
     id: [],
