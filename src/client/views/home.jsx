@@ -57,7 +57,7 @@ const Home = () => {
     <Fragment>
       <Nav></Nav>
       <main className="container-main">
-        <a href="" className="container-icon-w">
+        <a href="https://wa.link/q5epc7" className="container-icon-w">
           <span>Contactanos!</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

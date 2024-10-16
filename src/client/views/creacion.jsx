@@ -23,13 +23,13 @@ let meses = {
 };
 
 const Creacion = () => {
-  document.addEventListener(
+  /*document.addEventListener(
     "contextmenu",
     function (e) {
       e.preventDefault();
     },
     false
-  );
+  );*/
   let [img, setImg] = useState();
   let [infoObj, setInfoObj] = useState({
     id: [],
@@ -47,10 +47,13 @@ const Creacion = () => {
   let [checkedM, setIsCheckedM] = useState(false);
   let [checkedC, setIsCheckedC] = useState(false);
   let [checkedN, setIsCheckedN] = useState(false);
+  let [checkedBorder, setIsCheckedBorder] = useState(true);
+  let [checkedName, setIsCheckedName] = useState(true);
   let [checkedConst, setIsCheckedConst] = useState(false);
   let [checkedBG, setIsCheckedBG] = useState(false);
   let [checkedContact, setIsCheckedContact] = useState(false);
   let [checkedCant, setIsCheckedCant] = useState(false);
+  let [checkedBruj, setIsCheckedBruj] = useState(true);
   let [total, setTotal] = useState(0);
   let [images, setImages] = useState([]);
 
@@ -189,6 +192,18 @@ const Creacion = () => {
     setIsCheckedN(!checkedN);
   }
 
+  function displayName() {
+    setIsCheckedName(!checkedName);
+  }
+
+  function displayBorder() {
+    setIsCheckedBorder(!checkedBorder);
+  }
+
+  function displayBrujula() {
+    setIsCheckedBruj(!checkedBruj);
+  }
+
   function displayMoon() {
     setIsCheckedM(!checkedM);
   }
@@ -251,9 +266,11 @@ const Creacion = () => {
     const qr = document.querySelector("#QRCode");
     const spotify = document.querySelector("#spotify");
     const borderWhite = document.querySelector(".borderWhite");
+    const brujula = document.querySelector(".brujula");
     const quitarCM = medida.split("cm");
     const medidaCM = quitarCM[0];
     bgBlack.classList.add(`bg${medidaCM}`);
+    brujula.classList.add(`brujula${medidaCM}`);
     containerMain.classList.add(`container${medidaCM}`);
     Celestialmap.classList.add(`map${medidaCM}`);
     borderWhite.classList.add(`borderWhite${medidaCM}`);
@@ -261,18 +278,21 @@ const Creacion = () => {
     locatioShow.classList.add(`location-show${medidaCM}`);
     dateShow.classList.add(`date-show${medidaCM}`);
     spotify.classList.add(`spotify-code${medidaCM}`);
+    if (nameShow.classList.contains("nameBottom")) {
+      nameShow.classList.add(`name${medidaCM}`);
+      nameShow.classList.add(`nameBottom${medidaCM}`);
+    } else {
+      nameShow.classList.add(`name${medidaCM}`);
+      console.log(nameShow.classList);
+    }
     if (messageShow.classList.contains("message-prev")) {
       messageShow.classList.add(`message-show${medidaCM}`);
       messageShow.classList.add(`message-prev${medidaCM}`);
     } else {
       messageShow.classList.add(`message-show${medidaCM}`);
     }
-    qr ? qr.classList.add(`QRCode${medidaCM}`) : null;
-    if (nameShow.classList.contains("nameBottom")) {
-      nameShow.classList.add(`name${medidaCM}`);
-      nameShow.classList.add(`nameBottom${medidaCM}`);
-    } else {
-      nameShow.classList.add(`name${medidaCM}`);
+    if (qr) {
+      qr.classList.add(`QRCode${medidaCM}`);
     }
   }
 
@@ -287,9 +307,11 @@ const Creacion = () => {
     const moon = document.querySelector(".moon");
     const qr = document.querySelector("#QRCode");
     const borderWhite = document.querySelector(".borderWhite");
+    const brujula = document.querySelector(".brujula");
     const quitarCM = medida.split("cm");
     const medidaCM = quitarCM[0];
     bgBlack.classList.remove(`bg${medidaCM}`);
+    brujula.classList.remove(`brujula${medidaCM}`);
     containerMain.classList.remove(`container${medidaCM}`);
     Celestialmap.classList.remove(`map${medidaCM}`);
     borderWhite.classList.remove(`borderWhite${medidaCM}`);
@@ -321,16 +343,10 @@ const Creacion = () => {
     }
     setIsCheckedBG(true);
     if (inputMedida.value === "13x18cm") {
-      ancho = 491;
-      alto = 680;
       cambiarEstilos(inputMedida.value);
     } else if (inputMedida.value === "15x20cm") {
-      ancho = 566;
-      alto = 755;
       cambiarEstilos(inputMedida.value);
     } else if (inputMedida.value === "20x25cm") {
-      ancho = 755;
-      alto = 944;
       cambiarEstilos(inputMedida.value);
     }
     try {
@@ -390,18 +406,13 @@ const Creacion = () => {
     inputTelf.value = "";
     inputMetodo.value = "";
     if (inputMedida.value === "13x18cm") {
-      ancho = 491;
-      alto = 680;
       cambiarEstilos(inputMedida.value);
     } else if (inputMedida.value === "15x20cm") {
-      ancho = 566;
-      alto = 755;
       cambiarEstilos(inputMedida.value);
     } else if (inputMedida.value === "20x25cm") {
-      ancho = 755;
-      alto = 944;
       cambiarEstilos(inputMedida.value);
     }
+    setIsCheckedContact(false);
     try {
       html2canvas(containerMain, { scale: 3 }).then((canvas) => {
         const id = Date.now();
@@ -536,6 +547,9 @@ const Creacion = () => {
           isCheckedSP={checkedSP}
           isCheckedM={checkedM}
           isCheckedN={checkedN}
+          isCheckedName={checkedName}
+          isCheckedBorder={checkedBorder}
+          isCheckedBruj={checkedBruj}
         ></Mapa>
         <p className="WM">stars</p>
         <img
@@ -581,6 +595,23 @@ const Creacion = () => {
             id="inputN"
           />
         </div>
+        <div className="container-input-form formyn">
+          <label htmlFor="inputDName" className="labelCreate">
+            Mostrar nombre o iniciales
+          </label>
+          <YesorNo
+            text1={"Si"}
+            text2={"No"}
+            checked={checkedName}
+            input={"inputDName"}
+          ></YesorNo>
+          <input
+            className="hidden"
+            onChange={displayName}
+            type="checkbox"
+            id="inputDName"
+          />
+        </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputMsg">
             Mensaje
@@ -606,6 +637,40 @@ const Creacion = () => {
             className="hidden"
             onChange={displayMoon}
             id="inputM"
+          />
+        </div>
+        <div className="container-input-form formyn">
+          <label htmlFor="inputBorder" className="labelCreate">
+            Mostrar borde
+          </label>
+          <YesorNo
+            text1={"Si"}
+            text2={"No"}
+            checked={checkedBorder}
+            input={"inputBorder"}
+          ></YesorNo>
+          <input
+            className="hidden"
+            onChange={displayBorder}
+            type="checkbox"
+            id="inputBorder"
+          />
+        </div>
+        <div className="container-input-form formyn">
+          <label htmlFor="inputBruj" className="labelCreate">
+            Mostrar brújula
+          </label>
+          <YesorNo
+            text1={"Si"}
+            text2={"No"}
+            checked={checkedBruj}
+            input={"inputBruj"}
+          ></YesorNo>
+          <input
+            className="hidden"
+            onChange={displayBrujula}
+            type="checkbox"
+            id="inputBruj"
           />
         </div>
         <div className="container-input-form">
@@ -832,11 +897,8 @@ const Creacion = () => {
             className="inputCreate"
             id="inputMedida"
           >
-            <option value={""} selected disabled>
-              ...
-            </option>
-            <option value="Alice">Alice</option>
             <option value="Lustria">Lustria</option>
+            <option value="Alice">Alice</option>
             <option value="Inter">Inter</option>
             <option value="Tinos">Tinos</option>
           </select>
@@ -852,9 +914,6 @@ const Creacion = () => {
             className="inputCreate"
             id="inputMedida"
           >
-            <option value={""} selected disabled>
-              ...
-            </option>
             <option value="Alice">Alice</option>
             <option value="Lustria">Lustria</option>
             <option value="Inter">Inter</option>
@@ -872,12 +931,9 @@ const Creacion = () => {
             className="inputCreate"
             id="inputMedida"
           >
-            <option value={""} selected disabled>
-              ...
-            </option>
+            <option value="Inter">Inter</option>
             <option value="Alice">Alice</option>
             <option value="Lustria">Lustria</option>
-            <option value="Inter">Inter</option>
             <option value="Tinos">Tinos</option>
           </select>
         </div>
@@ -892,12 +948,9 @@ const Creacion = () => {
             className="inputCreate"
             id="inputMedida"
           >
-            <option value={""} selected disabled>
-              ...
-            </option>
+            <option value="Inter">Inter</option>
             <option value="Alice">Alice</option>
             <option value="Lustria">Lustria</option>
-            <option value="Inter">Inter</option>
             <option value="Tinos">Tinos</option>
           </select>
         </div>

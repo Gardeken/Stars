@@ -307,15 +307,6 @@ body {
   border: solid 4px var(--negro) !important;
 }
 
-.map canvas {
-  width: 25vw !important;
-  height: 25vw !important;
-  margin-top: 1rem;
-  position: relative;
-  z-index: 10;
-  border-radius: 50%;
-}
-
 .container-marco {
   z-index: -5;
   width: 50vw;
@@ -391,6 +382,8 @@ body {
 }
 
 .labelCreate {
+  font-size: large;
+  font-weight: bold;
   cursor: pointer;
 }
 
@@ -414,6 +407,26 @@ body {
   position: relative;
 }
 
+.map canvas {
+  width: 23vw !important;
+  height: 23vw !important;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.borderWhite {
+  width: 23vw;
+  height: 23vw;
+  margin-top: 2rem;
+  place-self: start center;
+  z-index: 20;
+  border-radius: 50%;
+  position: absolute;
+  border: solid 2px var(--blanco);
+}
+
 .moon {
   background-image: url(/luna.webp);
   background-size: 72%;
@@ -422,17 +435,29 @@ body {
   transform: rotate(-18deg);
   background-position: top 0.5rem left 140%;
   background-repeat: no-repeat;
-  width: 25vw;
-  height: 25vw;
+  width: 23vw;
+  height: 23vw;
   z-index: 15;
   position: absolute;
-  margin-top: 1.2rem;
+  margin-top: 2.2rem;
   place-self: start center;
+}
+
+.WM {
+  cursor: default;
+  position: absolute;
+  color: var(--blanco);
+  place-self: start center;
+  font-weight: bold;
+  margin-top: 13vw;
+  font-size: 7vw;
+  opacity: 20%;
+  letter-spacing: 5px;
 }
 
 .name {
   place-self: center;
-  margin-top: 8.5rem;
+  margin-top: 9.5rem;
   color: var(--blanco);
   z-index: 15;
   padding: 0 1rem;
@@ -444,15 +469,38 @@ body {
   bottom: -2rem;
 }
 
-.borderWhite {
-  width: 25vw;
-  height: 25vw;
-  margin-top: 1rem;
+.brujula {
+  width: 27vw;
+  height: 27vw;
+  position: absolute;
+  margin-top: 0.6rem;
   place-self: start center;
   z-index: 20;
-  border-radius: 50%;
+  display: flex;
+  color: gray;
+}
+
+.brujula span {
   position: absolute;
-  border: solid 2px var(--blanco);
+}
+
+.norte {
+  left: 49%;
+}
+
+.sur {
+  bottom: 0;
+  left: 49%;
+}
+
+.este {
+  right: 0;
+  top: 50%;
+}
+
+.oeste {
+  left: 0;
+  top: 50%;
 }
 
 .spotify-code {
@@ -670,18 +718,6 @@ body {
   position: fixed;
 }
 
-.WM {
-  cursor: default;
-  position: absolute;
-  color: var(--blanco);
-  place-self: start center;
-  font-weight: bold;
-  margin-top: 13vw;
-  font-size: 8vw;
-  opacity: 20%;
-  letter-spacing: 5px;
-}
-
 /*------------------------------------- 13x18 styles ----------------------------------------------*/
 
 .bg13x18,
@@ -694,6 +730,11 @@ body {
 .borderWhite13x18 {
   width: 7.5cm !important;
   height: 7.5cm !important;
+}
+
+.brujula13x18 {
+  width: 8.5cm;
+  height: 8.9cm;
 }
 
 .moon13x18 {
@@ -730,6 +771,11 @@ body {
   height: 18cm !important;
 }
 
+.brujula15x20 {
+  width: 11cm;
+  height: 11cm;
+}
+
 .map15x20 canvas,
 .borderWhite15x20,
 .moon15x20 {
@@ -755,8 +801,8 @@ body {
   left: 6.8rem;
   text-align: center;
   width: 15rem;
-  margin-top: 10rem;
-  font-size: 1.9rem;
+  margin-top: 14.5rem;
+  font-size: 1.8rem;
 }
 
 .nameBottom15x20 {
@@ -764,12 +810,12 @@ body {
 }
 
 .message-show15x20 {
-  top: 63%;
+  top: 67%;
   font-size: 1rem;
 }
 
 .message-prev15x20 {
-  top: 65%;
+  top: 68%;
   font-size: 1.1rem;
 }
 
@@ -779,9 +825,9 @@ body {
 }
 
 .QRCode15x20 {
-  top: 73%;
-  width: 2cm;
-  height: 2cm;
+  top: 75.8%;
+  width: 1.8cm;
+  height: 1.8cm;
 }
 
 /*------------------------------------- 20x25 styles ----------------------------------------------*/
@@ -799,21 +845,26 @@ body {
 
 .map20x25 canvas,
 .borderWhite20x25 {
-  margin-top: 0.5rem;
+  margin-top: 1.8rem;
   width: 12cm !important;
   height: 12cm !important;
 }
 
+.brujula20x25 {
+  width: 13.5cm;
+  height: 13.4cm;
+}
+
 .moon20x25 {
-  margin-top: 0.6rem;
+  margin-top: 2rem;
   width: 12cm;
   height: 12cm;
 }
 
 .QRCode20x25 {
-  top: 72%;
-  width: 2.8cm;
-  height: 2.8cm;
+  top: 74%;
+  width: 2.5cm;
+  height: 2.5cm;
 }
 
 .date-show20x25 {
@@ -831,20 +882,20 @@ body {
 }
 
 .message-show20x25 {
-  top: 62%;
-  font-size: 1.4rem;
-}
-
-.message-prev20x25 {
   top: 65%;
   font-size: 1.3rem;
 }
 
+.message-prev20x25 {
+  top: 67%;
+  font-size: 1.5rem;
+}
+
 .name20x25 {
-  left: 9.5rem;
+  left: 10.5rem;
   text-align: center;
   width: 20rem;
-  margin-top: 12rem;
+  margin-top: 16rem;
   font-size: 2.3rem;
 }
 
@@ -1197,19 +1248,26 @@ body {
 
   .map canvas,
   .borderWhite {
-    margin-top: 0.2rem;
+    margin-top: 1.3rem;
     width: 60vw !important;
     height: 60vw !important;
   }
 
   .moon {
-    margin-top: 0.3rem;
+    margin-top: 1.4rem;
     width: 60vw;
     height: 60.1vw;
   }
 
+  .brujula {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    width: 70vw;
+    height: 70vw;
+  }
+
   .message-show {
-    top: 57%;
+    top: 58%;
     font-size: 0.8rem;
   }
 
@@ -1255,7 +1313,7 @@ body {
 
   .name {
     font-size: 1.3rem;
-    margin-top: 4rem;
+    margin-top: 5rem;
   }
 
   .nameBottom {
@@ -1274,7 +1332,7 @@ body {
   }
 
   .WM {
-    margin-top: 28vw;
+    margin-top: 34vw;
     font-size: 20vw;
   }
 
@@ -1316,6 +1374,11 @@ body {
     height: 7.5cm !important;
   }
 
+  .brujula13x18 {
+    width: 8.5cm;
+    height: 8.9cm;
+  }
+
   .moon13x18 {
     width: 7.52cm;
     height: 7.5cm;
@@ -1355,6 +1418,11 @@ body {
     height: 18cm !important;
   }
 
+  .brujula15x20 {
+    width: 11cm;
+    height: 11cm;
+  }
+
   .map15x20 canvas,
   .borderWhite15x20,
   .moon15x20 {
@@ -1380,8 +1448,8 @@ body {
     left: 6.8rem;
     text-align: center;
     width: 15rem;
-    margin-top: 10rem;
-    font-size: 1.9rem;
+    margin-top: 14.5rem;
+    font-size: 1.8rem;
   }
 
   .nameBottom15x20 {
@@ -1389,12 +1457,12 @@ body {
   }
 
   .message-show15x20 {
-    top: 63%;
+    top: 67%;
     font-size: 1rem;
   }
 
   .message-prev15x20 {
-    top: 65%;
+    top: 68%;
     font-size: 1.1rem;
   }
 
@@ -1404,13 +1472,12 @@ body {
   }
 
   .QRCode15x20 {
-    top: 73%;
-    width: 2cm;
-    height: 2cm;
+    top: 75.8%;
+    width: 1.8cm;
+    height: 1.8cm;
   }
 
   /*------------------------------------- 20x25 styles ----------------------------------------------*/
-
   .bg20x25,
   .container20x25 {
     width: 20cm;
@@ -1425,21 +1492,26 @@ body {
 
   .map20x25 canvas,
   .borderWhite20x25 {
-    margin-top: 0.5rem;
+    margin-top: 1.8rem;
     width: 12cm !important;
     height: 12cm !important;
   }
 
+  .brujula20x25 {
+    width: 13.5cm;
+    height: 13.4cm;
+  }
+
   .moon20x25 {
-    margin-top: 0.6rem;
+    margin-top: 2rem;
     width: 12cm;
     height: 12cm;
   }
 
   .QRCode20x25 {
-    top: 72%;
-    width: 2.8cm;
-    height: 2.8cm;
+    top: 74%;
+    width: 2.5cm;
+    height: 2.5cm;
   }
 
   .date-show20x25 {
@@ -1457,20 +1529,20 @@ body {
   }
 
   .message-show20x25 {
-    top: 62%;
-    font-size: 1.4rem;
-  }
-
-  .message-prev20x25 {
     top: 65%;
     font-size: 1.3rem;
   }
 
+  .message-prev20x25 {
+    top: 67%;
+    font-size: 1.5rem;
+  }
+
   .name20x25 {
-    left: 10.3rem;
+    left: 10.5rem;
     text-align: center;
     width: 20rem;
-    margin-top: 12rem;
+    margin-top: 16rem;
     font-size: 2.3rem;
   }
 
@@ -1482,7 +1554,6 @@ body {
     width: 6cm;
     top: 75%;
   }
-
   .hidden {
     display: none;
   }

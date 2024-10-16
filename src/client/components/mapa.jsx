@@ -10,6 +10,9 @@ const Mapa = ({
   color,
   isCheckedN,
   isCheckedConst,
+  isCheckedName,
+  isCheckedBorder,
+  isCheckedBruj,
 }) => {
   let config = {
     width: 0, // Default width, 0 = full parent element width;
@@ -95,7 +98,7 @@ const Mapa = ({
         ],
       }, // ranked constellations
       lines: isCheckedConst, // Show constellation lines, style below
-      lineStyle: { stroke: "#cccccc", width: 0.7, opacity: 0.4 },
+      lineStyle: { stroke: "#cccccc", width: 0.7, opacity: 0.8 },
       bounds: false, // Show constellation boundaries, style below
       boundStyle: {
         stroke: "#cccc00",
@@ -208,18 +211,19 @@ const Mapa = ({
     Celestial.display(config);
   }, [isCheckedConst]);
 
-  return (
-    <div className="container-main-crear">
-      <div className={!color ? "map" : "map borderBlack"} id="celestial-map">
-        <div className={isCheckedM ? "moon" : "moon hidden"}></div>
-        {isCheckedN ? (
+  function DinamicName() {
+    if (isCheckedName) {
+      if (isCheckedN) {
+        return (
           <h2
             id="Name"
             className={!color ? "name Lustria" : "name colorBlack Lustria"}
           >
             Pedro Centeno
           </h2>
-        ) : (
+        );
+      } else {
+        return (
           <h2
             id="Name"
             className={
@@ -230,8 +234,27 @@ const Mapa = ({
           >
             Pedro Centeno
           </h2>
-        )}
-        <div className="borderWhite"></div>
+        );
+      }
+    } else {
+      return null;
+    }
+  }
+
+  return (
+    <div className="container-main-crear">
+      <div className={!color ? "map" : "map borderBlack"} id="celestial-map">
+        <div className={isCheckedM ? "moon" : "moon hidden"}></div>
+        <DinamicName></DinamicName>
+        <div
+          className={isCheckedBorder ? "borderWhite" : "borderWhite hidden"}
+        ></div>
+        <div className={isCheckedBruj ? "brujula" : "brujula hidden"}>
+          <span className="norte">N</span>
+          <span className="sur">S</span>
+          <span className="este">E</span>
+          <span className="oeste">O</span>
+        </div>
       </div>
       <div className={!color ? "bg-black" : "bg-black shadow bg-white"}></div>
       <span
