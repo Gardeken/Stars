@@ -5,6 +5,7 @@ import { getDownloadURL, list, ref, uploadBytes } from "firebase/storage";
 import LocationR from "../components/locationR";
 import YesorNo from "../components/yesorno";
 const token = import.meta.env.VITE_REACT_API_TOKEN;
+const pass = import.meta.env.VITE_REACT_API_PASS;
 const url = new URLSearchParams(window.location.search);
 
 let meses = {
@@ -23,17 +24,18 @@ let meses = {
 };
 
 const Creacion = () => {
-  /*document.addEventListener(
+  document.addEventListener(
     "contextmenu",
     function (e) {
       e.preventDefault();
     },
     false
-  );*/
+  );
   let [img, setImg] = useState();
   let [infoObj, setInfoObj] = useState({
     id: [],
     link: [],
+    pass: pass,
   });
   let [contador, setContador] = useState(1);
   const urlCant = url.get("cantidad");
@@ -438,6 +440,9 @@ const Creacion = () => {
           setIsCheckedContact(false);
           setIsCheckedBG(false);
           alert("Mapa creado con éxito");
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 500);
         });
       });
     } catch (error) {
@@ -560,6 +565,25 @@ const Creacion = () => {
         />
       </div>
       <form id="formulario" className="formulario">
+        <div
+          className={
+            contador > 1
+              ? "container-input-form hidden"
+              : "container-input-form"
+          }
+        >
+          <label className="labelCreate" htmlFor="inputMedida">
+            Medidas
+          </label>
+          <select onChange={Totalizar} className="inputCreate" id="inputMedida">
+            <option value={""} selected disabled>
+              ...
+            </option>
+            <option value="13x18cm">13x18cm</option>
+            <option value="15x20cm">15x20cm</option>
+            <option value="20x25cm">20x25cm</option>
+          </select>
+        </div>
         <div className="container-input-form">
           <label className="labelCreate" htmlFor="inputName">
             Nombres
@@ -796,25 +820,6 @@ const Creacion = () => {
             type="time"
             id="inputTime"
           />
-        </div>
-        <div
-          className={
-            contador > 1
-              ? "container-input-form hidden"
-              : "container-input-form"
-          }
-        >
-          <label className="labelCreate" htmlFor="inputMedida">
-            Medidas
-          </label>
-          <select onChange={Totalizar} className="inputCreate" id="inputMedida">
-            <option value={""} selected disabled>
-              ...
-            </option>
-            <option value="13x18cm">13x18cm</option>
-            <option value="15x20cm">15x20cm</option>
-            <option value="20x25cm">20x25cm</option>
-          </select>
         </div>
         <div className="container-input-form formyn">
           <label className="labelCreate" htmlFor="inputM">

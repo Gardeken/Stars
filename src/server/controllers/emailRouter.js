@@ -14,8 +14,18 @@ const transporter = nodemailer.createTransport({
 
 emailRouter.post("/sendEmail", async (req, res) => {
   try {
-    const { name, email, telf, medida, metodo, id, link, spotify } = req.body;
+    const { name, email, telf, medida, metodo, id, link, spotify, pass } =
+      req.body;
     let containerID = `<p>ID del mapa: ${id[0]}</p>`;
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true, // Use `true` for port 465, `false` for all other ports
+      auth: {
+        user: "stars.ve.25@gmail.com",
+        pass: `${pass}`,
+      },
+    });
     if (id[2]) {
       containerID = `
       <p>ID del mapa 1: ${id[0]}</p>
@@ -63,8 +73,8 @@ emailRouter.post("/sendEmail", async (req, res) => {
       ${containerLink}
       </div>`;
     transporter.sendMail({
-      from: '"Stars" <dominicode.xyz@gmail.com>',
-      to: "stars.ve.25@gmail.com",
+      from: "Stars <dominicode.xyz@gmail.com>",
+      to: `${email}`,
       subject: "Pedido",
       html: spotify ? withSP : without,
     });

@@ -1,19 +1,21 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Nav from "../components/nav";
 import Footer from "../components/footer";
+import ContainerReseñas from "../components/reseñas";
 
 const Home = () => {
   const [tiempo, setTiempo] = useState(1);
   const tiempoId = useRef();
+
   useEffect(() => {
     tiempoId.current = setInterval(
       () => {
-        setTiempo((prev) => {
-          prev + 1;
-          if (prev < 5) {
-            return prev + 1;
+        setTiempo((previo) => {
+          previo + 1;
+          if (previo < 5) {
+            return previo + 1;
           } else {
-            return (prev = 0);
+            return (previo = 0);
           }
         });
       },
@@ -21,6 +23,7 @@ const Home = () => {
     );
     return () => clearInterval(tiempoId.current);
   });
+
   function cambio() {
     if (tiempo === 1) {
       return "animation1";
@@ -85,11 +88,13 @@ const Home = () => {
         <div className="container-video-text">
           <div className="container-texto-vid">
             <section className="eslogan">
-              <h2>Creamos</h2>
-              <h3>Recuerdos</h3>
+              <h2>Creamos recuerdos</h2>
+              <h3>Memorables</h3>
             </section>
             <div className="container-btn-crea">
-              <a href="/Plantillas">Crea tu cruadro</a>
+              <a className="linkPlan" href="/Plantillas">
+                Crea tu mapa
+              </a>
             </div>
           </div>
           <div className="container-gif">
@@ -152,6 +157,8 @@ const Home = () => {
             />
           </div>
         </div>
+        <h2 className="reseñas-t">Reseñas</h2>
+        <ContainerReseñas></ContainerReseñas>
       </main>
       <Footer></Footer>
     </Fragment>

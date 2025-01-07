@@ -23,6 +23,7 @@ body {
 .navbar {
   background-color: var(--marron-claro-sec);
   height: 5rem;
+  z-index: 5;
   position: relative;
   display: flex;
 }
@@ -52,11 +53,17 @@ body {
 }
 
 .logo {
+  display: flex;
   cursor: pointer;
   font-weight: 700;
   margin: 0.8rem 1rem;
   font-size: 2.5rem;
   font-style: normal;
+}
+
+.imageStars {
+  width: 3rem;
+  height: 3rem;
 }
 
 .logo a {
@@ -136,9 +143,12 @@ body {
 }
 
 .eslogan {
-  width: 30rem;
+  width: 35rem;
   display: flex;
   gap: 1rem;
+  font-family: "Tinos", serif;
+  font-weight: 700;
+  font-style: italic;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -148,7 +158,7 @@ body {
 .eslogan h2 {
   margin: 0;
   transition: 0.5s;
-  font-size: 5rem;
+  font-size: 4rem;
   animation: inicio 2s normal;
 }
 
@@ -156,6 +166,67 @@ body {
   margin: 0;
   font-size: 3.5rem;
   animation: inicio 2s normal;
+}
+
+.reseñas-t {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.snow-background {
+  position: absolute;
+  width: 100%;
+  top: -5rem;
+  filter: brightness(0.8);
+}
+
+.container-reseñas {
+  position: relative;
+  height: 45rem;
+  gap: 1rem;
+  overflow: hidden;
+  display: flex;
+  margin-top: 4rem;
+  margin-left: 6rem;
+}
+
+.container-reseñas img {
+  width: 90vw;
+  height: 38rem;
+}
+
+.animation0-R {
+  transition: 0.3s;
+  transform: translate(0);
+}
+
+.animation1-R {
+  transition: 0.3s;
+  transform: translateX(-30vw);
+}
+
+.animation2-R {
+  transition: 0.3s;
+  transform: translateX(-57vw);
+}
+
+.animation3-R {
+  transition: 0.3s;
+  transform: translateX(-86vw);
+}
+
+.animation4-R {
+  transition: 0.3s;
+  transform: translateX(-116vw);
+}
+
+.animation5-R {
+  transition: 0.3s;
+  transform: translateX(-150vw);
+}
+
+.opacityH {
+  opacity: 0;
 }
 
 @keyframes inicio {
@@ -175,11 +246,12 @@ body {
 
 .container-btn-crea {
   display: grid;
-  place-items: center;
+  position: relative;
   animation: inicio 2s normal;
 }
 
-.container-btn-crea a {
+.linkPlan {
+  place-self: center;
   padding: 0.8rem;
   border: none;
   letter-spacing: 1px;
@@ -191,7 +263,7 @@ body {
   background-color: var(--marron-claro-sec);
 }
 
-.container-btn-crea a:hover {
+.linkPlan:hover {
   filter: brightness(0.8);
   transition: 0.3s;
 }
@@ -263,6 +335,21 @@ body {
   display: grid;
   text-align: center;
   place-items: center;
+}
+
+.container-plan-btn {
+  display: grid;
+}
+
+.btn-per {
+  margin-bottom: 1rem;
+  text-decoration: none;
+  border: none;
+  color: var(--blanco);
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  background-color: var(--marron-claro-sec);
+  place-self: center;
 }
 
 .plantilla:hover {
@@ -428,6 +515,7 @@ body {
 }
 
 .moon {
+  filter: brightness(1.4);
   background-image: url(/luna.webp);
   background-size: 72%;
   opacity: 0.9;
@@ -470,6 +558,7 @@ body {
 }
 
 .brujula {
+  font-size: 0.8rem;
   width: 27vw;
   height: 27vw;
   position: absolute;
@@ -1181,16 +1270,12 @@ body {
     width: 100vw;
   }
 
-  .eslogan {
-    width: 0;
-  }
-
   .eslogan h2 {
-    font-size: 4rem;
+    font-size: 2.5rem;
   }
 
   .eslogan h3 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .constelaciones {
@@ -1203,6 +1288,15 @@ body {
 
   .container-btn-crea button {
     font-size: 1.2rem;
+  }
+
+  .container-plan-btn {
+    display: grid;
+  }
+
+  .btn-per {
+    font-size: 1.3rem;
+    padding: 1.3rem;
   }
 
   .container-plantillas {
