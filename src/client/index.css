@@ -1730,23 +1730,23 @@ body {
   }
   .animation2-R {
     transition: 0.3s;
-    transform: translateX(-190vw);
+    transform: translateX(-180vw);
   }
   .animation3-R {
     transition: 0.3s;
-    transform: translateX(-282vw);
+    transform: translateX(-279vw);
   }
   .animation4-R {
     transition: 0.3s;
-    transform: translateX(-380vw);
+    transform: translateX(-365vw);
   }
   .animation5-R {
     transition: 0.3s;
-    transform: translateX(-470vw);
+    transform: translateX(-460vw);
   }
   .animation6-R {
     transition: 0.3s;
-    transform: translateX(-565vw);
+    transform: translateX(-555vw);
   }
 
   .animation7-R {
