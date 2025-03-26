@@ -1717,4 +1717,44 @@ body {
     transition: 0;
     transform: translateX(-338vw);
   }
+  /*------------------------------------- Galery 2 Responsive ----------------------------------------------*/
+
+  .container-reseñas {
+    margin: 0;
+    margin-left: 2rem;
+  }
+
+  .animation1-R {
+    transition: 0.3s;
+    transform: translateX(-95vw);
+  }
+  .animation2-R {
+    transition: 0.3s;
+    transform: translateX(-190vw);
+  }
+  .animation3-R {
+    transition: 0.3s;
+    transform: translateX(-282vw);
+  }
+  .animation4-R {
+    transition: 0.3s;
+    transform: translateX(-380vw);
+  }
+  .animation5-R {
+    transition: 0.3s;
+    transform: translateX(-470vw);
+  }
+  .animation6-R {
+    transition: 0.3s;
+    transform: translateX(-565vw);
+  }
+
+  .animation7-R {
+    transition: 0.3s;
+    transform: translateX(-665vw);
+  }
+
+  .animation6-1 {
+    transform: translateX(95vw);
+  }
 }
