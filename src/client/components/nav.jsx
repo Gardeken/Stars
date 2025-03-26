@@ -6,8 +6,10 @@ const Nav = () => {
   return (
     <nav className="navbar">
       <h1 className="logo">
-        <img className="imageStars" src="/LOGOS STARS.png" alt="" />
-        <a href="">Stars</a>
+        <a href="/">
+          <img className="imageStars" src="/LOGOS STARS.png" alt="" />
+        </a>
+        <a href="/">Stars</a>
       </h1>
       <div className="container-links-nav">
         <a className="link-nav" href="/">
