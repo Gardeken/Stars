@@ -245,7 +245,7 @@ const Mapa = ({
     <div className="container-main-crear">
       <div className={!color ? "map" : "map borderBlack"} id="celestial-map">
         <div className={isCheckedM ? "moon" : "moon hidden"}></div>
-        <DinamicName></DinamicName>
+        <DinamicName />
         <div
           className={isCheckedBorder ? "borderWhite" : "borderWhite hidden"}
         ></div>
@@ -257,49 +257,55 @@ const Mapa = ({
         </div>
       </div>
       <div className={!color ? "bg-black" : "bg-black shadow bg-white"}></div>
-      <span
-        id="dateShow"
-        className={!color ? "date-show Inter" : "date-show colorBlack Inter"}
-      >
-        Agosto 14, 2024
-      </span>
-      <span
-        id="locatioShow"
+
+      {/* Grouped Overlay Content */}
+      <div
         className={
-          !color ? "location-show Inter" : "location-show colorBlack Inter"
+          !isCheckedName || (isCheckedName && !isCheckedN)
+            ? "overlay-content overlay-up"
+            : "overlay-content"
         }
       >
-        Caracas, Venezuela
-      </span>
-      {isChecked || isCheckedSP ? (
         <span
           className={
-            !color ? "message-show Alice" : "message-show  colorBlack Alice"
+            !color ? "message-show Alice" : "message-show colorBlack Alice"
           }
           id="messageShow"
         >
           Te amo mucho, eres lo mejor que me ha pasado hasta ahora y quiero que
           sigamos por muchos años mas
         </span>
-      ) : (
-        <span
-          className={
-            !color
-              ? "message-show message-prev Alice"
-              : "message-show message-prev colorBlack Alice"
-          }
-          id="messageShow"
-        >
-          Te amo mucho, eres lo mejor que me ha pasado hasta ahora y quiero que
-          sigamos por muchos años mas
-        </span>
-      )}
 
-      {isChecked ? (
-        <QRCode className="QRCode" id="QRCode" value={qr} size={60}></QRCode>
-      ) : (
-        ""
-      )}
+        <span
+          id="dateShow"
+          className={!color ? "date-show Inter" : "date-show colorBlack Inter"}
+        >
+          Agosto 14, 2024
+        </span>
+
+        <span
+          id="locatioShow"
+          className={
+            !color ? "location-show Inter" : "location-show colorBlack Inter"
+          }
+        >
+          Caracas, Venezuela
+        </span>
+
+        {isChecked && (
+          <QRCode className="QRCode" id="QRCode" value={qr} size={60} />
+        )}
+
+        {isCheckedSP && (
+          <img
+            src={!color ? "/spcode-b.jpeg" : "/spcode-w.jpeg"}
+            id="spotify"
+            className="spotify-code"
+            alt="Spotify Code"
+          />
+        )}
+      </div>
+      <p className="WM">stars</p>
     </div>
   );
 };

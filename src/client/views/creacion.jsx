@@ -29,7 +29,7 @@ const Creacion = () => {
     function (e) {
       e.preventDefault();
     },
-    false
+    false,
   );
   let [img, setImg] = useState();
   let [infoObj, setInfoObj] = useState({
@@ -42,7 +42,7 @@ const Creacion = () => {
   const [active, setActive] = useState(false);
   const [lista, setLista] = useState([]);
   const [qr, setQR] = useState(
-    "https://open.spotify.com/intl-es/track/4a9tbd947vo9K8Vti9JwcI?si=b6b12cb70cb84015"
+    "https://open.spotify.com/intl-es/track/4a9tbd947vo9K8Vti9JwcI?si=b6b12cb70cb84015",
   );
   let [checked, setIsChecked] = useState(false);
   let [checkedSP, setIsCheckedSP] = useState(false);
@@ -120,7 +120,7 @@ const Creacion = () => {
     }
     const locatioShow = document.querySelector("#locatioShow");
     locatioShow.innerText = `${Number(inputLat.value).toFixed(4)}°N, ${Number(
-      inputLong.value
+      inputLong.value,
     ).toFixed(4)}°E`;
     Celestial.location([inputLat.value, inputLong.value]);
   }
@@ -258,74 +258,26 @@ const Creacion = () => {
 
   function cambiarEstilos(medida) {
     const containerMain = document.querySelector(".container-main-crear");
-    const Celestialmap = document.querySelector("#celestial-map");
-    const bgBlack = document.querySelector(".bg-black");
-    const locatioShow = document.querySelector("#locatioShow");
-    const messageShow = document.querySelector("#messageShow");
-    const dateShow = document.querySelector("#dateShow");
-    const nameShow = document.querySelector("#Name");
-    const moon = document.querySelector(".moon");
-    const qr = document.querySelector("#QRCode");
-    const spotify = document.querySelector("#spotify");
-    const borderWhite = document.querySelector(".borderWhite");
-    const brujula = document.querySelector(".brujula");
-    const quitarCM = medida.split("cm");
-    const medidaCM = quitarCM[0];
-    bgBlack.classList.add(`bg${medidaCM}`);
-    brujula.classList.add(`brujula${medidaCM}`);
-    containerMain.classList.add(`container${medidaCM}`);
-    Celestialmap.classList.add(`map${medidaCM}`);
-    borderWhite.classList.add(`borderWhite${medidaCM}`);
-    moon.classList.add(`moon${medidaCM}`);
-    locatioShow.classList.add(`location-show${medidaCM}`);
-    dateShow.classList.add(`date-show${medidaCM}`);
-    spotify.classList.add(`spotify-code${medidaCM}`);
-    if (nameShow.classList.contains("nameBottom")) {
-      nameShow.classList.add(`name${medidaCM}`);
-      nameShow.classList.add(`nameBottom${medidaCM}`);
-    } else {
-      nameShow.classList.add(`name${medidaCM}`);
-      console.log(nameShow.classList);
-    }
-    if (messageShow.classList.contains("message-prev")) {
-      messageShow.classList.add(`message-show${medidaCM}`);
-      messageShow.classList.add(`message-prev${medidaCM}`);
-    } else {
-      messageShow.classList.add(`message-show${medidaCM}`);
-    }
-    if (qr) {
-      qr.classList.add(`QRCode${medidaCM}`);
+    if (!containerMain) return;
+
+    if (medida === "13x18cm") {
+      containerMain.style.setProperty("--map-container-w", "12.8cm");
+      containerMain.style.setProperty("--map-container-h", "17.8cm");
+    } else if (medida === "15x20cm") {
+      containerMain.style.setProperty("--map-container-w", "15cm");
+      containerMain.style.setProperty("--map-container-h", "20cm");
+    } else if (medida === "20x25cm") {
+      containerMain.style.setProperty("--map-container-w", "20cm");
+      containerMain.style.setProperty("--map-container-h", "25cm");
     }
   }
 
-  function retirarEstilos(medida) {
+  function retirarEstilos() {
     const containerMain = document.querySelector(".container-main-crear");
-    const Celestialmap = document.querySelector("#celestial-map");
-    const bgBlack = document.querySelector(".bg-black");
-    const locatioShow = document.querySelector("#locatioShow");
-    const messageShow = document.querySelector("#messageShow");
-    const dateShow = document.querySelector("#dateShow");
-    const nameShow = document.querySelector("#Name");
-    const moon = document.querySelector(".moon");
-    const qr = document.querySelector("#QRCode");
-    const borderWhite = document.querySelector(".borderWhite");
-    const brujula = document.querySelector(".brujula");
-    const quitarCM = medida.split("cm");
-    const medidaCM = quitarCM[0];
-    bgBlack.classList.remove(`bg${medidaCM}`);
-    brujula.classList.remove(`brujula${medidaCM}`);
-    containerMain.classList.remove(`container${medidaCM}`);
-    Celestialmap.classList.remove(`map${medidaCM}`);
-    borderWhite.classList.remove(`borderWhite${medidaCM}`);
-    moon.classList.remove(`moon${medidaCM}`);
-    locatioShow.classList.remove(`location-show${medidaCM}`);
-    dateShow.classList.remove(`date-show${medidaCM}`);
-    messageShow.classList.remove(`message-show${medidaCM}`);
-    messageShow.classList.remove(`message-prev${medidaCM}`);
-    spotify.classList.remove(`spotify-code${medidaCM}`);
-    nameShow.classList.remove(`name${medidaCM}`);
-    nameShow.classList.remove(`nameBottom${medidaCM}`);
-    qr ? qr.classList.remove(`QRCode${medidaCM}`) : null;
+    if (!containerMain) return;
+
+    containerMain.style.removeProperty("--map-container-w");
+    containerMain.style.removeProperty("--map-container-h");
   }
 
   async function enviarEmail(obj) {
@@ -357,7 +309,7 @@ const Creacion = () => {
         canvas.toBlob((result) => {
           const imageRef = ref(
             imageDb,
-            `stars/mapas/${infoObj.name} - ${id}.png`
+            `stars/mapas/${infoObj.name} - ${id}.png`,
           );
           images.push({ imageRef, result });
           retirarEstilos(inputMedida.value);
@@ -422,7 +374,7 @@ const Creacion = () => {
         canvas.toBlob((result) => {
           const imageRef = ref(
             imageDb,
-            `stars/mapas/${infoObj.name} - ${id}.png`
+            `stars/mapas/${infoObj.name} - ${id}.png`,
           );
           images.push({ imageRef, result });
           images.forEach((i) => {
@@ -433,7 +385,7 @@ const Creacion = () => {
                   enviarEmail(infoObj);
                 }
                 contador++;
-              })
+              }),
             );
           });
           retirarEstilos(inputMedida.value);
@@ -462,7 +414,7 @@ const Creacion = () => {
   async function buscarUbicación() {
     const inputUbi = document.querySelector("#inputUbi").value;
     const localizacion = await fetch(
-      `https://geocode.maps.co/search?q=${inputUbi}&api_key=${token}`
+      `https://geocode.maps.co/search?q=${inputUbi}&api_key=${token}`,
     );
     const resultado = await localizacion.json();
     setLista(resultado);
@@ -556,13 +508,6 @@ const Creacion = () => {
           isCheckedBorder={checkedBorder}
           isCheckedBruj={checkedBruj}
         ></Mapa>
-        <p className="WM">stars</p>
-        <img
-          src={!checkedC ? "/spcode-b.jpeg" : "/spcode-w.jpeg"}
-          id="spotify"
-          className={checkedSP ? "spotify-code" : "spotify-code hidden"}
-          alt=""
-        />
       </div>
       <form id="formulario" className="formulario">
         <div
