@@ -173,79 +173,26 @@ body {
   text-align: center;
 }
 
-.container-reseñas {
+.container-reseñas-v2 {
+  width: 90%;
+  margin: 4rem auto;
+  overflow: hidden;
   position: relative;
-  height: 45rem;
-  width: 85vw;
-  gap: 1rem;
+}
+
+.slider-movil {
   display: flex;
-  overflow-x: hidden;
-  margin-top: 4rem;
-  margin-left: 6rem;
+  width: 100%;
+  will-change: transform;
 }
 
-.container-reseñas img {
-  width: 90vw;
+.imagen-carrusel {
+  width: 25%;
   height: 38rem;
-}
-
-.animation0-R {
-  transition: 0.3s;
-  transform: translate(0);
-}
-
-.animation1-R {
-  transition: 0.3s;
-  transform: translateX(-30vw);
-}
-
-.animation2-R {
-  transition: 0.3s;
-  transform: translateX(-57vw);
-}
-
-.animation3-R {
-  transition: 0.3s;
-  transform: translateX(-86vw);
-}
-
-.animation4-R {
-  transition: 0.3s;
-  transform: translateX(-116vw);
-}
-
-.animation5-R {
-  transition: 0.3s;
-  transform: translateX(-150vw);
-}
-
-.animation6-R {
-  transition: 0.3s;
-  transform: translateX(-179vw);
-}
-
-.animation7-R {
-  transition: 0.3s;
-  transform: translateX(-210vw);
-}
-
-.animation4-1 {
-  transform: translateX(72vw);
-}
-
-.animation5-1 {
-  transition: 0.3s;
-  transform: translateX(58vw);
-}
-
-.animation6-1 {
-  transition: 0.3s;
-  transform: translateX(30vw);
-}
-
-.animation7-1 {
-  transition: 0.3s;
-  transform: translateX(0);
+  flex-shrink: 0;
+  object-fit: cover;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .opacityH {
@@ -1166,61 +1113,45 @@ body {
   text-align: justify;
 }
 
+/* Contenedor principal en PC */
 .container-galery-text {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 3rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 4rem;
+  margin: 4rem auto;
+  max-width: 1500px; /* Evita que se estire demasiado en pantallas ultra anchas */
+}
+
+.text-galery {
+  flex: 1.5; /* El texto toma la mitad del espacio */
+  text-align: left;
 }
 
 .container-galery {
-  display: grid;
+  flex: 1;
   overflow: hidden;
-  gap: 1rem;
-  grid-auto-flow: column;
+  position: relative;
+  height: 550px; /* Altura fija para PC para que no "salte" el diseño */
 }
 
 .image-galery {
-  transition: 0.8s;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Clave: ajusta la foto al cuadro sin deformarla */
+  flex-shrink: 0;
   opacity: 0;
-  transform: translateX(40vw);
-  width: 40vw;
-  height: 30rem;
+  transition: opacity 0.8s ease-in-out;
+  object-position: center; /* Por defecto todas centradas */
 }
 
-.animation1 {
-  transform: translateX(0);
+.ajuste-cuadro {
+  /* Esto sube un poco la imagen para que se vea el marco superior */
+  object-position: center 60%;
 }
 
-.animation1-5 {
-  transform: translateX(-210vw);
-}
-
-.animation2 {
-  transform: translateX(-40vw);
-}
-
-.animation3 {
-  transform: translateX(-80vw);
-}
-
-.animation4 {
-  transform: translateX(-120vw);
-}
-
-.animation5 {
-  transform: translateX(-160vw);
-}
-
-.animation0 {
-  transition: 0;
-  transform: translateX(-160vw);
-}
-
-.opacity {
+.image-galery.opacity-viva {
   opacity: 1 !important;
 }
-
 /*------------------------------------- Footer ----------------------------------------------*/
 
 .footer {
@@ -1678,45 +1609,31 @@ body {
   /*------------------------------------- Galery Responsive ----------------------------------------------*/
 
   .container-galery-text {
-    display: flex;
-    text-align: center;
     flex-direction: column;
+    text-align: center;
+    margin: 2rem 0; /* Eliminamos márgenes laterales para que el carrusel toque los bordes si quieres */
+  }
+
+  .text-galery {
+    order: 1;
+    padding: 0 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .container-galery {
+    order: 2;
+    width: 100vw; /* Asegura que en móvil ocupe todo el ancho visual */
   }
 
   .image-galery {
-    width: 80vw;
-    height: 20rem;
-    transform: translateX(80vw);
+    height: 25rem;
   }
 
-  .animation1 {
-    transform: translateX(0);
+  .container-galery {
+    order: 2;
+    width: 100%; /* Ocupa todo el ancho en móvil */
   }
 
-  .animation1-5 {
-    transform: translateX(-430vw);
-  }
-
-  .animation2 {
-    transform: translateX(-85vw);
-  }
-
-  .animation3 {
-    transform: translateX(-170vw);
-  }
-
-  .animation4 {
-    transform: translateX(-250vw);
-  }
-
-  .animation5 {
-    transform: translateX(-338vw);
-  }
-
-  .animation0 {
-    transition: 0;
-    transform: translateX(-338vw);
-  }
   /*------------------------------------- Galery 2 Responsive ----------------------------------------------*/
 
   .container-reseñas {
@@ -1724,37 +1641,14 @@ body {
     margin-left: 2rem;
   }
 
-  .animation1-R {
-    transition: 0.3s;
-    transform: translateX(-95vw);
-  }
-  .animation2-R {
-    transition: 0.3s;
-    transform: translateX(-180vw);
-  }
-  .animation3-R {
-    transition: 0.3s;
-    transform: translateX(-279vw);
-  }
-  .animation4-R {
-    transition: 0.3s;
-    transform: translateX(-365vw);
-  }
-  .animation5-R {
-    transition: 0.3s;
-    transform: translateX(-460vw);
-  }
-  .animation6-R {
-    transition: 0.3s;
-    transform: translateX(-555vw);
+  .container-reseñas-v2 {
+    width: 100%;
+    margin-left: 0;
   }
 
-  .animation7-R {
-    transition: 0.3s;
-    transform: translateX(-665vw);
-  }
-
-  .animation6-1 {
-    transform: translateX(95vw);
+  .imagen-carrusel {
+    width: 100%;
+    height: 30rem;
+    padding: 0 20px;
   }
 }
